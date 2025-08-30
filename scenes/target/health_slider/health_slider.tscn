@@ -3,19 +3,15 @@
 [ext_resource type="Script" uid="uid://bomdvkontdslh" path="res://scenes/target/health_slider/health_slider.gd" id="1_nflju"]
 [ext_resource type="AudioStream" uid="uid://kf70w8cqg0y" path="res://scenes/target/hit.ogg" id="2_kcaou"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18ew3"]
-shading_mode = 0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_4njml"]
-material = SubResource("StandardMaterial3D_18ew3")
-size = Vector2(0.3, 0.3)
+[sub_resource type="ViewportTexture" id="ViewportTexture_nflju"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Animation" id="Animation_adj6b"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:mesh:material:albedo_color")
+tracks/0/path = NodePath("SubViewport/ProgressBar:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -31,14 +27,14 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:mesh:material:albedo_color")
+tracks/0/path = NodePath("SubViewport/ProgressBar:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(2, -2, 1),
 "update": 0,
-"values": [Color(1, 0.294118, 0.360784, 1), Color(1, 0.372549, 0.431808, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 0.372549, 0.431373, 1), Color(1, 0.372549, 0.431373, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nqfqo"]
@@ -47,9 +43,17 @@ _data = {
 &"shot": SubResource("Animation_7m7wm")
 }
 
-[node name="HealthSlider" type="MeshInstance3D"]
-transform = Transform3D(10, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("PlaneMesh_4njml")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nflju"]
+bg_color = Color(1, 1, 1, 0.784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="HealthSlider" type="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_nflju")
 script = ExtResource("1_nflju")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -61,3 +65,32 @@ autoplay = "RESET"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_kcaou")
 volume_db = -10.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(512, 64)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_nflju")
+value = 84.51
+show_percentage = false
+
+[node name="Label" type="Label" parent="SubViewport/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 42
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
