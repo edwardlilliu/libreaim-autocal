@@ -130,6 +130,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="WorldAppareance/WorldColor"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "The color of the world around you"
+mouse_filter = 1
+mouse_default_cursor_shape = 16
 text = "World color"
 
 [node name="Color" type="ColorPickerButton" parent="WorldAppareance/WorldColor" groups=["Persist", "PutLabel"]]
@@ -144,6 +147,9 @@ layout_mode = 2
 [node name="Label" type="Label" parent="WorldAppareance/TargetColor"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "The color of the targets you shoot at"
+mouse_filter = 1
+mouse_default_cursor_shape = 16
 text = "Targets color"
 
 [node name="TargetColor" type="ColorPickerButton" parent="WorldAppareance/TargetColor" groups=["Persist", "PutLabel"]]
@@ -201,6 +207,9 @@ script = ExtResource("6_p4dxm")
 [node name="FPSOverlayLabel" type="Label" parent="FPSOverlay"]
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "On enabled, a text showing the current FPS will appear on screen."
+mouse_filter = 1
+mouse_default_cursor_shape = 16
 text = "Fps Overlay: "
 
 [node name="FPSOverlayCheckBox" type="CheckBox" parent="FPSOverlay"]
