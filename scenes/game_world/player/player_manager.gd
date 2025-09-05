@@ -94,7 +94,7 @@ func _shoot(damage: float) -> void:
 			var bullet_hole_instance = _bullet_hole.instantiate()
 			
 			target.add_child(bullet_hole_instance)
-			bullet_hole_instance.global_transform.origin = _raycast.get_collision_point() + _raycast.get_collision_normal() * 0.001
+			bullet_hole_instance.global_transform.origin = _raycast.get_collision_point() + _raycast.get_collision_normal() * 0.01
 			if abs(_raycast.get_collision_normal().dot(Vector3.FORWARD)) != 1:
 				bullet_hole_instance.look_at(bullet_hole_instance.global_position + _raycast.get_collision_normal(), Vector3.FORWARD )
 			

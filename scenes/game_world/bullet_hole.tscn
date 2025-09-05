@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7w6oa4fydjyq"]
 
 [ext_resource type="Script" uid="uid://daosvdneli0st" path="res://scenes/game_world/bullet_hole.gd" id="1_a25ui"]
-[ext_resource type="Texture2D" uid="uid://cqospwtedgwrg" path="res://assets/images/hole.png" id="2_bi3vi"]
+[ext_resource type="Texture2D" uid="uid://c6u8573ge3m0t" path="res://assets/images/hole.svg" id="1_xdh7f"]
 
 [node name="BulletHole" type="Sprite3D"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 modulate = Color(1, 1, 1, 0.784314)
-texture = ExtResource("2_bi3vi")
+texture = ExtResource("1_xdh7f")
 script = ExtResource("1_a25ui")
