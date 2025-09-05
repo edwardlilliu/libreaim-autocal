@@ -33,6 +33,14 @@ signal toggle_checkbox(value: bool)
 		$Slider.value = value
 		change_value.emit(new_value)
 
+@export var step: float = 0.1:
+	set(new_value):
+		if new_value <= 0:
+			return
+		$SpinBox.step = new_value
+		$Slider.step = new_value
+		step = new_value
+
 @export var has_checkbox := true:
 	set(value):
 		has_checkbox = value
