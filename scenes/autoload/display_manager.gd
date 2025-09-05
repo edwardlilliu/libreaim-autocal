@@ -10,14 +10,21 @@ func _ready() -> void:
 	await get_tree().create_timer(0.01).timeout
 	var selected = SaveManager.settings.get_data("video", "window_mode")
 	set_window_mode(get_window_mode_from_string(selected))
-	set_max_fps(SaveManager.settings.get_data("video", "fps_limit"))
+	_set_max_fps_from_settings()
 
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fullscreen"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
 			set_window_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 		else:
 			set_window_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+
+func _notification(what: int):
+	match what:
+		NOTIFICATION_APPLICATION_FOCUS_IN:
+			_set_max_fps_from_settings()
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
+			set_max_fps(10)
 
 func set_window_mode_from_string(window_mode: String) -> void:
 	set_window_mode(get_window_mode_from_string(window_mode))
@@ -48,3 +55,6 @@ func set_window_mode(window_mode: DisplayServer.WindowMode) -> void:
 
 func set_max_fps(value) -> void:
 	Engine.set_max_fps(value)
+
+func _set_max_fps_from_settings() -> void:
+	set_max_fps(SaveManager.settings.get_data("video", "fps_limit"))
