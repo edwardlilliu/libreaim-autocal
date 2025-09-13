@@ -17,10 +17,10 @@ corner_radius_bottom_left = 100
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ocgsg"]
 bg_color = Color(0.0431373, 0.0431373, 0.0431373, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
 
 [sub_resource type="Gradient" id="Gradient_nnx5e"]
 colors = PackedColorArray(0.160784, 0.160784, 0.160784, 1, 1, 0.709804, 0.27451, 1)
@@ -47,7 +47,7 @@ theme_override_constants/margin_right = 200
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Scenario" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
@@ -60,7 +60,7 @@ horizontal_alignment = 1
 
 [node name="ScenarioIcon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 128)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 texture = ExtResource("3_co2ru")
 expand_mode = 1
@@ -76,7 +76,7 @@ layout_mode = 2
 
 [node name="NewHighScore" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Container"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
 offset_right = 560.0
 offset_bottom = 50.0
 pivot_offset = Vector2(280, 25)
@@ -91,14 +91,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
-theme_override_font_sizes/font_size = 38
+theme_override_font_sizes/font_size = 36
 text = "NEW HIGH SCORE"
 horizontal_alignment = 1
 
 [node name="CurrentHighScore" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/Container"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
+layout_mode = 0
 offset_right = 560.0
 offset_bottom = 50.0
 pivot_offset = Vector2(280, 25)
@@ -133,7 +133,7 @@ vertical_alignment = 2
 [node name="Value" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Score"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.709804, 0.27451, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 60
 text = "0"
 vertical_alignment = 2
 

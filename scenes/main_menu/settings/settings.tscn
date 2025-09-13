@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cropshnueuiqr"]
+[gd_scene load_steps=7 format=3 uid="uid://cropshnueuiqr"]
 
 [ext_resource type="Script" uid="uid://hadqd3kotmfk" path="res://scenes/main_menu/settings/settings.gd" id="1_4ilr3"]
+[ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_7vie7"]
 [ext_resource type="PackedScene" uid="uid://dcqej3022gbdk" path="res://scenes/main_menu/settings/settings_crosshair.tscn" id="2_ofn7e"]
 [ext_resource type="PackedScene" uid="uid://defuaijvpgkhn" path="res://scenes/main_menu/settings/settings_video.tscn" id="3_exihx"]
 [ext_resource type="PackedScene" uid="uid://1lrvcwbqgnw5" path="res://scenes/main_menu/settings/settings_controls.tscn" id="4_l5su2"]
@@ -18,17 +19,22 @@ script = ExtResource("1_4ilr3")
 [node name="LeftControl" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 80
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 60
 
 [node name="SettingsList" type="VBoxContainer" parent="LeftControl"]
 layout_mode = 2
+theme_override_constants/separation = 6
 
-[node name="Label" type="Label" parent="LeftControl/SettingsList"]
+[node name="Title" type="Label" parent="LeftControl/SettingsList"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 57
 text = "Settings"
+label_settings = ExtResource("2_7vie7")
+
+[node name="Margin" type="Control" parent="LeftControl/SettingsList"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
 
 [node name="Crosshair" type="Button" parent="LeftControl/SettingsList"]
 layout_mode = 2
@@ -59,9 +65,9 @@ mouse_filter = 2
 [node name="RightControl" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 90
-theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 80
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 120
 
 [node name="Crosshair" parent="RightControl" instance=ExtResource("2_ofn7e")]
 visible = false

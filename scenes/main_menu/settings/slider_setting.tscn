@@ -1,10 +1,65 @@
-[gd_scene load_steps=3 format=3 uid="uid://db0ivgs28q5rr"]
+[gd_scene load_steps=12 format=3 uid="uid://db0ivgs28q5rr"]
 
 [ext_resource type="Script" uid="uid://5eiruc5jlimu" path="res://scenes/main_menu/settings/slider_setting.gd" id="1_0c23u"]
+[ext_resource type="Texture2D" uid="uid://ql8v8tau18u1" path="res://assets/images/icons/checkbox_checked.svg" id="1_02l3v"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_3nqkf"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_02l3v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qs324"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfr00"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jerdo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bsn0"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_vtpo4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bheco"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.160784, 0.160784, 0.160784, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydstq"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.160784, 0.160784, 0.160784, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="Theme" id="Theme_qs324"]
+Button/styles/disabled = SubResource("StyleBoxEmpty_02l3v")
+Button/styles/focus = SubResource("StyleBoxEmpty_qs324")
+Button/styles/hover = SubResource("StyleBoxEmpty_kfr00")
+Button/styles/normal = SubResource("StyleBoxEmpty_jerdo")
+Button/styles/pressed = SubResource("StyleBoxEmpty_2bsn0")
+CheckBox/icons/checked = ExtResource("1_02l3v")
+CheckBox/icons/unchecked = SubResource("ImageTexture_vtpo4")
+CheckBox/styles/focus = SubResource("StyleBoxFlat_bheco")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_bheco")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_bheco")
+CheckBox/styles/normal = SubResource("StyleBoxFlat_bheco")
+CheckBox/styles/pressed = SubResource("StyleBoxFlat_bheco")
+ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_ydstq")
+Label/font_sizes/font_size = 18
+LineEdit/styles/normal = SubResource("StyleBoxFlat_bheco")
 
 [node name="SliderSetting" type="HBoxContainer"]
+offset_right = 341.0
+offset_bottom = 44.0
+theme = SubResource("Theme_qs324")
 script = ExtResource("1_0c23u")
 
 [node name="Label" type="Label" parent="."]
@@ -17,7 +72,6 @@ layout_mode = 2
 
 [node name="SpinBox" type="SpinBox" parent="."]
 layout_mode = 2
-theme_override_icons/updown = SubResource("ImageTexture_3nqkf")
 step = 0.1
 alignment = 1
 

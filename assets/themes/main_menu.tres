@@ -1,29 +1,41 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://caf1fphx2xqt0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66yw7"]
-content_margin_left = 50.0
-content_margin_top = 25.0
-content_margin_right = 50.0
-content_margin_bottom = 25.0
+content_margin_left = 30.0
+content_margin_top = 24.0
+content_margin_right = 30.0
+content_margin_bottom = 24.0
 bg_color = Color(0.160784, 0.160784, 0.160784, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_15sq2"]
-content_margin_left = 50.0
-content_margin_top = 25.0
-content_margin_bottom = 25.0
+content_margin_left = 30.0
+content_margin_top = 24.0
+content_margin_bottom = 24.0
 draw_center = false
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.8, 0.8, 0.8, 0.392157)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijt1d"]
-content_margin_left = 50.0
-content_margin_top = 25.0
+content_margin_left = 30.0
+content_margin_top = 24.0
 content_margin_right = 50.0
-content_margin_bottom = 25.0
+content_margin_bottom = 24.0
 bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_nufsd"]
 content_margin_top = 4.0
@@ -34,14 +46,17 @@ thickness = 5
 vertical = true
 
 [resource]
-Button/colors/font_color = Color(0.67451, 0.67451, 0.67451, 1)
-Button/colors/font_focus_color = Color(1, 1, 1, 1)
-Button/constants/h_separation = 30
-Button/font_sizes/font_size = 38
+Button/colors/font_color = Color(0.9, 0.9, 0.9, 1)
+Button/colors/font_focus_color = Color(0.6, 0.82666665, 1, 1)
+Button/colors/font_hover_color = Color(0.7, 0.87, 1, 1)
+Button/colors/font_pressed_color = Color(0.5, 0.7833333, 1, 1)
+Button/constants/h_separation = 24
+Button/font_sizes/font_size = 24
 Button/styles/disabled = SubResource("StyleBoxFlat_66yw7")
 Button/styles/focus = SubResource("StyleBoxFlat_15sq2")
 Button/styles/hover = SubResource("StyleBoxFlat_ijt1d")
 Button/styles/normal = SubResource("StyleBoxFlat_66yw7")
 Button/styles/pressed = SubResource("StyleBoxFlat_66yw7")
-Label/colors/font_color = Color(0.898039, 0.898039, 0.898039, 1)
+Label/colors/font_color = Color(0.9, 0.9, 0.9, 1)
+VBoxContainer/constants/separation = 6
 VSeparator/styles/separator = SubResource("StyleBoxLine_nufsd")

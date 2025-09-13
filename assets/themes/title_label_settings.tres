@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://lo2b2eogk1jn"]
+
+[ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="1_7aeq1"]
+
+[resource]
+font = ExtResource("1_7aeq1")
+font_size = 36
+font_color = Color(0.7, 0.87, 1, 1)

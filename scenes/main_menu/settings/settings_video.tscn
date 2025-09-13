@@ -1,12 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://defuaijvpgkhn"]
+[gd_scene load_steps=22 format=3 uid="uid://defuaijvpgkhn"]
 
 [ext_resource type="Script" uid="uid://od1jienr37dl" path="res://scenes/main_menu/settings/settings_video.gd" id="1_wsyhu"]
+[ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_0fpak"]
 [ext_resource type="Script" uid="uid://cxxp1bfw3sldw" path="res://scenes/main_menu/settings/settings_world_appareance.gd" id="2_tonjr"]
 [ext_resource type="Texture2D" uid="uid://ql8v8tau18u1" path="res://assets/images/icons/checkbox_checked.svg" id="3_ct4oh"]
 [ext_resource type="Texture2D" uid="uid://dpwdl2106eu1o" path="res://assets/default_data/custom_resources/world_textures/checkerboard.png" id="4_rr6tq"]
+[ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="4_ryila"]
 [ext_resource type="Script" uid="uid://dml4twebveb3q" path="res://scenes/main_menu/settings/settings_fps_limit.gd" id="5_awey5"]
 [ext_resource type="Script" uid="uid://desnvm0q70wky" path="res://scenes/main_menu/settings/settings_fps_overlay.gd" id="6_p4dxm"]
 [ext_resource type="Texture2D" uid="uid://dodywvhrikacr" path="res://assets/images/icons/checkbox_unchecked.svg" id="7_s4g6u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0fpak"]
+font = ExtResource("4_ryila")
+font_size = 24
+font_color = Color(0.69803923, 0.87058824, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yvei"]
 
@@ -61,26 +68,30 @@ ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_ydstq")
 Label/font_sizes/font_size = 22
 LineEdit/styles/normal = SubResource("StyleBoxFlat_p1fy7")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pcput"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1wm2h"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7lkr"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5u36"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0honh"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5u36"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7lkr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1wm2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pcput"]
 
 [node name="Video" type="VBoxContainer"]
 offset_right = 325.0
 offset_bottom = 464.0
 script = ExtResource("1_wsyhu")
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 46
 text = "Video"
+label_settings = ExtResource("2_0fpak")
 vertical_alignment = 1
+
+[node name="Margin" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
 
 [node name="ResolutionLabel" type="Label" parent="."]
 layout_mode = 2
@@ -122,7 +133,26 @@ script = ExtResource("2_tonjr")
 
 [node name="WorldAppareanceLabel" type="Label" parent="WorldAppareance"]
 layout_mode = 2
-text = "World appareance"
+text = "
+World appareance"
+label_settings = SubResource("LabelSettings_0fpak")
+
+[node name="TargetColor" type="HBoxContainer" parent="WorldAppareance"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WorldAppareance/TargetColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "The color of the targets you shoot at"
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Targets color"
+
+[node name="TargetColor" type="ColorPickerButton" parent="WorldAppareance/TargetColor" groups=["Persist", "PutLabel"]]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme = SubResource("Theme_og8m1")
+color = Color(1, 0.74902, 0, 1)
 
 [node name="WorldColor" type="HBoxContainer" parent="WorldAppareance"]
 layout_mode = 2
@@ -141,22 +171,12 @@ layout_mode = 2
 theme = SubResource("Theme_og8m1")
 color = Color(0.360784, 0.615686, 1, 1)
 
-[node name="TargetColor" type="HBoxContainer" parent="WorldAppareance"]
+[node name="Label" type="Label" parent="WorldAppareance"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="WorldAppareance/TargetColor"]
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "The color of the targets you shoot at"
+tooltip_text = "The texture of the world around you"
 mouse_filter = 1
 mouse_default_cursor_shape = 16
-text = "Targets color"
-
-[node name="TargetColor" type="ColorPickerButton" parent="WorldAppareance/TargetColor" groups=["Persist", "PutLabel"]]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-theme = SubResource("Theme_og8m1")
-color = Color(1, 0.74902, 0, 1)
+text = "World texture"
 
 [node name="WorldTexture" type="OptionButton" parent="WorldAppareance"]
 layout_mode = 2
@@ -214,19 +234,19 @@ text = "Fps Overlay: "
 
 [node name="FPSOverlayCheckBox" type="CheckBox" parent="FPSOverlay"]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_pcput")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_1wm2h")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_s7lkr")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_0honh")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u5u36")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0honh")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_s7lkr")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_1wm2h")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pcput")
 theme_override_icons/checked = ExtResource("3_ct4oh")
 theme_override_icons/unchecked = ExtResource("7_s4g6u")
 
 [connection signal="value_changed" from="ResolutionSlider" to="." method="_on_resolution_slider_value_changed"]
 [connection signal="value_changed" from="FovSlider" to="." method="_on_fov_slider_value_changed"]
 [connection signal="item_selected" from="WindowModeOptions" to="." method="_on_window_mode_options_item_selected"]
-[connection signal="color_changed" from="WorldAppareance/WorldColor/Color" to="WorldAppareance" method="_on_color_color_changed"]
 [connection signal="color_changed" from="WorldAppareance/TargetColor/TargetColor" to="WorldAppareance" method="_on_target_color_color_changed"]
+[connection signal="color_changed" from="WorldAppareance/WorldColor/Color" to="WorldAppareance" method="_on_color_color_changed"]
 [connection signal="item_selected" from="WorldAppareance/WorldTexture" to="WorldAppareance" method="_on_world_texture_item_selected"]
 [connection signal="value_changed" from="FPSLimit/FPSLimitSlider" to="FPSLimit" method="_on_fps_limit_slider_value_changed"]
 [connection signal="toggled" from="FPSOverlay/FPSOverlayCheckBox" to="FPSOverlay" method="_on_fps_overlay_check_box_toggled"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhe0v0qwojerb"]
+[gd_scene load_steps=5 format=3 uid="uid://dhe0v0qwojerb"]
 
 [ext_resource type="Script" uid="uid://dgg0fa81ahgss" path="res://scenes/main_menu/settings/settings_audio.gd" id="1_d47x0"]
 [ext_resource type="Texture2D" uid="uid://nng31j22g6fh" path="res://assets/images/icons/play.svg" id="2_38j32"]
+[ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_68csa"]
 [ext_resource type="Script" uid="uid://d0234x8uu2y3k" path="res://scenes/game_world/destroyed_sound.gd" id="3_gwiy3"]
 
 [node name="Audio" type="VBoxContainer"]
@@ -9,11 +10,15 @@ offset_right = 162.0
 offset_bottom = 210.0
 script = ExtResource("1_d47x0")
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 46
 text = "Audio"
+label_settings = ExtResource("2_68csa")
 vertical_alignment = 1
+
+[node name="Margin" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
 
 [node name="VolumeLabel" type="Label" parent="."]
 layout_mode = 2

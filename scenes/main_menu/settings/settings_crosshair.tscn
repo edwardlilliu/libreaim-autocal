@@ -1,74 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcqej3022gbdk"]
+[gd_scene load_steps=8 format=3 uid="uid://dcqej3022gbdk"]
 
 [ext_resource type="Script" uid="uid://cqb0m6137q6y8" path="res://scenes/main_menu/settings/settings_crosshair.gd" id="1_8jhp0"]
-[ext_resource type="Texture2D" uid="uid://ql8v8tau18u1" path="res://assets/images/icons/checkbox_checked.svg" id="2_a8xsi"]
+[ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_j81m0"]
 [ext_resource type="Script" uid="uid://coxbsxucgposx" path="res://scenes/game_world/crosshair.gd" id="3_uw2kl"]
 [ext_resource type="PackedScene" uid="uid://db0ivgs28q5rr" path="res://scenes/main_menu/settings/slider_setting.tscn" id="4_2iwqj"]
 [ext_resource type="Texture2D" uid="uid://dfccfxiw0aqif" path="res://assets/images/icons/export-file.svg" id="5_i2t3j"]
 [ext_resource type="Texture2D" uid="uid://btgrnb8ku7dyk" path="res://assets/images/icons/import-file.svg" id="6_bq5ho"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ohdm"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yvei"]
-
-[sub_resource type="ImageTexture" id="ImageTexture_vtpo4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bheco"]
-bg_color = Color(0.101961, 0.101961, 0.101961, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydstq"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1fy7"]
-bg_color = Color(0.101961, 0.101961, 0.101961, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="Theme" id="Theme_og8m1"]
-Button/styles/disabled = SubResource("StyleBoxEmpty_1ohdm")
-Button/styles/normal = SubResource("StyleBoxFlat_1yvei")
-CheckBox/icons/checked = ExtResource("2_a8xsi")
-CheckBox/icons/unchecked = SubResource("ImageTexture_vtpo4")
-CheckBox/styles/focus = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/hover = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/normal = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/pressed = SubResource("StyleBoxFlat_bheco")
-ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_ydstq")
-Label/font_sizes/font_size = 22
-LineEdit/styles/normal = SubResource("StyleBoxFlat_p1fy7")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b62o0"]
 bg_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [node name="Crosshair" type="VBoxContainer"]
 offset_right = 361.0
@@ -77,13 +21,16 @@ script = ExtResource("1_8jhp0")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 46
 text = "Crosshair"
+label_settings = ExtResource("2_j81m0")
 vertical_alignment = 1
+
+[node name="Margin2" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
 
 [node name="CrosshairSettings" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme = SubResource("Theme_og8m1")
 theme_override_constants/separation = 15
 
 [node name="Preview" type="Panel" parent="CrosshairSettings"]
@@ -170,7 +117,7 @@ custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 
 [node name="Margin" type="Control" parent="."]
-custom_minimum_size = Vector2(0, 25)
+custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
 [node name="Export" type="Button" parent="."]
