@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dgg0fa81ahgss" path="res://scenes/main_menu/settings/settings_audio.gd" id="1_d47x0"]
 [ext_resource type="Texture2D" uid="uid://nng31j22g6fh" path="res://assets/images/icons/play.svg" id="2_38j32"]
 [ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_68csa"]
-[ext_resource type="Script" uid="uid://d0234x8uu2y3k" path="res://scenes/game_world/destroyed_sound.gd" id="3_gwiy3"]
+[ext_resource type="Script" uid="uid://d0234x8uu2y3k" path="res://scenes/game_world/user_setting_sound.gd" id="3_gwiy3"]
 
 [node name="Audio" type="VBoxContainer"]
 offset_right = 162.0
@@ -30,23 +30,49 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="HitsoundLabel" type="Label" parent="."]
+[node name="HitSoundLabel" type="Label" parent="."]
 layout_mode = 2
+tooltip_text = "Sound that plays when you hit a target"
+mouse_filter = 1
+mouse_default_cursor_shape = 16
 text = "Hit sound"
 
-[node name="Preview" type="Button" parent="."]
+[node name="HitSoundPreview" type="Button" parent="."]
 layout_mode = 2
 text = "Preview sound"
 icon = ExtResource("2_38j32")
 alignment = 0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Preview"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitSoundPreview"]
 script = ExtResource("3_gwiy3")
+sound_id = "hit_sound"
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="HitSoundOptionButton" type="OptionButton" parent="."]
+layout_mode = 2
+
+[node name="DestroySoundLabel" type="Label" parent="."]
+layout_mode = 2
+tooltip_text = "Sound that plays when you destroy a target"
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Destroy sound"
+
+[node name="DestroySoundPreview" type="Button" parent="."]
+layout_mode = 2
+text = "Preview sound"
+icon = ExtResource("2_38j32")
+alignment = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DestroySoundPreview"]
+script = ExtResource("3_gwiy3")
+sound_id = "destroy_sound"
+
+[node name="DestroySoundOptionButton" type="OptionButton" parent="."]
 layout_mode = 2
 
 [connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="value_changed" from="VolumeSlider" to="Preview/AudioStreamPlayer" method="_on_volume_updated"]
-[connection signal="pressed" from="Preview" to="." method="_on_preview_pressed"]
-[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="value_changed" from="VolumeSlider" to="HitSoundPreview/AudioStreamPlayer" method="_on_volume_updated"]
+[connection signal="pressed" from="HitSoundPreview" to="." method="_on_hit_sound_preview_pressed"]
+[connection signal="item_selected" from="HitSoundOptionButton" to="." method="_on_hit_sound_option_button_item_selected"]
+[connection signal="pressed" from="DestroySoundPreview" to="." method="_on_destroy_sound_preview_pressed"]
+[connection signal="item_selected" from="DestroySoundOptionButton" to="." method="_on_destroy_sound_option_button_item_selected"]

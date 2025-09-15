@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://1xnrooyjmggn" path="res://assets/images/hit_marker.svg" id="6_efh5s"]
 [ext_resource type="PackedScene" uid="uid://cpoik4f7kx6aj" path="res://scenes/game_world/end_game_ui/end_game_ui.tscn" id="11_hrjw4"]
 [ext_resource type="AudioStream" uid="uid://c1ons03xoggga" path="res://assets/default_data/custom_resources/destroy_sounds/beep.ogg" id="12_xv1t2"]
-[ext_resource type="Script" uid="uid://d0234x8uu2y3k" path="res://scenes/game_world/destroyed_sound.gd" id="13_mss18"]
+[ext_resource type="Script" uid="uid://d0234x8uu2y3k" path="res://scenes/game_world/user_setting_sound.gd" id="13_mss18"]
 
 [sub_resource type="Theme" id="Theme_agxdx"]
 Label/font_sizes/font_size = 42
@@ -294,8 +294,9 @@ unique_name_in_owner = true
 
 [node name="Player" parent="." instance=ExtResource("4_50ilh")]
 
-[node name="DestroyedSound" type="AudioStreamPlayer" parent="."]
+[node name="DestroySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_xv1t2")
 script = ExtResource("13_mss18")
+sound_id = "destroy_sound"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

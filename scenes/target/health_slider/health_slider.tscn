@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmbneydx4xrji"]
+[gd_scene load_steps=9 format=3 uid="uid://cmbneydx4xrji"]
 
 [ext_resource type="Script" uid="uid://bomdvkontdslh" path="res://scenes/target/health_slider/health_slider.gd" id="1_nflju"]
-[ext_resource type="AudioStream" uid="uid://kf70w8cqg0y" path="res://scenes/target/hit.ogg" id="2_kcaou"]
+[ext_resource type="AudioStream" uid="uid://kf70w8cqg0y" path="res://assets/default_data/custom_resources/destroy_sounds/hit.ogg" id="2_kcaou"]
+[ext_resource type="Script" uid="uid://d0234x8uu2y3k" path="res://scenes/game_world/user_setting_sound.gd" id="3_kcaou"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nflju"]
 viewport_path = NodePath("SubViewport")
@@ -65,6 +66,8 @@ autoplay = "RESET"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_kcaou")
 volume_db = -10.0
+script = ExtResource("3_kcaou")
+sound_id = "hit_sound"
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true

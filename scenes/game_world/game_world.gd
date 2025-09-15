@@ -53,7 +53,7 @@ func _on_target_hitted() -> void:
 	_gameplay_ui.update_score(_get_score(), _get_accuracy())
 
 func _play_destroyed_sound() -> void:
-	var destroyed_sound: AudioStreamPlayer = $DestroyedSound
+	var destroyed_sound: AudioStreamPlayer = $DestroySound
 	destroyed_sound.pitch_scale = randf_range(0.95, 1.05)
 	destroyed_sound.play()
 

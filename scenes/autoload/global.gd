@@ -51,12 +51,13 @@ func get_current_world_texture() -> Texture2D:
 	var image := CustomResourceManager.get_image(current_texture)
 	return image
 
-func get_current_hit_sound() -> AudioStream:
-	var current_sound = SaveManager.settings.get_data("audio", "hit_sound")
+## Returns the current AudioStream of a sound defined in the user setttings
+func get_current_setting_sound(setting_id: String) -> AudioStream:
+	var current_sound = SaveManager.settings.get_data("audio", setting_id)
 	if not FileAccess.file_exists(current_sound):
 		push_warning("Sound not found: %s" % current_sound)
-		current_sound = SaveManager.settings.get_default_data("audio", "hit_sound")
-		SaveManager.settings.set_data("audio", "hit_sound", current_sound)
+		current_sound = SaveManager.settings.get_default_data("audio", setting_id)
+		SaveManager.settings.set_data("audio", setting_id, current_sound)
 	var sound := CustomResourceManager.get_sound(current_sound)
 	return sound
 
