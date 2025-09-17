@@ -47,4 +47,4 @@ func _update_resolution_label() -> void:
 		round(get_viewport().scaling_3d_scale * 100)]
 
 func _update_fov_label() -> void:
-	fov_label.text = "Camera fov: %dº" % fov_slider.value 
+	fov_label.text = "Camera FOV: %dº" % fov_slider.value 
