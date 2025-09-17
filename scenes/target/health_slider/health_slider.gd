@@ -9,7 +9,9 @@ func _process(_delta: float) -> void:
 	$SubViewport/ProgressBar/Label.text = str(health)
 
 func _on_target_hitted() -> void:
+	var health = $"..".health
+	var max_health = $"..".max_health
+	$AudioStreamPlayer.pitch_scale = lerpf(1.15, 0.85, health / max_health)
 	$AudioStreamPlayer.play()
-	$AudioStreamPlayer.pitch_scale = randf_range(0.97, 1.03)
 	$AnimationPlayer.play("RESET")
 	$AnimationPlayer.play("shot")
