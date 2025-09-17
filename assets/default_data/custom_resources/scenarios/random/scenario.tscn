@@ -15,7 +15,6 @@ _light = NodePath("DirectionalLight3D")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.998198, 0.0464176, 0.0380308, -0.0421491, 0.0912349, 0.994937, 0.0427129, -0.994747, 0.093027, 0, 20, 0)
-light_color = Color(0.360784, 0.615686, 1, 1)
 light_bake_mode = 1
 
 [node name="Geometry" parent="." instance=ExtResource("2_xogef")]

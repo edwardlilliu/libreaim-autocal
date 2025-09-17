@@ -134,7 +134,7 @@ sky_material = SubResource("ProceduralSkyMaterial_gakb1")
 
 [sub_resource type="Environment" id="Environment_pon8i"]
 background_mode = 1
-background_color = Color(0.0666667, 0.129412, 0.227451, 1)
+background_color = Color(0.06666667, 0.12941177, 0.22745098, 1)
 sky = SubResource("Sky_i8euj")
 
 [node name="World" type="Node3D" node_paths=PackedStringArray("_timer", "_gameplay_ui")]
