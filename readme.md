@@ -1,21 +1,21 @@
-![LibreAim](https://img.itch.zone/aW1nLzE3MTA3NTQzLnBuZw==/original/8acskw.png)
+![LibreAim logo](https://img.itch.zone/aW1nLzIzMjE0NzcwLnBuZw==/original/12jgj0.png)
 
 A free and open source FPS aim trainer, made with Godot 4.
 
 - **✏️ Customizable**: Libre Aim is open source, and offers a lot of customization settings.
 - **🕊️ Lightweight**: This is a training tool, it doesn't need fancy graphics, but it needs to run on low-end machines, give a high ammount of fps, and have minimal input lag.
 
-![Play custom scenarios](https://img.itch.zone/aW1nLzE3MTA3NDk1LmdpZg==/original/R9oMNM.gif)
+<img width="600px" src="https://img.itch.zone/aW1nLzIzMjE0Nzc5LnBuZw==/original/dkbj1N.png" alt="Create and train on custom scenarios">
 
-![Track your progress](https://img.itch.zone/aW1nLzE3MTA3Nzc0LnBuZw==/original/250RkK.png)
+<img width="600px" src="https://img.itch.zone/aW1nLzIzMjE0ODE5LnBuZw==/original/HlNVHz.png" alt="Create custom crosshairs">
 
-![Change the world appearance](https://img.itch.zone/aW1nLzE3MTA3NDY2LnBuZw==/original/pIIvv9.png)
+<img width="600px" src="https://img.itch.zone/aW1nLzIzMjE0OTE0LnBuZw==/original/4SlX%2Bb.png" alt="Change the world appearance">
 
-![Create a custom crosshair](https://img.itch.zone/aW1nLzE3MTA3ODAxLnBuZw==/original/4EPxXR.png) 
+<img width="600px" src="https://img.itch.zone/aW1nLzIzMjE0ODE0LnBuZw==/original/u1RGKM.png" alt="Track your progress">
 
 ## Libre software
 Libre Aim is libre software licensed under the GPLv3 license.
 
 You can contribute to the project, we have a [Discord community](https://discord.com/invite/u2Hm8sMagF)!
 
-![Screenshot](https://img.itch.zone/aW1nLzE3MTA3NjMyLmpwZw==/original/OJpGqx.jpg)
+![Screenshot](https://img.itch.zone/aW1nLzIzMjE0ODY2LnBuZw==/original/e6jA3U.png)
