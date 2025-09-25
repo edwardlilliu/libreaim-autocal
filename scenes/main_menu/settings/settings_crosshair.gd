@@ -3,7 +3,6 @@ extends Control
 
 signal refresh_crosshair
 
-
 @onready var crosshair := $CrosshairSettings/Preview/Crosshair
 @onready var file_export := $ExportFileDialog
 @onready var file_import := $ImportFileDialog
@@ -12,6 +11,13 @@ func _ready() -> void:
 	file_export.visible = false
 	file_import.visible = false
 	_load_saved()
+	%dot_size.change_value.connect(_on_crosshair_updated)
+	%dot_size.toggle_checkbox.connect(_on_crosshair_updated)
+	%length.change_value.connect(_on_crosshair_updated)
+	%thickness.change_value.connect(_on_crosshair_updated)
+	%gap.change_value.connect(_on_crosshair_updated)
+	%outline_width.change_value.connect(_on_crosshair_updated)
+	%outline_width.toggle_checkbox.connect(_on_crosshair_updated)
 
 func _on_export_pressed() -> void:
 	file_export.current_dir = "/"
@@ -39,26 +45,8 @@ func _on_import_file_dialog_file_selected(path: String) -> void:
 	_load_saved()
 	_queue_refresh_crosshair()
 
-func _on_dot_change_value(value: float) -> void:
-	change_value("dot_size", float(value))
-
-func _on_dot_toggle_checkbox(value: bool) -> void:
-	change_value("dot_enable", value)
-
-func _on_length_change_value(value: float) -> void:
-	change_value("length", float(value))
-
-func _on_thickness_change_value(value: float) -> void:
-	change_value("thickness", float(value))
-
-func _on_outline_toggle_checkbox(value: bool) -> void:
-	change_value("enable_outline", value)
-
-func _on_outline_change_value(value: float) -> void:
-	change_value("outline_width", float(value))
-
-func _on_gap_change_value(value: float) -> void:
-	change_value("gap", float(value))
+func _on_crosshair_updated(_value: Variant) -> void:
+	_queue_refresh_crosshair()
 
 func _on_crosshair_color_color_changed(color: Color) -> void:
 	change_value("color", color)

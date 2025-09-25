@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://defuaijvpgkhn"]
+[gd_scene load_steps=15 format=3 uid="uid://defuaijvpgkhn"]
 
 [ext_resource type="Script" uid="uid://od1jienr37dl" path="res://scenes/main_menu/settings/settings_video.gd" id="1_wsyhu"]
 [ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_0fpak"]
@@ -6,19 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ql8v8tau18u1" path="res://assets/images/icons/checkbox_checked.svg" id="3_ct4oh"]
 [ext_resource type="Texture2D" uid="uid://dpwdl2106eu1o" path="res://assets/default_data/custom_resources/world_textures/checkerboard.png" id="4_rr6tq"]
 [ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="4_ryila"]
-[ext_resource type="Script" uid="uid://dml4twebveb3q" path="res://scenes/main_menu/settings/settings_fps_limit.gd" id="5_awey5"]
-[ext_resource type="Script" uid="uid://desnvm0q70wky" path="res://scenes/main_menu/settings/settings_fps_overlay.gd" id="6_p4dxm"]
-[ext_resource type="Texture2D" uid="uid://dodywvhrikacr" path="res://assets/images/icons/checkbox_unchecked.svg" id="7_s4g6u"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5u36"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0honh"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7lkr"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1wm2h"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pcput"]
+[ext_resource type="PackedScene" uid="uid://db0ivgs28q5rr" path="res://scenes/main_menu/settings/slider_setting.tscn" id="4_srsku"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0fpak"]
 font = ExtResource("4_ryila")
@@ -93,50 +81,45 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="ResolutionLabel" type="Label" parent="."]
+[node name="Resolution" parent="." instance=ExtResource("4_srsku")]
 layout_mode = 2
-tooltip_text = "Resolution in which the 3D world will be rendered"
-mouse_filter = 1
-mouse_default_cursor_shape = 16
-text = "Resolution"
-
-[node name="ResolutionSlider" type="HSlider" parent="."]
-layout_mode = 2
-min_value = 0.1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="FovLabel" type="Label" parent="."]
-layout_mode = 2
-tooltip_text = "Extent of the observable world captured by the camera"
-mouse_filter = 1
-mouse_default_cursor_shape = 16
-text = "Camera FOV"
-
-[node name="FovSlider" type="HSlider" parent="."]
-layout_mode = 2
-min_value = 60.0
-max_value = 140.0
-value = 80.0
-
-[node name="FPSLimit" type="VBoxContainer" parent="."]
-layout_mode = 2
-script = ExtResource("5_awey5")
-
-[node name="FPSLimitLabel" type="Label" parent="FPSLimit"]
-layout_mode = 2
-tooltip_text = "Max FPS the game will render"
-mouse_filter = 1
-mouse_default_cursor_shape = 16
-text = "Fps limit"
-
-[node name="FPSLimitSlider" type="HSlider" parent="FPSLimit"]
-layout_mode = 2
-min_value = 60.0
-max_value = 360.0
+label_text = "Resolution"
+tooltip = "Resolution in which the 3D world will be rendered."
+save_this_setting = true
+settings_category = "video"
+settings_slider_id = "resolution"
+min_value = 10.0
+value = 100.0
 step = 5.0
+suffix = "%"
+has_checkbox = false
+
+[node name="CameraFov" parent="." instance=ExtResource("4_srsku")]
+layout_mode = 2
+label_text = "Camera Fov"
+tooltip = "Extent of the observable world captured by the camera."
+save_this_setting = true
+settings_category = "video"
+settings_slider_id = "fov"
+max_value = 120.0
+min_value = 30.0
 value = 120.0
+step = 1.0
+suffix = "º"
+has_checkbox = false
+
+[node name="FPSLimit" parent="." instance=ExtResource("4_srsku")]
+layout_mode = 2
+label_text = "FPS limit"
+save_this_setting = true
+settings_category = "video"
+settings_slider_id = "fps_limit"
+max_value = 360.0
+min_value = 30.0
+value = 120.0
+step = 1.0
+suffix = "FPS"
+has_checkbox = false
 
 [node name="WindowModeLabel" type="Label" parent="."]
 layout_mode = 2
@@ -151,28 +134,14 @@ popup/item_0/id = 1
 popup/item_1/text = "windowed"
 popup/item_1/id = 1
 
-[node name="FPSOverlay" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 32)
+[node name="FPSOverlay" parent="." instance=ExtResource("4_srsku")]
 layout_mode = 2
-script = ExtResource("6_p4dxm")
-
-[node name="FPSOverlayLabel" type="Label" parent="FPSOverlay"]
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "On enabled, a text showing the current FPS will appear on screen."
-mouse_filter = 1
-mouse_default_cursor_shape = 16
-text = "FPS Overlay: "
-
-[node name="FPSOverlayCheckBox" type="CheckBox" parent="FPSOverlay"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_u5u36")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_0honh")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_s7lkr")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_1wm2h")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_pcput")
-theme_override_icons/checked = ExtResource("3_ct4oh")
-theme_override_icons/unchecked = ExtResource("7_s4g6u")
+label_text = "FPS Overlay"
+tooltip = "On enabled, a text showing the current FPS will appear on screen."
+save_this_setting = true
+settings_category = "user"
+settings_checkbox_id = "fps_overlay"
+has_slider = false
 
 [node name="WorldAppareance" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -269,11 +238,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.74902, 0, 1)
 
-[connection signal="value_changed" from="ResolutionSlider" to="." method="_on_resolution_slider_value_changed"]
-[connection signal="value_changed" from="FovSlider" to="." method="_on_fov_slider_value_changed"]
-[connection signal="value_changed" from="FPSLimit/FPSLimitSlider" to="FPSLimit" method="_on_fps_limit_slider_value_changed"]
 [connection signal="item_selected" from="WindowModeOptions" to="." method="_on_window_mode_options_item_selected"]
-[connection signal="toggled" from="FPSOverlay/FPSOverlayCheckBox" to="FPSOverlay" method="_on_fps_overlay_check_box_toggled"]
 [connection signal="color_changed" from="WorldAppareance/TargetColor/TargetColor" to="WorldAppareance" method="_on_target_color_color_changed"]
 [connection signal="color_changed" from="WorldAppareance/AmbientColor/Color" to="WorldAppareance" method="_on_amient_color_changed"]
 [connection signal="color_changed" from="WorldAppareance/WorldColor/Color" to="WorldAppareance" method="_on_color_color_changed"]

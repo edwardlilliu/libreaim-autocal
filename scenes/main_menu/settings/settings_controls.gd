@@ -22,7 +22,7 @@ func _ready() -> void:
 	sensitivity.change_value.connect(_on_sensitivity_change_value)
 	game.item_selected.connect(_on_game_item_selected)
 
-func _on_sensitivity_change_value(value) -> void:
+func _on_sensitivity_change_value(value: float) -> void:
 	SaveManager.settings.set_data("user", "sensitivity_game", game.get_item_text(game.get_item_index(game.get_selected_id())))
 	SaveManager.settings.set_data("user", "sensitivity_game_value", games_sensitivities.get(game.get_item_text(game.get_selected_id())) )
 	SaveManager.settings.set_data("user", "sensitivity", float(value))

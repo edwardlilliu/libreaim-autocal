@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhe0v0qwojerb"]
+[gd_scene load_steps=6 format=3 uid="uid://dhe0v0qwojerb"]
 
 [ext_resource type="Script" uid="uid://dgg0fa81ahgss" path="res://scenes/main_menu/settings/settings_audio.gd" id="1_d47x0"]
 [ext_resource type="Texture2D" uid="uid://nng31j22g6fh" path="res://assets/images/icons/play.svg" id="2_38j32"]
 [ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_68csa"]
+[ext_resource type="PackedScene" uid="uid://db0ivgs28q5rr" path="res://scenes/main_menu/settings/slider_setting.tscn" id="3_1133e"]
 [ext_resource type="Script" uid="uid://d0234x8uu2y3k" path="res://scenes/game_world/user_setting_sound.gd" id="3_gwiy3"]
 
 [node name="Audio" type="VBoxContainer"]
@@ -20,15 +21,16 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="VolumeLabel" type="Label" parent="."]
+[node name="Volume" parent="." instance=ExtResource("3_1133e")]
 layout_mode = 2
-text = "Volume"
-
-[node name="VolumeSlider" type="HSlider" parent="."]
-layout_mode = 2
+label_text = "Volume"
+save_this_setting = true
+settings_category = "audio"
+settings_slider_id = "volume"
 max_value = 1.0
-step = 0.01
 value = 1.0
+step = 0.01
+has_checkbox = false
 
 [node name="HitSoundLabel" type="Label" parent="."]
 layout_mode = 2
@@ -70,8 +72,6 @@ sound_id = "destroy_sound"
 [node name="DestroySoundOptionButton" type="OptionButton" parent="."]
 layout_mode = 2
 
-[connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="value_changed" from="VolumeSlider" to="HitSoundPreview/AudioStreamPlayer" method="_on_volume_updated"]
 [connection signal="pressed" from="HitSoundPreview" to="." method="_on_hit_sound_preview_pressed"]
 [connection signal="item_selected" from="HitSoundOptionButton" to="." method="_on_hit_sound_option_button_item_selected"]
 [connection signal="pressed" from="DestroySoundPreview" to="." method="_on_destroy_sound_preview_pressed"]

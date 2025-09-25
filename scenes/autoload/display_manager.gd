@@ -10,6 +10,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.01).timeout
 	var selected = SaveManager.settings.get_data("video", "window_mode")
 	set_window_mode(get_window_mode_from_string(selected))
+	set_resolution(SaveManager.settings.get_data("video", "resolution"))
 	_set_max_fps_from_settings()
 
 func _input(event: InputEvent) -> void:
@@ -55,6 +56,9 @@ func set_window_mode(window_mode: DisplayServer.WindowMode) -> void:
 
 func set_max_fps(value) -> void:
 	Engine.set_max_fps(value)
+
+func set_resolution(value: float) -> void:
+	get_viewport().scaling_3d_scale = value / 100.0
 
 func _set_max_fps_from_settings() -> void:
 	set_max_fps(SaveManager.settings.get_data("video", "fps_limit"))
