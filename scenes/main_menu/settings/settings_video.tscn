@@ -1,12 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://defuaijvpgkhn"]
+[gd_scene load_steps=21 format=3 uid="uid://defuaijvpgkhn"]
 
 [ext_resource type="Script" uid="uid://od1jienr37dl" path="res://scenes/main_menu/settings/settings_video.gd" id="1_wsyhu"]
 [ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_0fpak"]
 [ext_resource type="Script" uid="uid://cxxp1bfw3sldw" path="res://scenes/main_menu/settings/settings_world_appareance.gd" id="2_tonjr"]
 [ext_resource type="Texture2D" uid="uid://ql8v8tau18u1" path="res://assets/images/icons/checkbox_checked.svg" id="3_ct4oh"]
-[ext_resource type="Texture2D" uid="uid://dpwdl2106eu1o" path="res://assets/default_data/custom_resources/world_textures/checkerboard.png" id="4_rr6tq"]
 [ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="4_ryila"]
 [ext_resource type="PackedScene" uid="uid://db0ivgs28q5rr" path="res://scenes/main_menu/settings/slider_setting.tscn" id="4_srsku"]
+[ext_resource type="Script" uid="uid://2yaqmk2h3ap" path="res://scenes/main_menu/settings/world_appearance_preview.gd" id="8_0fpak"]
+[ext_resource type="Script" uid="uid://dwyx06nsevwk4" path="res://scenes/game_world/world_mesh.gd" id="9_ryila"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0fpak"]
 font = ExtResource("4_ryila")
@@ -65,6 +66,35 @@ CheckBox/styles/pressed = SubResource("StyleBoxFlat_bheco")
 ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_ydstq")
 Label/font_sizes/font_size = 22
 LineEdit/styles/normal = SubResource("StyleBoxFlat_p1fy7")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_332bo"]
+bg_color = Color(0.16078432, 0.16078432, 0.16078432, 1)
+border_width_left = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.16078432, 0.16078432, 0.16078432, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fpak"]
+albedo_color = Color(1, 0.74902, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.74902, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_332bo"]
+material = SubResource("StandardMaterial3D_0fpak")
+radial_segments = 8
+rings = 4
+
+[sub_resource type="Environment" id="Environment_332bo"]
+background_mode = 1
+background_color = Color(0.8271669, 0.88920677, 0.9181329, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_332bo"]
+size = Vector2(18, 12)
 
 [node name="Video" type="VBoxContainer"]
 offset_right = 325.0
@@ -188,10 +218,10 @@ theme = SubResource("Theme_og8m1")
 color = Color(0.06666667, 0.12941177, 0.22745098, 1)
 edit_alpha = false
 
-[node name="WorldColor" type="HBoxContainer" parent="WorldAppareance"]
+[node name="SurfaceColor" type="HBoxContainer" parent="WorldAppareance"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="WorldAppareance/WorldColor"]
+[node name="Label" type="Label" parent="WorldAppareance/SurfaceColor"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "The color of the surfaces of the around you."
@@ -199,11 +229,11 @@ mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Surface color"
 
-[node name="Color" type="ColorPickerButton" parent="WorldAppareance/WorldColor" groups=["Persist", "PutLabel"]]
+[node name="Color" type="ColorPickerButton" parent="WorldAppareance/SurfaceColor" groups=["Persist", "PutLabel"]]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme = SubResource("Theme_og8m1")
-color = Color(0.360784, 0.615686, 1, 1)
+color = Color(1, 1, 1, 1)
 
 [node name="Label" type="Label" parent="WorldAppareance"]
 layout_mode = 2
@@ -216,30 +246,55 @@ text = "Surface texture"
 layout_mode = 2
 expand_icon = true
 
-[node name="Preview" type="TextureRect" parent="WorldAppareance"]
-self_modulate = Color(0.360784, 0.615686, 1, 1)
-custom_minimum_size = Vector2(0, 48)
+[node name="WorldAppearancePreview" type="CenterContainer" parent="WorldAppareance"]
 layout_mode = 2
-texture = ExtResource("4_rr6tq")
-stretch_mode = 1
+script = ExtResource("8_0fpak")
 
-[node name="TargetPreview" type="ColorRect" parent="WorldAppareance/Preview"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0.74902, 0, 1)
+[node name="PanelContainer" type="PanelContainer" parent="WorldAppareance/WorldAppearancePreview"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_332bo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WorldAppareance/WorldAppearancePreview/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Preview"
+horizontal_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+scaling_3d_scale = 0.5
+anisotropic_filtering_level = 0
+gui_disable_input = true
+size = Vector2i(300, 150)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+fov = 20.0
+
+[node name="Target" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+mesh = SubResource("SphereMesh_332bo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.25881907, -0.6830127, 0.6830127, 0, 0.7071068, 0.7071068, -0.9659258, -0.18301274, 0.18301274, 0, 2, 0)
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_332bo")
+
+[node name="Floor" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.08715574, 0, 0.08715574, 0.9961947, 0, -1, -6)
+mesh = SubResource("PlaneMesh_332bo")
+script = ExtResource("9_ryila")
 
 [connection signal="item_selected" from="WindowModeOptions" to="." method="_on_window_mode_options_item_selected"]
 [connection signal="color_changed" from="WorldAppareance/TargetColor/TargetColor" to="WorldAppareance" method="_on_target_color_color_changed"]
 [connection signal="color_changed" from="WorldAppareance/AmbientColor/Color" to="WorldAppareance" method="_on_amient_color_changed"]
-[connection signal="color_changed" from="WorldAppareance/WorldColor/Color" to="WorldAppareance" method="_on_color_color_changed"]
+[connection signal="color_changed" from="WorldAppareance/SurfaceColor/Color" to="WorldAppareance" method="_on_color_color_changed"]
 [connection signal="item_selected" from="WorldAppareance/WorldTexture" to="WorldAppareance" method="_on_world_texture_item_selected"]
