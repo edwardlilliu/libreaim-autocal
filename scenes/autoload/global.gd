@@ -43,11 +43,11 @@ func get_destroy_sounds() -> PackedStringArray:
 	return CustomResourceManager.get_file_list(DESTROY_SOUNDS_FOLDER, "ogg")
 
 func get_current_world_texture() -> Texture2D:
-	var current_texture = SaveManager.settings.get_data("world", "world_texture")
+	var current_texture = SaveManager.settings.get_data("video_world", "surface_texture")
 	if not FileAccess.file_exists(current_texture):
 		push_warning("Texture not found: %s" % current_texture)
-		current_texture = SaveManager.settings.get_default_data("world", "world_texture")
-		SaveManager.settings.set_data("world", "world_texture", current_texture)
+		current_texture = SaveManager.settings.get_default_data("video_world", "surface_texture")
+		SaveManager.settings.set_data("video_world", "surface_texture", current_texture)
 	var image := CustomResourceManager.get_image(current_texture)
 	return image
 

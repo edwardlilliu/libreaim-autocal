@@ -21,7 +21,7 @@ func _ready() -> void:
 	_scenario.target_hitted.connect(_on_target_hitted)
 	$Player.connect("missed", Callable(self, "_on_target_missed"))
 	_gameplay_ui.initialize(_timer, $Player)
-	$WorldEnvironment.environment.background_color = SaveManager.settings.get_data("world", "ambient_color")
+	$WorldEnvironment.environment.background_color = SaveManager.settings.get_data("video_world", "ambient_color")
 
 func _process(_delta: float) -> void:
 	if _timer.is_stopped():

@@ -61,8 +61,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func _get_mouse_sensitivity() -> float:
-	var user_sensitivity: float = SaveManager.settings.get_data("user", "sensitivity")
-	var conversion_sensitivity: float = SaveManager.settings.get_data("user", "sensitivity_game_value")
+	var user_sensitivity: float = SaveManager.settings.get_data("controls", "sensitivity")
+	var conversion_sensitivity: float = SaveManager.settings.get_data("controls", "sensitivity_game_value")
 	return user_sensitivity * conversion_sensitivity
 
 func _handle_joypad_rotation(delta: float) -> void:

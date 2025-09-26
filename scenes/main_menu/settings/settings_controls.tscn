@@ -29,7 +29,7 @@ layout_mode = 2
 [node name="Sensitivity" parent="." instance=ExtResource("2_ktgul")]
 layout_mode = 2
 label_text = "Sensitivity"
-settings_category = "user"
+settings_category = "controls"
 settings_slider_id = "sensitivity_game"
 max_value = 5.0
 value = 5.0

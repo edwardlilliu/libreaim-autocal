@@ -14,8 +14,8 @@ const games_sensitivities: Dictionary = {
 func _ready() -> void:
 	for sens in games_sensitivities:
 		game.add_item(sens)
-	sensitivity.value = SaveManager.settings.get_data("user", "sensitivity")
-	var selected = SaveManager.settings.get_data("user", "sensitivity_game")
+	sensitivity.value = SaveManager.settings.get_data("controls", "sensitivity")
+	var selected = SaveManager.settings.get_data("controls", "sensitivity_game")
 	for i in range(game.item_count):
 		if selected == game.get_item_text(i):
 			game.select(i)
@@ -23,10 +23,10 @@ func _ready() -> void:
 	game.item_selected.connect(_on_game_item_selected)
 
 func _on_sensitivity_change_value(value: float) -> void:
-	SaveManager.settings.set_data("user", "sensitivity_game", game.get_item_text(game.get_item_index(game.get_selected_id())))
-	SaveManager.settings.set_data("user", "sensitivity_game_value", games_sensitivities.get(game.get_item_text(game.get_selected_id())) )
-	SaveManager.settings.set_data("user", "sensitivity", float(value))
+	SaveManager.settings.set_data("controls", "sensitivity_game", game.get_item_text(game.get_item_index(game.get_selected_id())))
+	SaveManager.settings.set_data("controls", "sensitivity_game_value", games_sensitivities.get(game.get_item_text(game.get_selected_id())) )
+	SaveManager.settings.set_data("controls", "sensitivity", float(value))
 
 func _on_game_item_selected(index: int) -> void:
-	SaveManager.settings.set_data("user", "sensitivity_game", game.get_item_text(index))
-	SaveManager.settings.set_data("user", "sensitivity_game_value", games_sensitivities.get(game.get_item_text(index)))
+	SaveManager.settings.set_data("controls", "sensitivity_game", game.get_item_text(index))
+	SaveManager.settings.set_data("controls", "sensitivity_game_value", games_sensitivities.get(game.get_item_text(index)))

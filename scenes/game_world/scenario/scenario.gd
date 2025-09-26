@@ -25,7 +25,7 @@ func initialize() -> void:
 func _update_world_appareance() -> void:
 	var world_material: StandardMaterial3D = preload("res://assets/material_default.tres")
 	world_material.albedo_texture = Global.get_current_world_texture()
-	_light.light_color = SaveManager.settings.get_data("world", "world_color")
+	_light.light_color = SaveManager.settings.get_data("video_world", "surface_color")
 
 func _on_target_destroyed() -> void:
 	$".."._on_target_destroyed()

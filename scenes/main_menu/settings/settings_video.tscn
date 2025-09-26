@@ -139,7 +139,7 @@ layout_mode = 2
 label_text = "FPS Overlay"
 tooltip = "On enabled, a text showing the current FPS will appear on screen."
 save_this_setting = true
-settings_category = "user"
+settings_category = "video"
 settings_checkbox_id = "fps_overlay"
 has_slider = false
 
@@ -159,7 +159,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="WorldAppareance/TargetColor"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "The color of the targets you shoot at"
+tooltip_text = "The color of the targets you shoot at."
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Targets color"
@@ -176,7 +176,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="WorldAppareance/AmbientColor"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "The color of the ambient and the sky"
+tooltip_text = "The color of the ambient and the sky."
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Ambient color"
@@ -194,10 +194,10 @@ layout_mode = 2
 [node name="Label" type="Label" parent="WorldAppareance/WorldColor"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "The color of the world around you"
+tooltip_text = "The color of the surfaces of the around you."
 mouse_filter = 1
 mouse_default_cursor_shape = 16
-text = "World color"
+text = "Surface color"
 
 [node name="Color" type="ColorPickerButton" parent="WorldAppareance/WorldColor" groups=["Persist", "PutLabel"]]
 custom_minimum_size = Vector2(220, 0)
@@ -207,10 +207,10 @@ color = Color(0.360784, 0.615686, 1, 1)
 
 [node name="Label" type="Label" parent="WorldAppareance"]
 layout_mode = 2
-tooltip_text = "The texture of the world around you"
+tooltip_text = "The texture of the surfaces of the world around you"
 mouse_filter = 1
 mouse_default_cursor_shape = 16
-text = "World texture"
+text = "Surface texture"
 
 [node name="WorldTexture" type="OptionButton" parent="WorldAppareance"]
 layout_mode = 2
