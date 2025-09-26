@@ -150,7 +150,7 @@ script = ExtResource("2_tonjr")
 [node name="WorldAppareanceLabel" type="Label" parent="WorldAppareance"]
 layout_mode = 2
 text = "
-World appareance"
+World appearance"
 label_settings = SubResource("LabelSettings_0fpak")
 
 [node name="TargetColor" type="HBoxContainer" parent="WorldAppareance"]

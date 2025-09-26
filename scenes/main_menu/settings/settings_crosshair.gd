@@ -11,13 +11,13 @@ func _ready() -> void:
 	file_export.visible = false
 	file_import.visible = false
 	_load_saved()
-	%dot_size.change_value.connect(_on_crosshair_updated)
-	%dot_size.toggle_checkbox.connect(_on_crosshair_updated)
+	%dot.change_value.connect(_on_crosshair_updated)
+	%dot.toggle_checkbox.connect(_on_crosshair_updated)
 	%length.change_value.connect(_on_crosshair_updated)
 	%thickness.change_value.connect(_on_crosshair_updated)
 	%gap.change_value.connect(_on_crosshair_updated)
-	%outline_width.change_value.connect(_on_crosshair_updated)
-	%outline_width.toggle_checkbox.connect(_on_crosshair_updated)
+	%outline.change_value.connect(_on_crosshair_updated)
+	%outline.toggle_checkbox.connect(_on_crosshair_updated)
 
 func _on_export_pressed() -> void:
 	file_export.current_dir = "/"
@@ -68,10 +68,12 @@ func _call_refresh_crosshair() -> void:
 
 func _load_saved() -> void:
 	crosshair._load_save()
-	const plain_value_changes := ["dot_size", "length", "thickness", "gap", "outline_width"]
-	for param in plain_value_changes:
-		get_node("%" + param).value = crosshair.get("_" + param)
-	%dot_size.checkbox_value = crosshair._dot_enable
-	%outline_width.checkbox_value = crosshair._enable_outline
+	%dot.checkbox_value = crosshair._dot_enable
+	%length.value = crosshair._length
+	%thickness.value = crosshair._thickness
+	%gap.value = crosshair._gap
 	%crosshair_color.color = crosshair._color
+	%outline.value = crosshair._outline_width
+	%outline.checkbox_value = crosshair._outline_enable
 	%outline_color.color = crosshair._outline_color
+	%crosshair_color.color = crosshair._color

@@ -12,7 +12,7 @@ var current_crosshair: Dictionary = {
 var _color: Color
 var _outline_color: Color
 
-var _enable_outline: bool
+var _outline_enable: bool
 var _dot_enable: bool
 
 var _dot_size: float
@@ -44,7 +44,7 @@ func _load_save() -> void:
 	_length = save_file.get_data(setting, "length")
 	_thickness = save_file.get_data(setting, "thickness")
 	_gap = save_file.get_data(setting, "gap")
-	_enable_outline = save_file.get_data(setting, "enable_outline")
+	_outline_enable = save_file.get_data(setting, "outline_enable")
 	_outline_width = save_file.get_data(setting, "outline_width")
 	_color = save_file.get_data(setting, "color")
 	_outline_color = save_file.get_data(setting, "outline_color")
@@ -85,7 +85,7 @@ func _draw_part(points: PackedVector2Array) -> void:
 	draw_polygon(points, [_color])
 	var polygon := Polygon2D.new()
 	polygon.set_polygon(points)
-	if _enable_outline:
+	if _outline_enable:
 		_draw_outline(polygon)
 
 func _draw_outline(polygon: Polygon2D) -> void:
