@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="36"
+   height="36"
+   viewBox="0 0 36 36"
+   version="1.1"
+   xml:space="preserve"
+   style="clip-rule:evenodd;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
+   id="svg21"
+   sodipodi:docname="corner.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs21" /><sodipodi:namedview
+   id="namedview21"
+   pagecolor="#505050"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#505050"
+   inkscape:zoom="5.6568546"
+   inkscape:cx="6.5407373"
+   inkscape:cy="32.350133"
+   inkscape:window-width="1440"
+   inkscape:window-height="828"
+   inkscape:window-x="1920"
+   inkscape:window-y="108"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg21"
+   showgrid="false" />
+    
+    
+<path
+   style="fill:none;stroke:#ffb67a;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.99771601;paint-order:stroke fill markers"
+   d="m 0.5,8.5 h 8 v -8"
+   id="path671"
+   sodipodi:nodetypes="ccc" /><path
+   style="clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#ffb67a;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;stroke-opacity:0.99771601;paint-order:stroke fill markers"
+   d="M 27.5,0.4999998 V 8.5 h 8"
+   id="path671-3"
+   sodipodi:nodetypes="ccc" /><path
+   style="clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#ffb67a;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;stroke-opacity:0.99771601;paint-order:stroke fill markers"
+   d="M 0.50000002,27.5 H 8.5 v 8"
+   id="path671-6"
+   sodipodi:nodetypes="ccc" /><path
+   style="clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#ffb67a;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;stroke-opacity:0.99771601;paint-order:stroke fill markers"
+   d="m 27.5,35.5 v -8 h 8"
+   id="path671-3-7"
+   sodipodi:nodetypes="ccc" /></svg>

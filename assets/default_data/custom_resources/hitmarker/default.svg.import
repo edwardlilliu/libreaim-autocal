@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1xnrooyjmggn"
-path="res://.godot/imported/hit_marker.svg-5b5c50be23a43f0e8a260801b4c05e19.ctex"
+uid="uid://bhcd2x21fpe5"
+path="res://.godot/imported/default.svg-bb54d2afcad7678d583084a2cf4553b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/hit_marker.svg"
-dest_files=["res://.godot/imported/hit_marker.svg-5b5c50be23a43f0e8a260801b4c05e19.ctex"]
+source_file="res://assets/default_data/custom_resources/hitmarker/default.svg"
+dest_files=["res://.godot/imported/default.svg-bb54d2afcad7678d583084a2cf4553b4.ctex"]
 
 [params]
 

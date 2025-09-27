@@ -5,6 +5,7 @@ extends Node
 const TEXTURES_FOLDER := "world_textures"
 const SCENARIOS_FOLDER := "scenarios"
 const DESTROY_SOUNDS_FOLDER := "destroy_sounds"
+const HITMARKER_FOLDER := "hitmarker"
 
 var scenarios : Dictionary
 var current_scenario : Dictionary
@@ -22,6 +23,9 @@ func get_current_scenario_value(value: String) -> Variant:
 
 func get_world_textures() -> PackedStringArray:
 	return CustomResourceManager.get_file_list(TEXTURES_FOLDER, "png")
+
+func get_hitmarker_textures() -> PackedStringArray:
+	return CustomResourceManager.get_file_list(HITMARKER_FOLDER, "svg")
 
 ## Returns a list of paths to all scenarios
 func get_scenarios() -> PackedStringArray:

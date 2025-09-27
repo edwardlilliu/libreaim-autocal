@@ -14,7 +14,13 @@ var _timer: Timer
 
 func initialize(new_timer: Timer, player: PlayerManager) -> void:
 	_timer = new_timer
+	_set_hitmarker()
 	player.shooted.connect(_on_player_shoot)
+
+func _on_player_shoot() -> void:
+	if _timer != null and _timer.is_stopped():
+		_timer.start()
+		_start_feedback.queue_free()
 
 func target_destroyed(score: int, accuracy: float) -> void:
 	update_score(score, accuracy)
@@ -28,7 +34,9 @@ func update_score(score: int, accuracy: float) -> void:
 func update_timer_ui(time_left: float) -> void:
 	_timer_label.set_text("%.f s" % time_left)
 
-func _on_player_shoot() -> void:
-	if _timer != null and _timer.is_stopped():
-		_timer.start()
-		_start_feedback.queue_free()
+func _set_hitmarker() -> void:
+	var hitmarker: TextureRect = $GameplayUI/Hitmarker
+	hitmarker.texture = CustomResourceManager.get_image(SaveManager.settings.get_data("crosshair_hitmarker", "hitmarker_texture"))
+	hitmarker.visible = SaveManager.settings.get_data("crosshair_hitmarker", "hitmarker_enable")
+	hitmarker.pivot_offset.x = hitmarker.texture.get_width() / 2.0
+	hitmarker.pivot_offset.y = hitmarker.texture.get_height() / 2.0

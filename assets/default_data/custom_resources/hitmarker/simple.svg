@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 32 32"
+   version="1.1"
+   xml:space="preserve"
+   style="clip-rule:evenodd;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
+   id="svg21"
+   sodipodi:docname="simple.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs21" /><sodipodi:namedview
+   id="namedview21"
+   pagecolor="#505050"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#505050"
+   inkscape:zoom="16.000001"
+   inkscape:cx="-0.81249995"
+   inkscape:cy="20.687499"
+   inkscape:window-width="1920"
+   inkscape:window-height="1008"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg21"
+   showgrid="false" />
+    
+    
+<path
+   style="fill:none;stroke:#fffa40;stroke-width:0.999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.99771601;paint-order:stroke fill markers"
+   d="M 0.49999949,0.49999949 7.1125789,7.1125798"
+   id="path290"
+   sodipodi:nodetypes="cc" /><path
+   style="clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#fffa40;stroke-width:0.999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:0.99771601;paint-order:stroke fill markers"
+   d="m 24.87719,24.877185 6.622811,6.622816"
+   id="path290-7"
+   sodipodi:nodetypes="cc" /><path
+   style="clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#fffa40;stroke-width:0.999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:0.99771601;paint-order:stroke fill markers"
+   d="M 7.1231189,24.877186 0.49999949,31.500001"
+   id="path290-6"
+   sodipodi:nodetypes="cc" /><path
+   style="clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#fffa40;stroke-width:0.999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:0.99771601;paint-order:stroke fill markers"
+   d="M 31.500001,0.49999949 24.87719,7.12312"
+   id="path290-3"
+   sodipodi:nodetypes="cc" /></svg>

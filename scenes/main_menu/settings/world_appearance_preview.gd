@@ -7,7 +7,7 @@ func _ready() -> void:
 	$"../TargetColor/TargetColor".color_changed.connect(_on_target_color_changed)
 	$"../AmbientColor/Color".color_changed.connect(_on_ambient_color_changed)
 	$"../SurfaceColor/Color".color_changed.connect(_on_surface_changed)
-	$"../WorldTexture".item_selected.connect(_on_surface_changed)
+	$"../SurfaceTexture".item_selected.connect(_on_surface_changed)
 	_set_environment_color()
 	_set_target_material()
 
