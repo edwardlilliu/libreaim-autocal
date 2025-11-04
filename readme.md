@@ -13,6 +13,12 @@ A free and open source FPS aim trainer, made with Godot 4.
 
 <img width="600px" src="https://img.itch.zone/aW1nLzIzMjE0ODE0LnBuZw==/original/u1RGKM.png" alt="Track your progress">
 
+Download link:
+
+<a href="https://antimundo.itch.io/libreaim">
+    <img width="300px" src="https://static.itch.io/images/badge-color.svg" alt="Download from itchio">
+</a>
+
 ## Libre software
 Libre Aim is libre software licensed under the GPLv3 license.
 
