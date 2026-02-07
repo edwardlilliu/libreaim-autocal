@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://coxbsxucgposx" path="res://scenes/game_world/crosshair.gd" id="2_w1fsa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_itdsy"]
+radius = 0.3
 height = 1.7
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_41626"]
+radius = 0.3
 height = 1.7
 radial_segments = 16
 rings = 4
@@ -21,7 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_itdsy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=2129653010]
-layers = 4
+layers = 2
 mesh = SubResource("CapsuleMesh_41626")
 skeleton = NodePath("../..")
 
@@ -29,6 +31,7 @@ skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1303428346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+cull_mask = 1048573
 
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=1785098675]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
