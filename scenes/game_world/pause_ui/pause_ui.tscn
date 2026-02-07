@@ -1,16 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcd6yn8pmwkf"]
+[gd_scene format=3 uid="uid://dcd6yn8pmwkf"]
 
 [ext_resource type="Script" uid="uid://r2yatcixufco" path="res://scenes/game_world/pause_ui/pause.gd" id="1_vgykr"]
 [ext_resource type="Theme" uid="uid://caf1fphx2xqt0" path="res://assets/themes/main_menu.tres" id="2_yj2n1"]
 [ext_resource type="Texture2D" uid="uid://nng31j22g6fh" path="res://assets/images/icons/play.svg" id="3_af0kr"]
 [ext_resource type="Texture2D" uid="uid://cmrheauks0nru" path="res://assets/images/icons/cross.svg" id="4_q5h2w"]
 
-[node name="PauseUI" type="CanvasLayer"]
+[node name="PauseUI" type="CanvasLayer" unique_id=771431663]
 process_mode = 3
 layer = 10
 script = ExtResource("1_vgykr")
 
-[node name="Pause" type="Control" parent="."]
+[node name="Pause" type="Control" parent="." unique_id=77902331]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_yj2n1")
 
-[node name="ColorRect" type="ColorRect" parent="Pause"]
+[node name="ColorRect" type="ColorRect" parent="Pause" unique_id=1617923224]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ grow_vertical = 2
 color = Color(0.0745098, 0.0745098, 0.0745098, 0.34902)
 metadata/_edit_use_anchors_ = true
 
-[node name="Buttons" type="VBoxContainer" parent="Pause"]
+[node name="Buttons" type="VBoxContainer" parent="Pause" unique_id=1325110268]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,18 +44,18 @@ offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Pause/Buttons"]
+[node name="Label" type="Label" parent="Pause/Buttons" unique_id=510257484]
 layout_mode = 2
 text = "Pause"
 horizontal_alignment = 1
 
-[node name="Resume" type="Button" parent="Pause/Buttons"]
+[node name="Resume" type="Button" parent="Pause/Buttons" unique_id=1450438241]
 layout_mode = 2
 text = "Resume"
 icon = ExtResource("3_af0kr")
 alignment = 0
 
-[node name="Menu" type="Button" parent="Pause/Buttons"]
+[node name="Menu" type="Button" parent="Pause/Buttons" unique_id=97422442]
 layout_mode = 2
 text = "Menu"
 icon = ExtResource("4_q5h2w")

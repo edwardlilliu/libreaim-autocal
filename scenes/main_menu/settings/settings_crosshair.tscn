@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dcqej3022gbdk"]
+[gd_scene format=3 uid="uid://dcqej3022gbdk"]
 
 [ext_resource type="Script" uid="uid://cqb0m6137q6y8" path="res://scenes/main_menu/settings/settings_crosshair.gd" id="1_8jhp0"]
 [ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_j81m0"]
@@ -88,7 +88,7 @@ font = ExtResource("8_olnri")
 font_size = 24
 font_color = Color(0.69803923, 0.87058824, 1, 1)
 
-[node name="ScrollContainer" type="ScrollContainer"]
+[node name="ScrollContainer" type="ScrollContainer" unique_id=1973642881]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -96,35 +96,35 @@ offset_right = -920.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=389515875]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Crosshair" type="VBoxContainer" parent="MarginContainer"]
+[node name="Crosshair" type="VBoxContainer" parent="MarginContainer" unique_id=386682583]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_8jhp0")
 
-[node name="Title" type="Label" parent="MarginContainer/Crosshair"]
+[node name="Title" type="Label" parent="MarginContainer/Crosshair" unique_id=1987393914]
 layout_mode = 2
 text = "Crosshair"
 label_settings = ExtResource("2_j81m0")
 vertical_alignment = 1
 
-[node name="Margin2" type="Control" parent="MarginContainer/Crosshair"]
+[node name="Margin2" type="Control" parent="MarginContainer/Crosshair" unique_id=140216119]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="CrosshairSettings" type="VBoxContainer" parent="MarginContainer/Crosshair"]
+[node name="CrosshairSettings" type="VBoxContainer" parent="MarginContainer/Crosshair" unique_id=1693225744]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Preview" type="Panel" parent="MarginContainer/Crosshair/CrosshairSettings"]
+[node name="Preview" type="Panel" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=817405819]
 custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b62o0")
 
-[node name="Crosshair" type="Control" parent="MarginContainer/Crosshair/CrosshairSettings/Preview"]
+[node name="Crosshair" type="Control" parent="MarginContainer/Crosshair/CrosshairSettings/Preview" unique_id=2077353373]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -137,7 +137,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("3_uw2kl")
 
-[node name="dot" parent="MarginContainer/Crosshair/CrosshairSettings" instance=ExtResource("4_2iwqj")]
+[node name="dot" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=625519116 instance=ExtResource("4_2iwqj")]
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Dot"
@@ -148,7 +148,7 @@ settings_checkbox_id = "dot_enable"
 max_value = 10.0
 value = 10.0
 
-[node name="length" parent="MarginContainer/Crosshair/CrosshairSettings" instance=ExtResource("4_2iwqj")]
+[node name="length" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=1476897844 instance=ExtResource("4_2iwqj")]
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Length"
@@ -159,7 +159,7 @@ max_value = 50.0
 value = 20.0
 has_checkbox = false
 
-[node name="thickness" parent="MarginContainer/Crosshair/CrosshairSettings" instance=ExtResource("4_2iwqj")]
+[node name="thickness" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=1683483264 instance=ExtResource("4_2iwqj")]
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Thickness"
@@ -170,7 +170,7 @@ max_value = 10.0
 value = 10.0
 has_checkbox = false
 
-[node name="gap" parent="MarginContainer/Crosshair/CrosshairSettings" instance=ExtResource("4_2iwqj")]
+[node name="gap" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=1077465656 instance=ExtResource("4_2iwqj")]
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Gap"
@@ -181,7 +181,7 @@ max_value = 25.0
 value = 25.0
 has_checkbox = false
 
-[node name="outline" parent="MarginContainer/Crosshair/CrosshairSettings" instance=ExtResource("4_2iwqj")]
+[node name="outline" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=379998285 instance=ExtResource("4_2iwqj")]
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Outline"
@@ -192,63 +192,63 @@ settings_checkbox_id = "outline_enable"
 max_value = 10.0
 value = 10.0
 
-[node name="Color" type="HBoxContainer" parent="MarginContainer/Crosshair/CrosshairSettings"]
+[node name="Color" type="HBoxContainer" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=1159982321]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Crosshair/CrosshairSettings/Color"]
+[node name="Label" type="Label" parent="MarginContainer/Crosshair/CrosshairSettings/Color" unique_id=1931935724]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Color"
 
-[node name="crosshair_color" type="ColorPickerButton" parent="MarginContainer/Crosshair/CrosshairSettings/Color" groups=["Persist", "PutLabel"]]
+[node name="crosshair_color" type="ColorPickerButton" parent="MarginContainer/Crosshair/CrosshairSettings/Color" unique_id=1952339493 groups=["Persist", "PutLabel"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme = SubResource("Theme_olnri")
 color = Color(0, 1, 1, 1)
 
-[node name="OutlineColor" type="HBoxContainer" parent="MarginContainer/Crosshair/CrosshairSettings"]
+[node name="OutlineColor" type="HBoxContainer" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=2082402231]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Crosshair/CrosshairSettings/OutlineColor"]
+[node name="Label" type="Label" parent="MarginContainer/Crosshair/CrosshairSettings/OutlineColor" unique_id=1450230743]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Outline color"
 
-[node name="outline_color" type="ColorPickerButton" parent="MarginContainer/Crosshair/CrosshairSettings/OutlineColor" groups=["Persist", "PutLabel"]]
+[node name="outline_color" type="ColorPickerButton" parent="MarginContainer/Crosshair/CrosshairSettings/OutlineColor" unique_id=960502498 groups=["Persist", "PutLabel"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme = SubResource("Theme_xn6g7")
 
-[node name="Margin" type="Control" parent="MarginContainer/Crosshair"]
+[node name="Margin" type="Control" parent="MarginContainer/Crosshair" unique_id=1566020641]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Crosshair"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Crosshair" unique_id=1658640646]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Export" type="Button" parent="MarginContainer/Crosshair/HBoxContainer"]
+[node name="Export" type="Button" parent="MarginContainer/Crosshair/HBoxContainer" unique_id=725745370]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Export"
 icon = ExtResource("5_i2t3j")
 alignment = 0
 
-[node name="Import" type="Button" parent="MarginContainer/Crosshair/HBoxContainer"]
+[node name="Import" type="Button" parent="MarginContainer/Crosshair/HBoxContainer" unique_id=303717630]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Import"
 icon = ExtResource("6_bq5ho")
 alignment = 0
 
-[node name="ExportFileDialog" type="FileDialog" parent="MarginContainer/Crosshair"]
+[node name="ExportFileDialog" type="FileDialog" parent="MarginContainer/Crosshair" unique_id=581715339]
 size = Vector2i(1280, 720)
 access = 2
 use_native_dialog = true
 
-[node name="ImportFileDialog" type="FileDialog" parent="MarginContainer/Crosshair"]
+[node name="ImportFileDialog" type="FileDialog" parent="MarginContainer/Crosshair" unique_id=1978928949]
 title = "Open a File"
 size = Vector2i(1280, 720)
 ok_button_text = "Open"
@@ -256,17 +256,17 @@ file_mode = 0
 access = 2
 use_native_dialog = true
 
-[node name="Hitmarker" type="VBoxContainer" parent="MarginContainer/Crosshair"]
+[node name="Hitmarker" type="VBoxContainer" parent="MarginContainer/Crosshair" unique_id=581679875]
 layout_mode = 2
 script = ExtResource("8_0xqo5")
 
-[node name="Label2" type="Label" parent="MarginContainer/Crosshair/Hitmarker"]
+[node name="Label2" type="Label" parent="MarginContainer/Crosshair/Hitmarker" unique_id=644782072]
 layout_mode = 2
 text = "
 Hitmarker"
 label_settings = SubResource("LabelSettings_xn6g7")
 
-[node name="EnableHitmarker" parent="MarginContainer/Crosshair/Hitmarker" instance=ExtResource("4_2iwqj")]
+[node name="EnableHitmarker" parent="MarginContainer/Crosshair/Hitmarker" unique_id=160017151 instance=ExtResource("4_2iwqj")]
 layout_mode = 2
 label_text = "Enable hitmarker"
 tooltip = "If enabled a hitmarker will appear when you destroy a target."
@@ -275,17 +275,17 @@ settings_category = "crosshair_hitmarker"
 settings_checkbox_id = "hitmarker_enable"
 has_slider = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Crosshair/Hitmarker"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Crosshair/Hitmarker" unique_id=530544135]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Crosshair/Hitmarker/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/Crosshair/Hitmarker/VBoxContainer" unique_id=446630305]
 layout_mode = 2
 tooltip_text = "Texture of the hitmarker."
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Hitmarker texture"
 
-[node name="HitmarkerTexture" type="OptionButton" parent="MarginContainer/Crosshair/Hitmarker/VBoxContainer"]
+[node name="HitmarkerTexture" type="OptionButton" parent="MarginContainer/Crosshair/Hitmarker/VBoxContainer" unique_id=378703478]
 layout_mode = 2
 expand_icon = true
 

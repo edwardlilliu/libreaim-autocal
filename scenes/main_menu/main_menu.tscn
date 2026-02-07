@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c8on0ngoa3108"]
+[gd_scene format=3 uid="uid://c8on0ngoa3108"]
 
 [ext_resource type="Theme" uid="uid://caf1fphx2xqt0" path="res://assets/themes/main_menu.tres" id="1_2h7x4"]
 [ext_resource type="Script" uid="uid://dw5gwf5bgcody" path="res://scenes/main_menu/main_menu.gd" id="1_p06gh"]
@@ -47,7 +47,7 @@ ColorPickerButton/styles/normal = SubResource("StyleBoxEmpty_mk0sv")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5srfh"]
 bg_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
 
-[node name="MainMenu" type="HBoxContainer"]
+[node name="MainMenu" type="HBoxContainer" unique_id=1496393764]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,39 +56,39 @@ grow_vertical = 2
 theme = ExtResource("1_2h7x4")
 script = ExtResource("1_p06gh")
 
-[node name="LeftControl" type="MarginContainer" parent="."]
+[node name="LeftControl" type="MarginContainer" parent="." unique_id=1020845973]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/margin_left = 120
 theme_override_constants/margin_top = 180
 theme_override_constants/margin_right = 120
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LeftControl"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftControl" unique_id=520993199]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LeftControl/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftControl/VBoxContainer" unique_id=420231938]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LeftControl/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftControl/VBoxContainer/HBoxContainer" unique_id=732475177]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="LeftControl/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="LeftControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=222215979]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3145, 0.61795, 0.85, 1)
 theme_override_fonts/font = ExtResource("3_qel0l")
 theme_override_font_sizes/font_size = 36
 text = "Libre Aim"
 
-[node name="Label" type="Label" parent="LeftControl/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="LeftControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2008573506]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.65882355, 0.65882355, 1)
 theme_override_font_sizes/font_size = 18
 text = "Version"
 script = ExtResource("3_kmn6w")
 
-[node name="Icon" type="TextureRect" parent="LeftControl/VBoxContainer/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="LeftControl/VBoxContainer/HBoxContainer" unique_id=1814381117]
 custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -96,54 +96,54 @@ size_flags_vertical = 4
 texture = ExtResource("3_kq7as")
 expand_mode = 1
 
-[node name="Margin" type="Control" parent="LeftControl/VBoxContainer"]
+[node name="Margin" type="Control" parent="LeftControl/VBoxContainer" unique_id=1132077758]
 layout_mode = 2
 
-[node name="Play" type="Button" parent="LeftControl/VBoxContainer"]
+[node name="Play" type="Button" parent="LeftControl/VBoxContainer" unique_id=859968536]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Play"
 icon = ExtResource("2_n3hsc")
 alignment = 0
 
-[node name="Settings" type="Button" parent="LeftControl/VBoxContainer"]
+[node name="Settings" type="Button" parent="LeftControl/VBoxContainer" unique_id=1801953310]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Settings"
 icon = ExtResource("3_8dqwy")
 alignment = 0
 
-[node name="UserFolder" type="Button" parent="LeftControl/VBoxContainer"]
+[node name="UserFolder" type="Button" parent="LeftControl/VBoxContainer" unique_id=602364598]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "User folder"
 icon = ExtResource("8_cvdmj")
 alignment = 0
 
-[node name="SourceCode" type="Button" parent="LeftControl/VBoxContainer"]
+[node name="SourceCode" type="Button" parent="LeftControl/VBoxContainer" unique_id=548363565]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Source code"
 icon = ExtResource("4_nuriq")
 alignment = 0
 
-[node name="Quit" type="Button" parent="LeftControl/VBoxContainer"]
+[node name="Quit" type="Button" parent="LeftControl/VBoxContainer" unique_id=1404666080]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Quit"
 icon = ExtResource("5_nidys")
 alignment = 0
 
-[node name="RightControl" type="Panel" parent="."]
+[node name="RightControl" type="Panel" parent="." unique_id=1028924371]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_8521u")
 theme_override_styles/panel = SubResource("StyleBoxFlat_5srfh")
 
-[node name="SelectScenario" parent="RightControl" instance=ExtResource("9_lii3m")]
+[node name="SelectScenario" parent="RightControl" unique_id=1810057202 instance=ExtResource("9_lii3m")]
 layout_mode = 1
 
-[node name="Settings" parent="RightControl" instance=ExtResource("8_1n7gf")]
+[node name="Settings" parent="RightControl" unique_id=2019305631 instance=ExtResource("8_1n7gf")]
 visible = false
 layout_mode = 1
 

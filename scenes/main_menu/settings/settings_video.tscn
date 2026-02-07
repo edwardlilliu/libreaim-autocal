@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://defuaijvpgkhn"]
+[gd_scene format=3 uid="uid://defuaijvpgkhn"]
 
 [ext_resource type="Script" uid="uid://od1jienr37dl" path="res://scenes/main_menu/settings/settings_video.gd" id="1_wsyhu"]
 [ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_0fpak"]
@@ -96,22 +96,22 @@ background_color = Color(0.8271669, 0.88920677, 0.9181329, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_332bo"]
 size = Vector2(18, 12)
 
-[node name="Video" type="VBoxContainer"]
+[node name="Video" type="VBoxContainer" unique_id=23639290]
 offset_right = 325.0
 offset_bottom = 464.0
 script = ExtResource("1_wsyhu")
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=1918649134]
 layout_mode = 2
 text = "Video"
 label_settings = ExtResource("2_0fpak")
 vertical_alignment = 1
 
-[node name="Margin" type="Control" parent="."]
+[node name="Margin" type="Control" parent="." unique_id=2052534369]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="Resolution" parent="." instance=ExtResource("4_srsku")]
+[node name="Resolution" parent="." unique_id=1068940304 instance=ExtResource("4_srsku")]
 layout_mode = 2
 label_text = "Resolution"
 tooltip = "Resolution in which the 3D world will be rendered."
@@ -124,7 +124,7 @@ step = 5.0
 suffix = "%"
 has_checkbox = false
 
-[node name="CameraFov" parent="." instance=ExtResource("4_srsku")]
+[node name="CameraFov" parent="." unique_id=71034099 instance=ExtResource("4_srsku")]
 layout_mode = 2
 label_text = "Camera Fov"
 tooltip = "Extent of the observable world captured by the camera."
@@ -138,7 +138,7 @@ step = 1.0
 suffix = "º"
 has_checkbox = false
 
-[node name="FPSLimit" parent="." instance=ExtResource("4_srsku")]
+[node name="FPSLimit" parent="." unique_id=1922662732 instance=ExtResource("4_srsku")]
 layout_mode = 2
 label_text = "FPS limit"
 save_this_setting = true
@@ -151,11 +151,11 @@ step = 1.0
 suffix = "FPS"
 has_checkbox = false
 
-[node name="WindowModeLabel" type="Label" parent="."]
+[node name="WindowModeLabel" type="Label" parent="." unique_id=1649607555]
 layout_mode = 2
 text = "Window mode"
 
-[node name="WindowModeOptions" type="OptionButton" parent="."]
+[node name="WindowModeOptions" type="OptionButton" parent="." unique_id=901121429]
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -164,7 +164,7 @@ popup/item_0/id = 1
 popup/item_1/text = "windowed"
 popup/item_1/id = 1
 
-[node name="FPSOverlay" parent="." instance=ExtResource("4_srsku")]
+[node name="FPSOverlay" parent="." unique_id=723044895 instance=ExtResource("4_srsku")]
 layout_mode = 2
 label_text = "FPS Overlay"
 tooltip = "On enabled, a text showing the current FPS will appear on screen."
@@ -173,20 +173,20 @@ settings_category = "video"
 settings_checkbox_id = "fps_overlay"
 has_slider = false
 
-[node name="WorldAppareance" type="VBoxContainer" parent="."]
+[node name="WorldAppareance" type="VBoxContainer" parent="." unique_id=1656367185]
 layout_mode = 2
 script = ExtResource("2_tonjr")
 
-[node name="WorldAppareanceLabel" type="Label" parent="WorldAppareance"]
+[node name="WorldAppareanceLabel" type="Label" parent="WorldAppareance" unique_id=951610390]
 layout_mode = 2
 text = "
 World appearance"
 label_settings = SubResource("LabelSettings_0fpak")
 
-[node name="TargetColor" type="HBoxContainer" parent="WorldAppareance"]
+[node name="TargetColor" type="HBoxContainer" parent="WorldAppareance" unique_id=686620601]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="WorldAppareance/TargetColor"]
+[node name="Label" type="Label" parent="WorldAppareance/TargetColor" unique_id=1626223266]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "The color of the targets you shoot at."
@@ -194,16 +194,16 @@ mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Targets color"
 
-[node name="TargetColor" type="ColorPickerButton" parent="WorldAppareance/TargetColor" groups=["Persist", "PutLabel"]]
+[node name="TargetColor" type="ColorPickerButton" parent="WorldAppareance/TargetColor" unique_id=1741649499 groups=["Persist", "PutLabel"]]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme = SubResource("Theme_og8m1")
 color = Color(1, 0.74902, 0, 1)
 
-[node name="AmbientColor" type="HBoxContainer" parent="WorldAppareance"]
+[node name="AmbientColor" type="HBoxContainer" parent="WorldAppareance" unique_id=1162738074]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="WorldAppareance/AmbientColor"]
+[node name="Label" type="Label" parent="WorldAppareance/AmbientColor" unique_id=873921186]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "The color of the ambient and the sky."
@@ -211,17 +211,17 @@ mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Ambient color"
 
-[node name="Color" type="ColorPickerButton" parent="WorldAppareance/AmbientColor" groups=["Persist", "PutLabel"]]
+[node name="Color" type="ColorPickerButton" parent="WorldAppareance/AmbientColor" unique_id=1443451182 groups=["Persist", "PutLabel"]]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme = SubResource("Theme_og8m1")
 color = Color(0.06666667, 0.12941177, 0.22745098, 1)
 edit_alpha = false
 
-[node name="SurfaceColor" type="HBoxContainer" parent="WorldAppareance"]
+[node name="SurfaceColor" type="HBoxContainer" parent="WorldAppareance" unique_id=403746442]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="WorldAppareance/SurfaceColor"]
+[node name="Label" type="Label" parent="WorldAppareance/SurfaceColor" unique_id=1846249981]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "The color of the surfaces of the around you."
@@ -229,44 +229,44 @@ mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Surface color"
 
-[node name="Color" type="ColorPickerButton" parent="WorldAppareance/SurfaceColor" groups=["Persist", "PutLabel"]]
+[node name="Color" type="ColorPickerButton" parent="WorldAppareance/SurfaceColor" unique_id=246635728 groups=["Persist", "PutLabel"]]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme = SubResource("Theme_og8m1")
 color = Color(1, 1, 1, 1)
 
-[node name="Label" type="Label" parent="WorldAppareance"]
+[node name="Label" type="Label" parent="WorldAppareance" unique_id=1508221707]
 layout_mode = 2
 tooltip_text = "The texture of the surfaces of the world around you"
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Surface texture"
 
-[node name="SurfaceTexture" type="OptionButton" parent="WorldAppareance"]
+[node name="SurfaceTexture" type="OptionButton" parent="WorldAppareance" unique_id=1020165128]
 layout_mode = 2
 expand_icon = true
 
-[node name="WorldAppearancePreview" type="CenterContainer" parent="WorldAppareance"]
+[node name="WorldAppearancePreview" type="CenterContainer" parent="WorldAppareance" unique_id=1696981799]
 layout_mode = 2
 script = ExtResource("8_0fpak")
 
-[node name="PanelContainer" type="PanelContainer" parent="WorldAppareance/WorldAppearancePreview"]
+[node name="PanelContainer" type="PanelContainer" parent="WorldAppareance/WorldAppearancePreview" unique_id=144996364]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_332bo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WorldAppareance/WorldAppearancePreview/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WorldAppareance/WorldAppearancePreview/PanelContainer" unique_id=1759007886]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer" unique_id=1920150112]
 layout_mode = 2
 text = "Preview"
 horizontal_alignment = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer" unique_id=1703719837]
 layout_mode = 2
 
-[node name="SubViewport" type="SubViewport" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer" unique_id=143887316]
 handle_input_locally = false
 scaling_3d_scale = 0.5
 anisotropic_filtering_level = 0
@@ -274,21 +274,21 @@ gui_disable_input = true
 size = Vector2i(300, 150)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1940158000]
 fov = 20.0
 
-[node name="Target" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+[node name="Target" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=445463680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 mesh = SubResource("SphereMesh_332bo")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=671543682]
 transform = Transform3D(0.25881907, -0.6830127, 0.6830127, 0, 0.7071068, 0.7071068, -0.9659258, -0.18301274, 0.18301274, 0, 2, 0)
 directional_shadow_mode = 0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=994494411]
 environment = SubResource("Environment_332bo")
 
-[node name="Floor" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+[node name="Floor" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=170197266]
 transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.08715574, 0, 0.08715574, 0.9961947, 0, -1, -6)
 mesh = SubResource("PlaneMesh_332bo")
 script = ExtResource("9_ryila")

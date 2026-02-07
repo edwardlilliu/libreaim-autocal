@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx5lej1m0kvgb"]
+[gd_scene format=3 uid="uid://bx5lej1m0kvgb"]
 
 [ext_resource type="Script" uid="uid://blgmmigbqfjhr" path="res://scenes/main_menu/select_scenario.gd" id="1_74pqa"]
 [ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_hddc3"]
@@ -13,7 +13,7 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[node name="SelectScenario" type="HBoxContainer"]
+[node name="SelectScenario" type="HBoxContainer" unique_id=241814628]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,66 +21,66 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_74pqa")
 
-[node name="Scenarios" type="MarginContainer" parent="."]
+[node name="Scenarios" type="MarginContainer" parent="." unique_id=1121340218]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 120
 theme_override_constants/margin_top = 180
 theme_override_constants/margin_right = 60
 
-[node name="Scenarios" type="VBoxContainer" parent="Scenarios"]
+[node name="Scenarios" type="VBoxContainer" parent="Scenarios" unique_id=464688901]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Scenarios/Scenarios"]
+[node name="Title" type="Label" parent="Scenarios/Scenarios" unique_id=1836844304]
 layout_mode = 2
 text = "Select a scenario"
 label_settings = ExtResource("2_hddc3")
 
-[node name="Margin" type="Control" parent="Scenarios/Scenarios"]
+[node name="Margin" type="Control" parent="Scenarios/Scenarios" unique_id=1314287189]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Scenarios/Scenarios"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Scenarios/Scenarios" unique_id=787378148]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Scenarios" type="VBoxContainer" parent="Scenarios/Scenarios/ScrollContainer"]
+[node name="Scenarios" type="VBoxContainer" parent="Scenarios/Scenarios/ScrollContainer" unique_id=1212973137]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="VSeparator" type="VSeparator" parent="."]
+[node name="VSeparator" type="VSeparator" parent="." unique_id=902806076]
 custom_minimum_size = Vector2(0, 750)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="CurrentScenario" type="MarginContainer" parent="."]
+[node name="CurrentScenario" type="MarginContainer" parent="." unique_id=853012609]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 180
 theme_override_constants/margin_right = 120
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CurrentScenario"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CurrentScenario" unique_id=1807732352]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="CurrentScenario/VBoxContainer"]
+[node name="Title" type="Label" parent="CurrentScenario/VBoxContainer" unique_id=1761431834]
 layout_mode = 2
 text = "Title"
 label_settings = ExtResource("2_hddc3")
 vertical_alignment = 1
 
-[node name="Margin" type="Control" parent="CurrentScenario/VBoxContainer"]
+[node name="Margin" type="Control" parent="CurrentScenario/VBoxContainer" unique_id=1168810824]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="CurrentScenario/VBoxContainer"]
+[node name="Panel" type="Panel" parent="CurrentScenario/VBoxContainer" unique_id=884836093]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_m0qci")
 
-[node name="Thumbnail" type="TextureRect" parent="CurrentScenario/VBoxContainer/Panel"]
+[node name="Thumbnail" type="TextureRect" parent="CurrentScenario/VBoxContainer/Panel" unique_id=1091289720]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -95,7 +95,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ym4aa")
 
-[node name="Description" type="Label" parent="CurrentScenario/VBoxContainer"]
+[node name="Description" type="Label" parent="CurrentScenario/VBoxContainer" unique_id=328516456]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
@@ -104,7 +104,7 @@ text = "Description"
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Play" type="Button" parent="CurrentScenario/VBoxContainer"]
+[node name="Play" type="Button" parent="CurrentScenario/VBoxContainer" unique_id=1441476764]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_hddc3")
 theme_override_font_sizes/font_size = 48

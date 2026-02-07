@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cdbhv0p0jfr75"]
+[gd_scene format=3 uid="uid://cdbhv0p0jfr75"]
 
 [ext_resource type="Script" uid="uid://bw403cdwa6w7u" path="res://scenes/game_world/game_world.gd" id="1_4pv4x"]
 [ext_resource type="PackedScene" uid="uid://dcd6yn8pmwkf" path="res://scenes/game_world/pause_ui/pause_ui.tscn" id="2_tp74x"]
@@ -137,22 +137,22 @@ background_mode = 1
 background_color = Color(0.06666667, 0.12941177, 0.22745098, 1)
 sky = SubResource("Sky_i8euj")
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("_timer", "_gameplay_ui")]
+[node name="World" type="Node3D" unique_id=2015162523 node_paths=PackedStringArray("_timer", "_gameplay_ui")]
 script = ExtResource("1_4pv4x")
 _timer = NodePath("Timer")
 _gameplay_ui = NodePath("GameplayUI")
 
-[node name="PauseUI" parent="." instance=ExtResource("2_tp74x")]
+[node name="PauseUI" parent="." unique_id=13701667 instance=ExtResource("2_tp74x")]
 visible = false
 
-[node name="EndGameUI" parent="." instance=ExtResource("11_hrjw4")]
+[node name="EndGameUI" parent="." unique_id=1015188913 instance=ExtResource("11_hrjw4")]
 visible = false
 
-[node name="GameplayUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_start_feedback")]
+[node name="GameplayUI" type="CanvasLayer" parent="." unique_id=1404808923 node_paths=PackedStringArray("_start_feedback")]
 script = ExtResource("5_of43n")
 _start_feedback = NodePath("GameplayUI/PressAny")
 
-[node name="GameplayUI" type="Control" parent="GameplayUI"]
+[node name="GameplayUI" type="Control" parent="GameplayUI" unique_id=2005002443]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -161,7 +161,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_agxdx")
 
-[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/GameplayUI"]
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/GameplayUI" unique_id=280052546]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -173,70 +173,70 @@ offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="GameplayUI/GameplayUI/MarginContainer"]
+[node name="Panel" type="PanelContainer" parent="GameplayUI/GameplayUI/MarginContainer" unique_id=1862286044]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fembj")
 
-[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel" unique_id=1138850701]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer" unique_id=204394770]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="time" type="HBoxContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="time" type="HBoxContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=351182951]
 layout_mode = 2
 
-[node name="label" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/time"]
+[node name="label" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/time" unique_id=386713456]
 layout_mode = 2
 text = "Time "
 label_settings = SubResource("LabelSettings_gakb1")
 vertical_alignment = 1
 uppercase = true
 
-[node name="label2" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/time"]
+[node name="label2" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/time" unique_id=1625199169]
 layout_mode = 2
 text = "60 s"
 label_settings = SubResource("LabelSettings_pon8i")
 
-[node name="score" type="HBoxContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="score" type="HBoxContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1095399275]
 layout_mode = 2
 
-[node name="label" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/score"]
+[node name="label" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/score" unique_id=137892281]
 layout_mode = 2
 text = "Score "
 label_settings = SubResource("LabelSettings_gakb1")
 vertical_alignment = 1
 uppercase = true
 
-[node name="label2" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/score"]
+[node name="label2" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/score" unique_id=907564693]
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_pon8i")
 
-[node name="accuracy" type="HBoxContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="accuracy" type="HBoxContainer" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=992003923]
 layout_mode = 2
 
-[node name="label" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/accuracy"]
+[node name="label" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/accuracy" unique_id=770493812]
 layout_mode = 2
 text = "Accuracy "
 label_settings = SubResource("LabelSettings_gakb1")
 vertical_alignment = 1
 uppercase = true
 
-[node name="label2" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/accuracy"]
+[node name="label2" type="Label" parent="GameplayUI/GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/accuracy" unique_id=1207175659]
 layout_mode = 2
 text = "100.0%"
 label_settings = SubResource("LabelSettings_pon8i")
 
-[node name="Hitmarker" type="TextureRect" parent="GameplayUI/GameplayUI"]
+[node name="Hitmarker" type="TextureRect" parent="GameplayUI/GameplayUI" unique_id=1591929362]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -253,13 +253,11 @@ grow_vertical = 2
 pivot_offset = Vector2(18, 18)
 texture = ExtResource("5_gakb1")
 
-[node name="AnimationKill" type="AnimationPlayer" parent="GameplayUI/GameplayUI"]
+[node name="AnimationKill" type="AnimationPlayer" parent="GameplayUI/GameplayUI" unique_id=1409977969]
 root_node = NodePath("../../..")
-libraries = {
-&"": SubResource("AnimationLibrary_s0jl0")
-}
+libraries/ = SubResource("AnimationLibrary_s0jl0")
 
-[node name="PressAny" type="Label" parent="GameplayUI/GameplayUI"]
+[node name="PressAny" type="Label" parent="GameplayUI/GameplayUI" unique_id=29315824]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -278,23 +276,21 @@ text = "Shoot to start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayUI/GameplayUI/PressAny"]
-libraries = {
-&"": SubResource("AnimationLibrary_y2pta")
-}
-autoplay = "idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayUI/GameplayUI/PressAny" unique_id=199262455]
+libraries/ = SubResource("AnimationLibrary_y2pta")
+autoplay = &"idle"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=599092477]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1086223072]
 environment = SubResource("Environment_pon8i")
 
-[node name="LevelSpawner" type="Node3D" parent="."]
+[node name="LevelSpawner" type="Node3D" parent="." unique_id=315761970]
 unique_name_in_owner = true
 
-[node name="Player" parent="." instance=ExtResource("4_50ilh")]
+[node name="Player" parent="." unique_id=2116774012 instance=ExtResource("4_50ilh")]
 
-[node name="DestroySound" type="AudioStreamPlayer" parent="."]
+[node name="DestroySound" type="AudioStreamPlayer" parent="." unique_id=2026684494]
 stream = ExtResource("12_xv1t2")
 script = ExtResource("13_mss18")
 sound_id = "destroy_sound"
