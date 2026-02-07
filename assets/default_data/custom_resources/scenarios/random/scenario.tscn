@@ -15,12 +15,11 @@ _light = NodePath("DirectionalLight3D")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=553162342]
 transform = Transform3D(0.998198, 0.0464176, 0.0380308, -0.0421491, 0.0912349, 0.994937, 0.0427129, -0.994747, 0.093027, 0, 20, 0)
-light_bake_mode = 1
 
 [node name="Geometry" parent="." unique_id=37419255 instance=ExtResource("2_xogef")]
 
 [node name="TargetSpawner" type="Marker3D" parent="." unique_id=1785027974]
-transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0, 2, -10)
+transform = Transform3D(1, 0, 0, 0, 0.9998477, -0.017452395, 0, 0.017452395, 0.9998477, 0, 2, -10)
 script = ExtResource("3_tfn8e")
 initial_targets = 3
 min_position = Vector3(-5, -2, 0)

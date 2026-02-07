@@ -15,9 +15,7 @@ script = ExtResource("1_xogef")
 _light = NodePath("DirectionalLight3D")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1879470924]
-transform = Transform3D(0.998198, 0.0464176, 0.0380308, -0.0421491, 0.0912349, 0.994937, 0.0427129, -0.994747, 0.093027, 0, 20, 0)
-light_color = Color(0.360784, 0.615686, 1, 1)
-light_bake_mode = 1
+transform = Transform3D(0.9981979, 0.046417624, 0.038030803, -0.042149123, 0.09123496, 0.994937, 0.042712897, -0.99474704, 0.093027, 0, 20, 0)
 
 [node name="Geometry" parent="." unique_id=266680627 instance=ExtResource("2_xogef")]
 
