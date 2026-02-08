@@ -2,8 +2,8 @@ class_name TargetSpawner
 extends Node3D
 ## Spawns targets
 
-## Packed scene of the target
-var _packed_target: PackedScene = preload("res://scenes/target/target.tscn")
+signal target_destroyed ## When player destroys the target
+signal target_hitted ## When player when player hits the target
 
 ## Initial quantity of targets
 @export var initial_targets: int = 1
@@ -18,6 +18,9 @@ var _packed_target: PackedScene = preload("res://scenes/target/target.tscn")
 
 ## Movement behavior script
 @export var behavior: TargetMovementBehavior
+
+## Packed scene of the target
+var _packed_target: PackedScene = preload("res://scenes/target/target.tscn")
 
 func _ready() -> void:
 	_spawn_initial_targets()
@@ -38,14 +41,11 @@ func _spawn_target() -> void:
 	add_child(target)
 
 func _on_target_destroyed() -> void:
-	$"..".target_destroyed.emit()
+	target_destroyed.emit()
 	_spawn_target()
 
 func _on_target_hitted() -> void:
-	$"..".target_hitted.emit()
-
-func _on_target_missed() -> void:
-	$"..".target_destroyed.emit()
+	target_hitted.emit()
 
 func _get_valid_target_spawn_position() -> Vector3:
 	var is_position_valid := false

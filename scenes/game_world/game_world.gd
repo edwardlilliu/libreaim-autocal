@@ -17,7 +17,6 @@ func _ready() -> void:
 		_timer.wait_time = Global.current_scenario.time
 	_load_scenario()
 	_scenario.target_destroyed.connect(_on_target_destroyed)
-	_scenario.target_missed.connect(_on_target_missed)
 	_scenario.target_hitted.connect(_on_target_hitted)
 	$Player.connect("missed", Callable(self, "_on_target_missed"))
 	_gameplay_ui.initialize(_timer, $Player)

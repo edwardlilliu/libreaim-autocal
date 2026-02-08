@@ -18,7 +18,7 @@ func initialize(new_timer: Timer, player: PlayerManager) -> void:
 	player.shooted.connect(_on_player_shoot)
 
 func _on_player_shoot() -> void:
-	if _timer != null and _timer.is_stopped():
+	if _timer != null and _timer.is_stopped() and _start_feedback != null:
 		_timer.start()
 		_start_feedback.queue_free()
 

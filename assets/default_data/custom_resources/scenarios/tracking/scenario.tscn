@@ -10,9 +10,10 @@ script = ExtResource("4_aotl8")
 max_velocity = Vector3(15, 0, 0)
 metadata/_custom_type_script = "uid://bxhkdvu8k5owt"
 
-[node name="Scenario" type="Node3D" unique_id=1523549980 node_paths=PackedStringArray("_light")]
+[node name="Scenario" type="Node3D" unique_id=1523549980 node_paths=PackedStringArray("_light", "_target_spawners")]
 script = ExtResource("1_xogef")
 _light = NodePath("DirectionalLight3D")
+_target_spawners = [NodePath("TargetSpawner")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1879470924]
 transform = Transform3D(0.9981979, 0.046417624, 0.038030803, -0.042149123, 0.09123496, 0.994937, 0.042712897, -0.99474704, 0.093027, 0, 20, 0)
