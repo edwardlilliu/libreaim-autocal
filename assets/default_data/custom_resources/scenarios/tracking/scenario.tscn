@@ -4,16 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://dagqtbldaccgh" path="res://scenes/game_world/scenario/sample_world_geometry.tscn" id="2_xogef"]
 [ext_resource type="Script" uid="uid://7eouyjvbgjo0" path="res://scenes/game_world/target_spawner.gd" id="3_tfn8e"]
 [ext_resource type="Script" uid="uid://bxhkdvu8k5owt" path="res://scenes/target/behavior/behavior_linearmovement.gd" id="4_aotl8"]
+[ext_resource type="Script" uid="uid://cqgu0hosxt5e1" path="res://scenes/game_world/player_spawner.gd" id="5_qfx0g"]
 
 [sub_resource type="Resource" id="Resource_ncddh"]
 script = ExtResource("4_aotl8")
 max_velocity = Vector3(15, 0, 0)
 metadata/_custom_type_script = "uid://bxhkdvu8k5owt"
 
-[node name="Scenario" type="Node3D" unique_id=1523549980 node_paths=PackedStringArray("_light", "_target_spawners")]
+[node name="Scenario" type="Node3D" unique_id=1523549980 node_paths=PackedStringArray("_light", "_target_spawners", "_player_spawner")]
 script = ExtResource("1_xogef")
 _light = NodePath("DirectionalLight3D")
 _target_spawners = [NodePath("TargetSpawner")]
+_player_spawner = NodePath("PlayerSpawner")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1879470924]
 transform = Transform3D(0.9981979, 0.046417624, 0.038030803, -0.042149123, 0.09123496, 0.994937, 0.042712897, -0.99474704, 0.093027, 0, 20, 0)
@@ -28,3 +30,6 @@ size = Vector2(1, 4)
 min_position = Vector3(-15, -2, 0)
 max_position = Vector3(15, 2, 0)
 behavior = SubResource("Resource_ncddh")
+
+[node name="PlayerSpawner" type="Marker3D" parent="." unique_id=1355402168]
+script = ExtResource("5_qfx0g")

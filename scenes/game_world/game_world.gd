@@ -18,8 +18,8 @@ func _ready() -> void:
 	_load_scenario()
 	_scenario.target_destroyed.connect(_on_target_destroyed)
 	_scenario.target_hitted.connect(_on_target_hitted)
-	$Player.connect("missed", Callable(self, "_on_target_missed"))
-	_gameplay_ui.initialize(_timer, $Player)
+	_scenario.get_player().connect("missed", Callable(self, "_on_target_missed"))
+	_gameplay_ui.initialize(_timer, _scenario.get_player())
 	$WorldEnvironment.environment.background_color = SaveManager.settings.get_data("video_world", "ambient_color")
 
 func _process(_delta: float) -> void:
@@ -33,7 +33,7 @@ func _on_timer_timeout() -> void:
 	_timer.stop()
 	var high_score := HighScoreManager.get_high_score(Global.current_scenario.id)
 	HighScoreManager.save_high_score(Global.current_scenario.id, _get_score())
-	$Player.queue_free()
+	_scenario.get_player().queue_free()
 	$PauseUI.queue_free()
 	$EndGameUI.set_score(_get_score(), high_score, _get_accuracy())
 	$GameplayUI.visible = false
