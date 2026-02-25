@@ -26,8 +26,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
-		_camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
+		rotate_y(deg_to_rad(-event.screen_relative.x * mouse_sensitivity))
+		_camera.rotate_x(deg_to_rad(-event.screen_relative.y * mouse_sensitivity))
 		_camera.rotation.x = clamp(_camera.rotation.x, deg_to_rad(-MAX_CAMERA_ANGLE), deg_to_rad(MAX_CAMERA_ANGLE))
 	if Global.current_scenario and Global.current_scenario.shoot_machinegun == false:
 		if event.is_action_pressed("shoot"):
