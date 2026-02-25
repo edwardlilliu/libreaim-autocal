@@ -2,10 +2,10 @@ extends Control
 ## Controls settings
 
 const games_sensitivities: Dictionary = {
-	"Counter Strike 2": 0.022,
-	"Apex Legends": 0.022,
-	"Team Fortress 2": 0.022,
-	"Valorant": 0.07,
+	"Counter Strike 2": 0.0003840578,
+	"Apex Legends": 0.0003840578,
+	"Team Fortress 2": 0.0003840578,
+	"Valorant": 0.0012220027,
 }
 
 @onready var game: OptionButton = $Game

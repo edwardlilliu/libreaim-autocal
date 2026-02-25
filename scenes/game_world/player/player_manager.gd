@@ -26,8 +26,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.screen_relative.x * mouse_sensitivity))
-		_camera.rotate_x(deg_to_rad(-event.screen_relative.y * mouse_sensitivity))
+		rotate_y(-event.screen_relative.x * mouse_sensitivity)
+		_camera.rotate_x(-event.screen_relative.y * mouse_sensitivity)
 		_camera.rotation.x = clamp(_camera.rotation.x, deg_to_rad(-MAX_CAMERA_ANGLE), deg_to_rad(MAX_CAMERA_ANGLE))
 	if Global.current_scenario and Global.current_scenario.shoot_machinegun == false:
 		if event.is_action_pressed("shoot"):
@@ -68,8 +68,8 @@ func _get_mouse_sensitivity() -> float:
 func _handle_joypad_rotation(delta: float) -> void:
 	var joypad_dir: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 	if joypad_dir.length() > 0:
-		rotate_y(deg_to_rad(-joypad_dir.x * mouse_sensitivity * delta * 1000))
-		_camera.rotate_x(deg_to_rad(-joypad_dir.y * mouse_sensitivity * delta * 1000))
+		rotate_y(-joypad_dir.x * mouse_sensitivity * delta * 1000)
+		_camera.rotate_x(-joypad_dir.y * mouse_sensitivity * delta * 1000)
 		_camera.rotation.x = clamp(_camera.rotation.x, deg_to_rad(-MAX_CAMERA_ANGLE), deg_to_rad(MAX_CAMERA_ANGLE))
 
 func _handle_gravity(delta: float) -> void:
