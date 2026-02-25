@@ -21,12 +21,20 @@ func _ready() -> void:
 			game.select(i)
 	sensitivity.change_value.connect(_on_sensitivity_change_value)
 	game.item_selected.connect(_on_game_item_selected)
+	_update_sensitivity_label()
 
 func _on_sensitivity_change_value(value: float) -> void:
 	SaveManager.settings.set_data("controls", "sensitivity_game", game.get_item_text(game.get_item_index(game.get_selected_id())))
 	SaveManager.settings.set_data("controls", "sensitivity_game_value", games_sensitivities.get(game.get_item_text(game.get_selected_id())) )
 	SaveManager.settings.set_data("controls", "sensitivity", float(value))
+	_update_sensitivity_label()
 
 func _on_game_item_selected(index: int) -> void:
 	SaveManager.settings.set_data("controls", "sensitivity_game", game.get_item_text(index))
 	SaveManager.settings.set_data("controls", "sensitivity_game_value", games_sensitivities.get(game.get_item_text(index)))
+	_update_sensitivity_label()
+
+func _update_sensitivity_label() -> void:
+	var this_sensitivity: float = SaveManager.settings.get_data("controls", "sensitivity") \
+		* SaveManager.settings.get_data("controls", "sensitivity_game_value")
+	$SensitivityLabel.text = "LibreAim sensitivity: " + str(this_sensitivity)
