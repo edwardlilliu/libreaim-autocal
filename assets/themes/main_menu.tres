@@ -41,7 +41,7 @@ corner_radius_bottom_left = 6
 content_margin_top = 4.0
 content_margin_right = 0.0
 content_margin_bottom = 4.0
-color = Color(0.160784, 0.160784, 0.160784, 1)
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
 thickness = 5
 vertical = true
 

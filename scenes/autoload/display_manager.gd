@@ -8,6 +8,7 @@ func _ready() -> void:
 	# randomly ignoring the user screen setting, this behaviour was detected
 	# for the first time in Godot4.4 in Linux 
 	await get_tree().create_timer(0.01).timeout
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	var selected = SaveManager.settings.get_data("video", "window_mode")
 	set_window_mode(get_window_mode_from_string(selected))
 	set_resolution(SaveManager.settings.get_data("video", "resolution"))

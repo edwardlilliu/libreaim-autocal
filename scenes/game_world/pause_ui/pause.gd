@@ -13,8 +13,11 @@ func _notification(what: int) -> void:
 func trigger_pause(new_pause_state: bool) -> void:
 	get_tree().paused = new_pause_state
 	visible = new_pause_state
+	$"../GameplayUI".visible = !new_pause_state
+	%CurrentGamemode.text = Global.get_current_scenario_value("title")
+	%GamemodeIcon.texture = Global.get_scenario_thumbnail(Global.get_current_scenario_value("path"))
 	if (new_pause_state):
-		$Pause/Buttons/Resume.grab_focus()
+		$Pause/Panel/LeftControl/VBoxContainer/Resume.grab_focus()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
