@@ -11,10 +11,11 @@ config_version=5
 [application]
 
 config/name="LibreAim"
-config/version="0.4"
+config/description="Libre first person shooter aim trainer"
+config/version="0.5"
 run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://c4b2m50txi00g"
 config/convert_text_resources_to_binary=false
 
 [autoload]
