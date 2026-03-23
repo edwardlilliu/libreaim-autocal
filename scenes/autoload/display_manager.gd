@@ -4,10 +4,6 @@ extends Node
 signal window_mode_updated(window_mode: DisplayServer.WindowMode)
 
 func _ready() -> void:
-	# This await is very bad and shouldn't be here, it prevents the window
-	# randomly ignoring the user screen setting, this behaviour was detected
-	# for the first time in Godot4.4 in Linux 
-	await get_tree().create_timer(0.01).timeout
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	var selected = SaveManager.settings.get_data("video", "window_mode")
 	set_window_mode(get_window_mode_from_string(selected))
@@ -61,5 +57,12 @@ func set_max_fps(value) -> void:
 func set_resolution(value: float) -> void:
 	get_viewport().scaling_3d_scale = value / 100.0
 
+func _get_screen_refresh_rate() -> int:
+	return int(DisplayServer.screen_get_refresh_rate(DisplayServer.get_primary_screen()))
+
 func _set_max_fps_from_settings() -> void:
-	set_max_fps(SaveManager.settings.get_data("video", "fps_limit"))
+	var value = SaveManager.settings.get_data("video", "fps_limit")
+	if value < 0:
+		value = _get_screen_refresh_rate()
+		SaveManager.settings.set_data("video", "fps_limit", value)
+	set_max_fps(value)
