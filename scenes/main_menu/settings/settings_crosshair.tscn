@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://coxbsxucgposx" path="res://scenes/game_world/crosshair.gd" id="3_uw2kl"]
 [ext_resource type="PackedScene" uid="uid://db0ivgs28q5rr" path="res://scenes/main_menu/settings/slider_setting.tscn" id="4_2iwqj"]
 [ext_resource type="Texture2D" uid="uid://dfccfxiw0aqif" path="res://assets/images/icons/export-file.svg" id="5_i2t3j"]
-[ext_resource type="Texture2D" uid="uid://ql8v8tau18u1" path="res://assets/images/icons/checkbox_checked.svg" id="5_j81m0"]
+[ext_resource type="Theme" uid="uid://iie104f258ak" path="res://assets/themes/color_picker.tres" id="5_xn6g7"]
 [ext_resource type="Texture2D" uid="uid://btgrnb8ku7dyk" path="res://assets/images/icons/import-file.svg" id="6_bq5ho"]
 [ext_resource type="Script" uid="uid://bm3vbahhf6av" path="res://scenes/main_menu/settings/settings_hitmarker.gd" id="8_0xqo5"]
 [ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="8_olnri"]
@@ -16,72 +16,6 @@ corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yvei"]
-
-[sub_resource type="ImageTexture" id="ImageTexture_vtpo4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bheco"]
-bg_color = Color(0.101961, 0.101961, 0.101961, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydstq"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1fy7"]
-bg_color = Color(0.101961, 0.101961, 0.101961, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="Theme" id="Theme_olnri"]
-Button/styles/normal = SubResource("StyleBoxFlat_1yvei")
-CheckBox/icons/checked = ExtResource("5_j81m0")
-CheckBox/icons/unchecked = SubResource("ImageTexture_vtpo4")
-CheckBox/styles/focus = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/hover = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/normal = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/pressed = SubResource("StyleBoxFlat_bheco")
-ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_ydstq")
-Label/font_sizes/font_size = 22
-LineEdit/styles/normal = SubResource("StyleBoxFlat_p1fy7")
-
-[sub_resource type="Theme" id="Theme_xn6g7"]
-Button/styles/normal = SubResource("StyleBoxFlat_1yvei")
-CheckBox/icons/checked = ExtResource("5_j81m0")
-CheckBox/icons/unchecked = SubResource("ImageTexture_vtpo4")
-CheckBox/styles/focus = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/hover = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/normal = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/pressed = SubResource("StyleBoxFlat_bheco")
-ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_ydstq")
-Label/font_sizes/font_size = 22
-LineEdit/styles/normal = SubResource("StyleBoxFlat_p1fy7")
 
 [sub_resource type="LabelSettings" id="LabelSettings_xn6g7"]
 font = ExtResource("8_olnri")
@@ -204,7 +138,7 @@ text = "Color"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-theme = SubResource("Theme_olnri")
+theme = ExtResource("5_xn6g7")
 color = Color(0, 1, 1, 1)
 
 [node name="OutlineColor" type="HBoxContainer" parent="MarginContainer/Crosshair/CrosshairSettings" unique_id=2082402231]
@@ -219,7 +153,7 @@ text = "Outline color"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-theme = SubResource("Theme_xn6g7")
+theme = ExtResource("5_xn6g7")
 
 [node name="Margin" type="Control" parent="MarginContainer/Crosshair" unique_id=1566020641]
 custom_minimum_size = Vector2(0, 12)

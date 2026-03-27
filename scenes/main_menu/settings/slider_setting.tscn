@@ -15,6 +15,14 @@
 
 [sub_resource type="ImageTexture" id="ImageTexture_vtpo4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02l3v"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6, 0.6, 0.6, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bheco"]
 bg_color = Color(0.101961, 0.101961, 0.101961, 1)
 border_width_left = 3
@@ -47,7 +55,7 @@ Button/styles/normal = SubResource("StyleBoxEmpty_jerdo")
 Button/styles/pressed = SubResource("StyleBoxEmpty_2bsn0")
 CheckBox/icons/checked = ExtResource("1_02l3v")
 CheckBox/icons/unchecked = SubResource("ImageTexture_vtpo4")
-CheckBox/styles/focus = SubResource("StyleBoxFlat_bheco")
+CheckBox/styles/focus = SubResource("StyleBoxFlat_02l3v")
 CheckBox/styles/hover = SubResource("StyleBoxFlat_bheco")
 CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_bheco")
 CheckBox/styles/normal = SubResource("StyleBoxFlat_bheco")

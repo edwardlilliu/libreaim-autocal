@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://od1jienr37dl" path="res://scenes/main_menu/settings/settings_video.gd" id="1_wsyhu"]
 [ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_0fpak"]
 [ext_resource type="Script" uid="uid://cxxp1bfw3sldw" path="res://scenes/main_menu/settings/settings_world_appareance.gd" id="2_tonjr"]
-[ext_resource type="Texture2D" uid="uid://ql8v8tau18u1" path="res://assets/images/icons/checkbox_checked.svg" id="3_ct4oh"]
 [ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="4_ryila"]
 [ext_resource type="PackedScene" uid="uid://db0ivgs28q5rr" path="res://scenes/main_menu/settings/slider_setting.tscn" id="4_srsku"]
+[ext_resource type="Theme" uid="uid://iie104f258ak" path="res://assets/themes/color_picker.tres" id="6_0fpak"]
 [ext_resource type="Script" uid="uid://2yaqmk2h3ap" path="res://scenes/main_menu/settings/world_appearance_preview.gd" id="8_0fpak"]
 [ext_resource type="Script" uid="uid://dwyx06nsevwk4" path="res://scenes/game_world/world_mesh.gd" id="9_ryila"]
 
@@ -13,59 +13,6 @@
 font = ExtResource("4_ryila")
 font_size = 24
 font_color = Color(0.69803923, 0.87058824, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yvei"]
-
-[sub_resource type="ImageTexture" id="ImageTexture_vtpo4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bheco"]
-bg_color = Color(0.101961, 0.101961, 0.101961, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydstq"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1fy7"]
-bg_color = Color(0.101961, 0.101961, 0.101961, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.160784, 0.160784, 0.160784, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="Theme" id="Theme_og8m1"]
-Button/styles/normal = SubResource("StyleBoxFlat_1yvei")
-CheckBox/icons/checked = ExtResource("3_ct4oh")
-CheckBox/icons/unchecked = SubResource("ImageTexture_vtpo4")
-CheckBox/styles/focus = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/hover = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/normal = SubResource("StyleBoxFlat_bheco")
-CheckBox/styles/pressed = SubResource("StyleBoxFlat_bheco")
-ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_ydstq")
-Label/font_sizes/font_size = 22
-LineEdit/styles/normal = SubResource("StyleBoxFlat_p1fy7")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_332bo"]
 bg_color = Color(0.16078432, 0.16078432, 0.16078432, 1)
@@ -197,7 +144,7 @@ text = "Targets color"
 [node name="TargetColor" type="ColorPickerButton" parent="WorldAppareance/TargetColor" unique_id=1741649499 groups=["Persist", "PutLabel"]]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-theme = SubResource("Theme_og8m1")
+theme = ExtResource("6_0fpak")
 color = Color(1, 0.74902, 0, 1)
 
 [node name="AmbientColor" type="HBoxContainer" parent="WorldAppareance" unique_id=1162738074]
@@ -214,7 +161,7 @@ text = "Ambient color"
 [node name="Color" type="ColorPickerButton" parent="WorldAppareance/AmbientColor" unique_id=1443451182 groups=["Persist", "PutLabel"]]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-theme = SubResource("Theme_og8m1")
+theme = ExtResource("6_0fpak")
 color = Color(0.06666667, 0.12941177, 0.22745098, 1)
 edit_alpha = false
 
@@ -232,7 +179,7 @@ text = "Surface color"
 [node name="Color" type="ColorPickerButton" parent="WorldAppareance/SurfaceColor" unique_id=246635728 groups=["Persist", "PutLabel"]]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-theme = SubResource("Theme_og8m1")
+theme = ExtResource("6_0fpak")
 color = Color(1, 1, 1, 1)
 
 [node name="Label" type="Label" parent="WorldAppareance" unique_id=1508221707]
