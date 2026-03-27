@@ -13,6 +13,7 @@ script = ExtResource("1_d47x0")
 
 [node name="Title" type="Label" parent="." unique_id=8677936]
 layout_mode = 2
+focus_mode = 3
 text = "Audio"
 label_settings = ExtResource("2_68csa")
 vertical_alignment = 1

@@ -41,6 +41,7 @@ script = ExtResource("1_8jhp0")
 
 [node name="Title" type="Label" parent="MarginContainer/Crosshair" unique_id=1987393914]
 layout_mode = 2
+focus_mode = 3
 text = "Crosshair"
 label_settings = ExtResource("2_j81m0")
 vertical_alignment = 1
@@ -196,6 +197,7 @@ script = ExtResource("8_0xqo5")
 
 [node name="Label2" type="Label" parent="MarginContainer/Crosshair/Hitmarker" unique_id=644782072]
 layout_mode = 2
+focus_mode = 3
 text = "
 Hitmarker"
 label_settings = SubResource("LabelSettings_xn6g7")

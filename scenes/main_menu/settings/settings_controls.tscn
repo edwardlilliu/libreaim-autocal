@@ -11,6 +11,7 @@ script = ExtResource("1_04o0j")
 
 [node name="Title" type="Label" parent="." unique_id=2034482145]
 layout_mode = 2
+focus_mode = 3
 text = "Controls"
 label_settings = ExtResource("2_t7tm4")
 vertical_alignment = 1

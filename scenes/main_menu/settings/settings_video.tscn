@@ -50,6 +50,7 @@ script = ExtResource("1_wsyhu")
 
 [node name="Title" type="Label" parent="." unique_id=1918649134]
 layout_mode = 2
+focus_mode = 3
 text = "Video"
 label_settings = ExtResource("2_0fpak")
 vertical_alignment = 1
@@ -126,6 +127,7 @@ script = ExtResource("2_tonjr")
 
 [node name="WorldAppareanceLabel" type="Label" parent="WorldAppareance" unique_id=951610390]
 layout_mode = 2
+focus_mode = 3
 text = "
 World appearance"
 label_settings = SubResource("LabelSettings_0fpak")

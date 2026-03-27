@@ -76,6 +76,7 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="LeftControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=222215979]
 layout_mode = 2
+focus_mode = 3
 theme_override_colors/font_color = Color(0.3145, 0.61795, 0.85, 1)
 theme_override_fonts/font = ExtResource("3_qel0l")
 theme_override_font_sizes/font_size = 36
@@ -83,6 +84,7 @@ text = "Libre Aim"
 
 [node name="Label" type="Label" parent="LeftControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2008573506]
 layout_mode = 2
+focus_mode = 3
 theme_override_colors/font_color = Color(0.65882355, 0.65882355, 0.65882355, 1)
 theme_override_font_sizes/font_size = 18
 text = "Version"

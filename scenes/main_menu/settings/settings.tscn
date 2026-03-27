@@ -29,6 +29,7 @@ theme_override_constants/separation = 6
 
 [node name="Title" type="Label" parent="LeftControl/SettingsList" unique_id=1573118812]
 layout_mode = 2
+focus_mode = 3
 text = "Settings"
 label_settings = ExtResource("2_7vie7")
 
