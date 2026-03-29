@@ -2,10 +2,10 @@ class_name SettingsAudio
 extends Control
 ## Audio settings
 
-@onready var hit_sound_option_button := $HitSoundOptionButton
-@onready var hit_sound_preview: AudioStreamPlayer = $HitSoundPreview/AudioStreamPlayer
-@onready var destroy_sound_option_button: OptionButton = $DestroySoundOptionButton
-@onready var destroy_sound_preview: AudioStreamPlayer = $DestroySoundPreview/AudioStreamPlayer
+@export var hit_sound_option_button: OptionButton
+@export var hit_sound_preview: AudioStreamPlayer
+@export var destroy_sound_option_button: OptionButton
+@export var destroy_sound_preview: AudioStreamPlayer
 
 func _ready() -> void:
 	_add_destroy_sounds(hit_sound_option_button)

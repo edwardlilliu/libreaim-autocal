@@ -65,14 +65,16 @@ Label/font_sizes/font_size = 18
 LineEdit/styles/normal = SubResource("StyleBoxFlat_bheco")
 
 [node name="SliderSetting" type="HBoxContainer" unique_id=845783721]
+offset_top = 1.0
 offset_right = 341.0
-offset_bottom = 44.0
+offset_bottom = 45.0
 theme = SubResource("Theme_qs324")
 script = ExtResource("1_0c23u")
 
 [node name="Label" type="Label" parent="." unique_id=1154552931]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 3
 mouse_filter = 1
 text = "Label"
 
