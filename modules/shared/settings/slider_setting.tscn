@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://db0ivgs28q5rr"]
+
+[ext_resource type="Script" uid="uid://5eiruc5jlimu" path="res://modules/shared/settings/slider_setting.gd" id="1_0c23u"]
+[ext_resource type="Texture2D" uid="uid://ql8v8tau18u1" path="res://assets/images/icons/checkbox_checked.svg" id="1_02l3v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_02l3v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qs324"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfr00"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jerdo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bsn0"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_vtpo4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02l3v"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bheco"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.160784, 0.160784, 0.160784, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydstq"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.160784, 0.160784, 0.160784, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="Theme" id="Theme_qs324"]
+Button/styles/disabled = SubResource("StyleBoxEmpty_02l3v")
+Button/styles/focus = SubResource("StyleBoxEmpty_qs324")
+Button/styles/hover = SubResource("StyleBoxEmpty_kfr00")
+Button/styles/normal = SubResource("StyleBoxEmpty_jerdo")
+Button/styles/pressed = SubResource("StyleBoxEmpty_2bsn0")
+CheckBox/icons/checked = ExtResource("1_02l3v")
+CheckBox/icons/unchecked = SubResource("ImageTexture_vtpo4")
+CheckBox/styles/focus = SubResource("StyleBoxFlat_02l3v")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_bheco")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_bheco")
+CheckBox/styles/normal = SubResource("StyleBoxFlat_bheco")
+CheckBox/styles/pressed = SubResource("StyleBoxFlat_bheco")
+ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_ydstq")
+Label/font_sizes/font_size = 18
+LineEdit/styles/normal = SubResource("StyleBoxFlat_bheco")
+
+[node name="SliderSetting" type="HBoxContainer" unique_id=845783721]
+offset_top = 1.0
+offset_right = 341.0
+offset_bottom = 45.0
+theme = SubResource("Theme_qs324")
+script = ExtResource("1_0c23u")
+
+[node name="Label" type="Label" parent="." unique_id=1154552931]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 3
+mouse_filter = 1
+text = "Label"
+
+[node name="CheckBox" type="CheckBox" parent="." unique_id=1397504354]
+layout_mode = 2
+button_pressed = true
+
+[node name="SpinBox" type="SpinBox" parent="." unique_id=237294270]
+layout_mode = 2
+step = 0.1
+value = 50.0
+alignment = 1
+
+[node name="Slider" type="HSlider" parent="." unique_id=1208678499]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 4
+step = 0.1
+value = 50.0
+
+[connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]
+[connection signal="value_changed" from="Slider" to="." method="_on_slider_value_changed"]

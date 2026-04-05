@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://cropshnueuiqr"]
+
+[ext_resource type="Script" uid="uid://hadqd3kotmfk" path="res://modules/shared/settings/settings.gd" id="1_4ilr3"]
+[ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_7vie7"]
+[ext_resource type="PackedScene" uid="uid://dcqej3022gbdk" path="res://modules/shared/settings/categories/settings_crosshair.tscn" id="2_ofn7e"]
+[ext_resource type="PackedScene" uid="uid://defuaijvpgkhn" path="res://modules/shared/settings/categories/settings_video.tscn" id="3_exihx"]
+[ext_resource type="PackedScene" uid="uid://1lrvcwbqgnw5" path="res://modules/shared/settings/categories/settings_controls.tscn" id="4_l5su2"]
+[ext_resource type="PackedScene" uid="uid://dhe0v0qwojerb" path="res://modules/shared/settings/categories/settings_audio.tscn" id="5_3v276"]
+
+[node name="Settings" type="HBoxContainer" unique_id=20530153]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_4ilr3")
+
+[node name="LeftControl" type="MarginContainer" parent="." unique_id=1277315690]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 60
+
+[node name="SettingsList" type="VBoxContainer" parent="LeftControl" unique_id=121029643]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="LeftControl/SettingsList" unique_id=1573118812]
+layout_mode = 2
+focus_mode = 3
+text = "Settings"
+label_settings = ExtResource("2_7vie7")
+
+[node name="Margin" type="Control" parent="LeftControl/SettingsList" unique_id=1934724111]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Crosshair" type="Button" parent="LeftControl/SettingsList" unique_id=112394932]
+layout_mode = 2
+text = "Crosshair"
+alignment = 0
+
+[node name="Video" type="Button" parent="LeftControl/SettingsList" unique_id=1171497405]
+layout_mode = 2
+text = "Video"
+alignment = 0
+
+[node name="Controls" type="Button" parent="LeftControl/SettingsList" unique_id=1190109225]
+layout_mode = 2
+text = "Controls"
+alignment = 0
+
+[node name="Audio" type="Button" parent="LeftControl/SettingsList" unique_id=247856930]
+layout_mode = 2
+text = "Audio"
+alignment = 0
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=281937500]
+custom_minimum_size = Vector2(0, 750)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="RightControl" type="MarginContainer" parent="." unique_id=1124039343]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 120
+
+[node name="Crosshair" parent="RightControl" unique_id=492063271 instance=ExtResource("2_ofn7e")]
+visible = false
+layout_mode = 2
+
+[node name="Video" parent="RightControl" unique_id=1845871289 instance=ExtResource("3_exihx")]
+visible = false
+layout_mode = 2
+
+[node name="Controls" parent="RightControl" unique_id=331774468 instance=ExtResource("4_l5su2")]
+visible = false
+layout_mode = 2
+
+[node name="Audio" parent="RightControl" unique_id=975452402 instance=ExtResource("5_3v276")]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="LeftControl/SettingsList/Crosshair" to="." method="_on_crosshair_pressed"]
+[connection signal="pressed" from="LeftControl/SettingsList/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="LeftControl/SettingsList/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="LeftControl/SettingsList/Audio" to="." method="_on_audio_pressed"]

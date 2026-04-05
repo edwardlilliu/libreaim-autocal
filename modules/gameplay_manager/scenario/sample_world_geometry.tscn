@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dagqtbldaccgh"]
+
+[ext_resource type="Script" uid="uid://dwyx06nsevwk4" path="res://modules/gameplay_manager/scenario/world_mesh.gd" id="1_o82f3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ex5n1"]
+size = Vector2(24, 8)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_psba1"]
+data = PackedVector3Array(12, 0, 4, -12, 0, 4, 12, 0, -4, -12, 0, 4, -12, 0, -4, 12, 0, -4)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_31dq1"]
+data = PackedVector3Array(12, 0, 4, -12, 0, 4, 12, 0, -4, -12, 0, 4, -12, 0, -4, 12, 0, -4)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_m5raa"]
+data = PackedVector3Array(12, 0, 4, -12, 0, 4, 12, 0, -4, -12, 0, 4, -12, 0, -4, 12, 0, -4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mfcxv"]
+size = Vector2(24, 24)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d3ml8"]
+data = PackedVector3Array(12, 0, 12, -12, 0, 12, 12, 0, -12, -12, 0, 12, -12, 0, -12, 12, 0, -12)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hn4xm"]
+plane = Plane(0, 0, 1, 0)
+
+[node name="Geometry" type="Node3D" unique_id=1526646959]
+
+[node name="Walls" type="Node3D" parent="." unique_id=341119205]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls" unique_id=1856103626]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 21)
+mesh = SubResource("PlaneMesh_ex5n1")
+script = ExtResource("1_o82f3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Walls/MeshInstance3D" unique_id=1641323502]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/MeshInstance3D/StaticBody3D" unique_id=1406947137]
+shape = SubResource("ConcavePolygonShape3D_psba1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Walls" unique_id=852517003]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -12, 4, 9)
+mesh = SubResource("PlaneMesh_ex5n1")
+script = ExtResource("1_o82f3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Walls/MeshInstance3D2" unique_id=428391724]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/MeshInstance3D2/StaticBody3D" unique_id=696840322]
+shape = SubResource("ConcavePolygonShape3D_31dq1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Walls" unique_id=2009828137]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 12, 4, 9)
+mesh = SubResource("PlaneMesh_ex5n1")
+script = ExtResource("1_o82f3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Walls/MeshInstance3D3" unique_id=1557683209]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/MeshInstance3D3/StaticBody3D" unique_id=1736572211]
+shape = SubResource("ConcavePolygonShape3D_m5raa")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=155471590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+mesh = SubResource("PlaneMesh_mfcxv")
+script = ExtResource("1_o82f3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1345901090]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1354691040]
+shape = SubResource("ConcavePolygonShape3D_d3ml8")
+
+[node name="PlayerWall" type="StaticBody3D" parent="." unique_id=1717575015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerWall" unique_id=554307502]
+shape = SubResource("WorldBoundaryShape3D_hn4xm")

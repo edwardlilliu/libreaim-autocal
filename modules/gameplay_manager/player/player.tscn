@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dkiet13jnna2m"]
+
+[ext_resource type="Script" uid="uid://dypck0cj1wmxf" path="res://modules/gameplay_manager/player/player_manager.gd" id="1_txs4e"]
+[ext_resource type="PackedScene" uid="uid://b7w6oa4fydjyq" path="res://modules/gameplay_manager/bullet_hole/bullet_hole.tscn" id="2_g1fc8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_itdsy"]
+radius = 0.3
+height = 1.7
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_41626"]
+radius = 0.3
+height = 1.7
+radial_segments = 16
+rings = 4
+
+[node name="Player" type="CharacterBody3D" unique_id=51770985]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_txs4e")
+bullet_hole_scene = ExtResource("2_g1fc8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=899611673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_itdsy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=2129653010]
+layers = 2
+mesh = SubResource("CapsuleMesh_41626")
+skeleton = NodePath("../..")
+
+[node name="Head" type="Node3D" parent="." unique_id=44715910]
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1303428346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+cull_mask = 1048573
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=1785098675]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -256, 0)

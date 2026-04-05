@@ -13,18 +13,18 @@ config_version=5
 config/name="LibreAim"
 config/description="Libre first person shooter aim trainer"
 config/version="0.5"
-run/main_scene="res://scenes/main_menu/main_menu.tscn"
+run/main_scene="res://modules/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://c4b2m50txi00g"
 config/convert_text_resources_to_binary=false
 
 [autoload]
 
-Global="*res://scenes/autoload/global.gd"
-SaveManager="*res://scenes/autoload/save_manager.gd"
-DisplayManager="*res://scenes/autoload/display_manager.gd"
-OverlayUi="*res://scenes/autoload/overlay_ui.tscn"
-CustomResourceManager="*res://scenes/autoload/custom_resource_manager.gd"
+Global="*res://modules/autoload/global.gd"
+SaveManager="*res://modules/autoload/save_manager.gd"
+DisplayManager="*res://modules/autoload/display_manager.gd"
+OverlayUi="*res://modules/autoload/overlay_ui.tscn"
+CustomResourceManager="*res://modules/autoload/custom_resource_manager.gd"
 
 [display]
 

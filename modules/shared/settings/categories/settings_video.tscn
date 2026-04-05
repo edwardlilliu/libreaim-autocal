@@ -1,0 +1,252 @@
+[gd_scene format=3 uid="uid://defuaijvpgkhn"]
+
+[ext_resource type="Script" uid="uid://od1jienr37dl" path="res://modules/shared/settings/categories/settings_video.gd" id="1_wsyhu"]
+[ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_0fpak"]
+[ext_resource type="Script" uid="uid://cxxp1bfw3sldw" path="res://modules/shared/settings/categories/settings_world_appareance.gd" id="2_tonjr"]
+[ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="4_ryila"]
+[ext_resource type="PackedScene" uid="uid://db0ivgs28q5rr" path="res://modules/shared/settings/slider_setting.tscn" id="4_srsku"]
+[ext_resource type="Theme" uid="uid://iie104f258ak" path="res://assets/themes/color_picker.tres" id="6_0fpak"]
+[ext_resource type="Script" uid="uid://2yaqmk2h3ap" path="res://modules/shared/settings/categories/world_appearance_preview.gd" id="8_0fpak"]
+[ext_resource type="Script" uid="uid://dwyx06nsevwk4" path="res://modules/gameplay_manager/scenario/world_mesh.gd" id="9_ryila"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0fpak"]
+font = ExtResource("4_ryila")
+font_size = 24
+font_color = Color(0.69803923, 0.87058824, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_332bo"]
+bg_color = Color(0.16078432, 0.16078432, 0.16078432, 1)
+border_width_left = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.16078432, 0.16078432, 0.16078432, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fpak"]
+albedo_color = Color(1, 0.74902, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.74902, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_332bo"]
+material = SubResource("StandardMaterial3D_0fpak")
+radial_segments = 8
+rings = 4
+
+[sub_resource type="Environment" id="Environment_332bo"]
+background_mode = 1
+background_color = Color(0.8271669, 0.88920677, 0.9181329, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_332bo"]
+size = Vector2(18, 12)
+
+[node name="Video" type="VBoxContainer" unique_id=23639290]
+offset_right = 325.0
+offset_bottom = 464.0
+script = ExtResource("1_wsyhu")
+
+[node name="Title" type="Label" parent="." unique_id=1918649134]
+layout_mode = 2
+focus_mode = 3
+text = "Video"
+label_settings = ExtResource("2_0fpak")
+vertical_alignment = 1
+
+[node name="Margin" type="Control" parent="." unique_id=2052534369]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Resolution" parent="." unique_id=1068940304 instance=ExtResource("4_srsku")]
+layout_mode = 2
+label_text = "Resolution"
+tooltip = "Resolution in which the 3D world will be rendered."
+save_this_setting = true
+settings_category = "video"
+settings_slider_id = "resolution"
+min_value = 10.0
+value = 100.0
+step = 5.0
+suffix = "%"
+has_checkbox = false
+
+[node name="CameraFov" parent="." unique_id=71034099 instance=ExtResource("4_srsku")]
+layout_mode = 2
+label_text = "Camera Fov"
+tooltip = "Extent of the observable world captured by the camera."
+save_this_setting = true
+settings_category = "video"
+settings_slider_id = "fov"
+max_value = 120.0
+min_value = 30.0
+value = 120.0
+step = 1.0
+suffix = "º"
+has_checkbox = false
+
+[node name="FPSLimit" parent="." unique_id=1922662732 instance=ExtResource("4_srsku")]
+layout_mode = 2
+label_text = "FPS limit"
+save_this_setting = true
+settings_category = "video"
+settings_slider_id = "fps_limit"
+max_value = 999.0
+min_value = 30.0
+value = 120.0
+step = 1.0
+suffix = "FPS"
+has_checkbox = false
+
+[node name="WindowModeLabel" type="Label" parent="." unique_id=1649607555]
+layout_mode = 2
+text = "Window mode"
+
+[node name="WindowModeOptions" type="OptionButton" parent="." unique_id=901121429]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "fullscreen"
+popup/item_0/id = 1
+popup/item_1/text = "windowed"
+popup/item_1/id = 1
+
+[node name="FPSOverlay" parent="." unique_id=723044895 instance=ExtResource("4_srsku")]
+layout_mode = 2
+label_text = "FPS Overlay"
+tooltip = "On enabled, a text showing the current FPS will appear on screen."
+save_this_setting = true
+settings_category = "video"
+settings_checkbox_id = "fps_overlay"
+has_slider = false
+
+[node name="WorldAppareance" type="VBoxContainer" parent="." unique_id=1656367185]
+layout_mode = 2
+script = ExtResource("2_tonjr")
+
+[node name="WorldAppareanceLabel" type="Label" parent="WorldAppareance" unique_id=951610390]
+layout_mode = 2
+focus_mode = 3
+text = "
+World appearance"
+label_settings = SubResource("LabelSettings_0fpak")
+
+[node name="TargetColor" type="HBoxContainer" parent="WorldAppareance" unique_id=686620601]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WorldAppareance/TargetColor" unique_id=1626223266]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "The color of the targets you shoot at."
+focus_mode = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Targets color"
+
+[node name="TargetColor" type="ColorPickerButton" parent="WorldAppareance/TargetColor" unique_id=1741649499 groups=["Persist", "PutLabel"]]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme = ExtResource("6_0fpak")
+color = Color(1, 0.74902, 0, 1)
+
+[node name="AmbientColor" type="HBoxContainer" parent="WorldAppareance" unique_id=1162738074]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WorldAppareance/AmbientColor" unique_id=873921186]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "The color of the ambient and the sky."
+focus_mode = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Ambient color"
+
+[node name="Color" type="ColorPickerButton" parent="WorldAppareance/AmbientColor" unique_id=1443451182 groups=["Persist", "PutLabel"]]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme = ExtResource("6_0fpak")
+color = Color(0.06666667, 0.12941177, 0.22745098, 1)
+edit_alpha = false
+
+[node name="SurfaceColor" type="HBoxContainer" parent="WorldAppareance" unique_id=403746442]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WorldAppareance/SurfaceColor" unique_id=1846249981]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "The color of the surfaces of the around you."
+focus_mode = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Surface color"
+
+[node name="Color" type="ColorPickerButton" parent="WorldAppareance/SurfaceColor" unique_id=246635728 groups=["Persist", "PutLabel"]]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme = ExtResource("6_0fpak")
+color = Color(1, 1, 1, 1)
+
+[node name="Label" type="Label" parent="WorldAppareance" unique_id=1508221707]
+layout_mode = 2
+tooltip_text = "The texture of the surfaces of the world around you"
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Surface texture"
+
+[node name="SurfaceTexture" type="OptionButton" parent="WorldAppareance" unique_id=1020165128]
+layout_mode = 2
+expand_icon = true
+
+[node name="WorldAppearancePreview" type="CenterContainer" parent="WorldAppareance" unique_id=1696981799]
+layout_mode = 2
+script = ExtResource("8_0fpak")
+
+[node name="PanelContainer" type="PanelContainer" parent="WorldAppareance/WorldAppearancePreview" unique_id=144996364]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_332bo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WorldAppareance/WorldAppearancePreview/PanelContainer" unique_id=1759007886]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer" unique_id=1920150112]
+layout_mode = 2
+text = "Preview"
+horizontal_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer" unique_id=1703719837]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer" unique_id=143887316]
+handle_input_locally = false
+scaling_3d_scale = 0.5
+anisotropic_filtering_level = 0
+gui_disable_input = true
+size = Vector2i(300, 150)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1940158000]
+fov = 20.0
+
+[node name="Target" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=445463680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+mesh = SubResource("SphereMesh_332bo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=671543682]
+transform = Transform3D(0.25881907, -0.6830127, 0.6830127, 0, 0.7071068, 0.7071068, -0.9659258, -0.18301274, 0.18301274, 0, 2, 0)
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=994494411]
+environment = SubResource("Environment_332bo")
+
+[node name="Floor" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=170197266]
+transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.08715574, 0, 0.08715574, 0.9961947, 0, -1, -6)
+mesh = SubResource("PlaneMesh_332bo")
+script = ExtResource("9_ryila")
+
+[connection signal="item_selected" from="WindowModeOptions" to="." method="_on_window_mode_options_item_selected"]
+[connection signal="color_changed" from="WorldAppareance/TargetColor/TargetColor" to="WorldAppareance" method="_on_target_color_color_changed"]
+[connection signal="color_changed" from="WorldAppareance/AmbientColor/Color" to="WorldAppareance" method="_on_amient_color_changed"]
+[connection signal="color_changed" from="WorldAppareance/SurfaceColor/Color" to="WorldAppareance" method="_on_color_color_changed"]
+[connection signal="item_selected" from="WorldAppareance/SurfaceTexture" to="WorldAppareance" method="_on_world_texture_item_selected"]

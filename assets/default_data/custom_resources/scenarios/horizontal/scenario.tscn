@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://ctiu53wtnnk3e"]
 
-[ext_resource type="Script" uid="uid://eap3623705g4" path="res://scenes/game_world/scenario/scenario.gd" id="1_xogef"]
-[ext_resource type="PackedScene" uid="uid://dagqtbldaccgh" path="res://scenes/game_world/scenario/sample_world_geometry.tscn" id="2_xogef"]
-[ext_resource type="Script" uid="uid://7eouyjvbgjo0" path="res://scenes/game_world/target_spawner.gd" id="3_tfn8e"]
-[ext_resource type="Script" uid="uid://bw3onig2m2r3s" path="res://scenes/target/behavior/behavior_static.gd" id="4_8xptx"]
-[ext_resource type="Script" uid="uid://cqgu0hosxt5e1" path="res://scenes/game_world/player_spawner.gd" id="5_u06mb"]
+[ext_resource type="Script" uid="uid://eap3623705g4" path="res://modules/gameplay_manager/scenario/scenario.gd" id="1_xogef"]
+[ext_resource type="PackedScene" uid="uid://dagqtbldaccgh" path="res://modules/gameplay_manager/scenario/sample_world_geometry.tscn" id="2_xogef"]
+[ext_resource type="Script" uid="uid://7eouyjvbgjo0" path="res://modules/gameplay_manager/scenario/target_spawner.gd" id="3_tfn8e"]
+[ext_resource type="Script" uid="uid://bw3onig2m2r3s" path="res://modules/gameplay_manager/target/behavior/behavior_static.gd" id="4_8xptx"]
+[ext_resource type="Script" uid="uid://cqgu0hosxt5e1" path="res://modules/gameplay_manager/scenario/player_spawner.gd" id="5_u06mb"]
 
 [sub_resource type="Resource" id="Resource_u06mb"]
 script = ExtResource("4_8xptx")
