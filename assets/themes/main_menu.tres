@@ -29,7 +29,7 @@ corner_radius_bottom_left = 6
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijt1d"]
 content_margin_left = 30.0
 content_margin_top = 24.0
-content_margin_right = 50.0
+content_margin_right = 30.0
 content_margin_bottom = 24.0
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 6
