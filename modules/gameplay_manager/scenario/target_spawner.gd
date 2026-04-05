@@ -9,15 +9,19 @@ signal target_hitted ## When player when player hits the target
 @export var initial_targets: int = 1
 ## Max health of the targets
 @export var health: float = 0
+## Movement behavior script
+@export var behavior: TargetMovementBehavior
+@export_group("shape")
+## Shape of the target, a Scene of type TargetShape[br]
+## Can be left clear to use the default shape
+@export var shape: PackedScene = null
 ## Size of the target [radius, height]
 @export var size: Vector2 = Vector2(2, 1)
+@export_group("position")
 ## Min position at the target will be spawned
 @export var min_position: Vector3 = Vector3(-1, -1, 0)
 ## Max position at the target will be spawned
 @export var max_position: Vector3 = Vector3(1, 1, 0)
-
-## Movement behavior script
-@export var behavior: TargetMovementBehavior
 
 ## Packed scene of the target
 var _packed_target: PackedScene = preload("res://modules/gameplay_manager/target/target.tscn")
@@ -32,7 +36,7 @@ func _spawn_initial_targets() -> void:
 func _spawn_target() -> void:
 	var spawn_position: Vector3 = _get_valid_target_spawn_position()
 	var target: Target = _packed_target.instantiate()
-	target.init(size, behavior.duplicate(), health)
+	target.init(size, behavior.duplicate(), health, shape)
 	target.min_position = min_position
 	target.max_position = max_position
 	target.connect("destroyed", Callable(self, "_on_target_destroyed"))

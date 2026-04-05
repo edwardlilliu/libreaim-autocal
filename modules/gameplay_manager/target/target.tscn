@@ -2,21 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dguvlnaoi8ut7" path="res://modules/gameplay_manager/target/target.gd" id="1_nte11"]
 [ext_resource type="PackedScene" uid="uid://cmbneydx4xrji" path="res://modules/gameplay_manager/target/health_slider/health_slider.tscn" id="2_ifcii"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_do5mn"]
-height = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkxxc"]
-albedo_color = Color(1, 0.74902, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.74902, 0, 1)
-emission_energy_multiplier = 0.5
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xrxto"]
-material = SubResource("StandardMaterial3D_nkxxc")
-height = 1.0
-radial_segments = 16
-rings = 4
+[ext_resource type="Script" uid="uid://vtr11jg2wuxh" path="res://modules/gameplay_manager/target/shape/target_shape_manager.gd" id="3_xdau2"]
 
 [node name="Target" type="CharacterBody3D" unique_id=2133352912 groups=["Target"]]
 collision_mask = 0
@@ -24,9 +10,5 @@ motion_mode = 1
 script = ExtResource("1_nte11")
 health_slider_scene = ExtResource("2_ifcii")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1104659849]
-shape = SubResource("CapsuleShape3D_do5mn")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=2047088886]
-mesh = SubResource("CapsuleMesh_xrxto")
-skeleton = NodePath("../..")
+[node name="TargetShapeManager" type="Node" parent="." unique_id=1451726441]
+script = ExtResource("3_xdau2")

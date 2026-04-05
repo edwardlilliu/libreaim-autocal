@@ -26,10 +26,10 @@ transform = Transform3D(0.9981979, 0.046417624, 0.038030803, -0.042149123, 0.091
 transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0, 2, -10)
 script = ExtResource("3_tfn8e")
 health = 5.0
+behavior = SubResource("Resource_ncddh")
 size = Vector2(1, 4)
 min_position = Vector3(-15, -2, 0)
 max_position = Vector3(15, 2, 0)
-behavior = SubResource("Resource_ncddh")
 
 [node name="PlayerSpawner" type="Marker3D" parent="." unique_id=1355402168]
 script = ExtResource("5_qfx0g")
