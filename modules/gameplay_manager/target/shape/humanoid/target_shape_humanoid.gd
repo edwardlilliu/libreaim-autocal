@@ -3,6 +3,7 @@ extends TargetShape
 
 func init(_size: Vector2, color: Color) -> void:
 	_set_target_material(color)
+	_connect_to_hitboxes()
 
 func _set_target_material(color: Color) -> void:
 	_mesh_instance = $humanoid/HumanoidBase_NotOverlapping

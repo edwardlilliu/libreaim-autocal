@@ -9,6 +9,7 @@ func init(size: Vector2, color: Color) -> void:
 	_mesh_instance.mesh.size.y = size.y
 	_mesh_instance.mesh.size.z = size.x
 	_set_target_material(color)
+	_connect_to_hitboxes()
 
 func _set_target_material(color: Color) -> void:
 	var material_override = _mesh_instance.get_mesh().get_material()

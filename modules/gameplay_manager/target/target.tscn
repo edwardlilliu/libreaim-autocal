@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://vtr11jg2wuxh" path="res://modules/gameplay_manager/target/shape/target_shape_manager.gd" id="3_xdau2"]
 
 [node name="Target" type="CharacterBody3D" unique_id=2133352912 groups=["Target"]]
+collision_layer = 0
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_nte11")
@@ -12,3 +13,5 @@ health_slider_scene = ExtResource("2_ifcii")
 
 [node name="TargetShapeManager" type="Node" parent="." unique_id=1451726441]
 script = ExtResource("3_xdau2")
+
+[connection signal="hitted" from="TargetShapeManager" to="." method="_on_target_shape_manager_hitted"]

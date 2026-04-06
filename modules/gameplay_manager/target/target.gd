@@ -36,6 +36,9 @@ func init(size = Vector2(1, 2), behavior: TargetMovementBehavior = TargetMovemen
 func _physics_process(delta: float) -> void:
 	move_and_collide(movement_behavior.move_process(delta, position))
 
+func _on_target_shape_manager_hitted(damage: float) -> void:
+	health -= damage
+
 func _set_health(new_health: float) -> void:
 	max_health = new_health
 	health = max_health
@@ -44,5 +47,5 @@ func _set_health_slider() -> void:
 	if health > 0:
 		_health_slider = health_slider_scene.instantiate()
 		add_child(_health_slider)
-		_health_slider.position.y = ($CollisionShape3D/MeshInstance3D.mesh.height / 2) + 0.4
+		_health_slider.position.y = (_target_shape_manager.size.y / 2) + 0.4
 		hitted.connect(_health_slider._on_target_hitted)

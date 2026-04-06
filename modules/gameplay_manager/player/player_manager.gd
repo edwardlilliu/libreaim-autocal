@@ -89,6 +89,7 @@ func _jump() -> void:
 
 func _shoot(damage: float) -> void:
 	shooted.emit()
+	
 	if _raycast.is_colliding():
 		var target = _raycast.get_collider()
 		if target != null:
@@ -96,12 +97,18 @@ func _shoot(damage: float) -> void:
 			
 			target.add_child(bullet_hole_instance)
 			bullet_hole_instance.global_transform.origin = _raycast.get_collision_point() + _raycast.get_collision_normal() * 0.01
-			if abs(_raycast.get_collision_normal().dot(Vector3.FORWARD)) != 1:
-				bullet_hole_instance.look_at(bullet_hole_instance.global_position + _raycast.get_collision_normal(), Vector3.FORWARD )
 			
-			if target.is_in_group("Target"):
-				target.health -= damage
-			else:
-				missed.emit()
+			if abs(_raycast.get_collision_normal().dot(Vector3.FORWARD)) != 1:
+				bullet_hole_instance.look_at(
+				bullet_hole_instance.global_position + _raycast.get_collision_normal(),
+				Vector3.FORWARD
+				)
+			if target is Area3D:
+				if target.is_in_group("Target"):
+					target.hit(damage)
+				else:
+					missed.emit()
+		else:
+			missed.emit()
 	else:
 		missed.emit()

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dru4x8sckpe66" path="res://modules/gameplay_manager/target/shape/humanoid/target_shape_humanoid.gd" id="1_cldpu"]
 [ext_resource type="Material" uid="uid://sgwmkb70jvdo" path="res://modules/gameplay_manager/target/shape/target_material.tres" id="2_e8p7l"]
+[ext_resource type="Script" uid="uid://du4wd2auu6srh" path="res://modules/gameplay_manager/target/shape/target_hitbox.gd" id="3_26vff"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_26vff"]
 height = 3.2
@@ -44,9 +45,10 @@ shadow_mesh = SubResource("ArrayMesh_apwaq")
 radius = 0.24
 height = 0.6
 
-[node name="TargetShapeCube" type="CollisionShape3D" unique_id=1246026187]
+[node name="TargetShapeHumanoid" type="CollisionShape3D" unique_id=1246026187 node_paths=PackedStringArray("_mesh_instance")]
 shape = SubResource("CapsuleShape3D_26vff")
 script = ExtResource("1_cldpu")
+_mesh_instance = NodePath("humanoid/HumanoidBase_NotOverlapping")
 
 [node name="humanoid" type="Node3D" parent="." unique_id=428061667]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5000001, 0)
@@ -55,14 +57,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5000001, 0)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0023041964, 0, 0)
 mesh = SubResource("ArrayMesh_ra782")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2070406477]
-skeleton = NodePath("../..")
+[node name="Hitboxes" type="Node3D" parent="." unique_id=1517203788]
 
-[node name="Area3D" type="Area3D" parent="." unique_id=11343873]
+[node name="Body" type="Area3D" parent="Hitboxes" unique_id=11343873]
+script = ExtResource("3_26vff")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1473248332]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitboxes/Body" unique_id=1473248332]
 shape = SubResource("CapsuleShape3D_26vff")
 
-[node name="Head" type="CollisionShape3D" parent="Area3D" unique_id=313082977]
+[node name="Head" type="Area3D" parent="Hitboxes" unique_id=214344585]
+script = ExtResource("3_26vff")
+damage_multiplier = 4.0
+
+[node name="Head" type="CollisionShape3D" parent="Hitboxes/Head" unique_id=1729831191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.829209, 0.057628095)
 shape = SubResource("CapsuleShape3D_cldpu")

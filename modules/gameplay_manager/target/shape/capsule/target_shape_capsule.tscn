@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cxn8m20y6c54w" path="res://modules/gameplay_manager/target/shape/capsule/target_shape_capsule.gd" id="1_q6jtu"]
 [ext_resource type="Material" uid="uid://sgwmkb70jvdo" path="res://modules/gameplay_manager/target/shape/target_material.tres" id="2_847aa"]
+[ext_resource type="Script" uid="uid://du4wd2auu6srh" path="res://modules/gameplay_manager/target/shape/target_hitbox.gd" id="3_ot6wa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_847aa"]
 height = 1.0
@@ -12,15 +13,19 @@ height = 1.0
 radial_segments = 16
 rings = 4
 
-[node name="TargetShapeCapsule" type="CollisionShape3D" unique_id=1246026187]
+[node name="TargetShapeCapsule" type="CollisionShape3D" unique_id=1246026187 node_paths=PackedStringArray("_mesh_instance")]
 shape = SubResource("CapsuleShape3D_847aa")
 script = ExtResource("1_q6jtu")
+_mesh_instance = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2070406477]
 mesh = SubResource("CapsuleMesh_ot6wa")
 skeleton = NodePath("../..")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=1612725022]
+[node name="Hitboxes" type="Node3D" parent="." unique_id=105595710]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1473248332]
+[node name="Area3D" type="Area3D" parent="Hitboxes" unique_id=1612725022]
+script = ExtResource("3_ot6wa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitboxes/Area3D" unique_id=1473248332]
 shape = SubResource("CapsuleShape3D_847aa")

@@ -37,3 +37,4 @@ cull_mask = 1048573
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=1785098675]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -256, 0)
+collide_with_areas = true
