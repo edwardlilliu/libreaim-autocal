@@ -17,14 +17,12 @@ func _ready() -> void:
 
 func _on_hit_sound_option_button_item_selected(index: int) -> void:
 	SaveManager.settings.set_data("audio", "hit_sound", hit_sound_option_button.get_item_metadata(index))
-	hit_sound_preview.update_setting_sound()
 
 func _on_hit_sound_preview_pressed() -> void:
 	hit_sound_preview.play()
 
 func _on_destroy_sound_option_button_item_selected(index: int) -> void:
 	SaveManager.settings.set_data("audio", "destroy_sound", destroy_sound_option_button.get_item_metadata(index))
-	destroy_sound_preview.update_setting_sound()
 
 func _on_destroy_sound_preview_pressed() -> void:
 	destroy_sound_preview.play()

@@ -5,7 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://nng31j22g6fh" path="res://assets/images/icons/play.svg" id="3_af0kr"]
 [ext_resource type="Texture2D" uid="uid://cmrheauks0nru" path="res://assets/images/icons/cross.svg" id="4_q5h2w"]
 [ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="5_ym2ek"]
+[ext_resource type="Texture2D" uid="uid://m5gaiq7pjwbv" path="res://assets/images/icons/settings.svg" id="6_hfur4"]
 [ext_resource type="Texture2D" uid="uid://dokjso5ltbuyu" path="res://assets/sample_custom_resources/scenarios/test/icon.svg" id="6_q3uto"]
+[ext_resource type="PackedScene" uid="uid://cropshnueuiqr" path="res://modules/shared/settings/settings.tscn" id="7_go287"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3uto"]
 bg_color = Color(0, 0, 0, 0.29411766)
@@ -33,17 +35,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.29411766)
-metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="Pause" unique_id=1991378940]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pause" unique_id=1478943194]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 511.0
+grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Pause/HBoxContainer" unique_id=1991378940]
+custom_minimum_size = Vector2(511, 0)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_q3uto")
 
-[node name="LeftControl" type="MarginContainer" parent="Pause/Panel" unique_id=1090296536]
+[node name="LeftControl" type="MarginContainer" parent="Pause/HBoxContainer/Panel" unique_id=1090296536]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,55 +61,71 @@ theme_override_constants/margin_left = 120
 theme_override_constants/margin_top = 180
 theme_override_constants/margin_right = 120
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Pause/Panel/LeftControl" unique_id=1753532782]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/HBoxContainer/Panel/LeftControl" unique_id=1753532782]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Pause/Panel/LeftControl/VBoxContainer" unique_id=2132839042]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer" unique_id=2132839042]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Pause/Panel/LeftControl/VBoxContainer/HBoxContainer" unique_id=160995796]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer/HBoxContainer" unique_id=160995796]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="Pause/Panel/LeftControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1895458194]
+[node name="Title" type="Label" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1895458194]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3145, 0.61795, 0.85, 1)
 theme_override_fonts/font = ExtResource("5_ym2ek")
 theme_override_font_sizes/font_size = 36
 text = "Pause"
 
-[node name="CurrentGamemode" type="Label" parent="Pause/Panel/LeftControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1877877637]
+[node name="CurrentGamemode" type="Label" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1877877637]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65882355, 0.65882355, 0.65882355, 1)
 theme_override_font_sizes/font_size = 18
 text = "Current gamemode"
 
-[node name="GamemodeIcon" type="TextureRect" parent="Pause/Panel/LeftControl/VBoxContainer" unique_id=1673684815]
+[node name="GamemodeIcon" type="TextureRect" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer" unique_id=1673684815]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("6_q3uto")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Margin" type="Control" parent="Pause/Panel/LeftControl/VBoxContainer" unique_id=582278050]
+[node name="Margin" type="Control" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer" unique_id=582278050]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="Pause/Panel/LeftControl/VBoxContainer" unique_id=1879455052]
+[node name="Resume" type="Button" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer" unique_id=1879455052]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Resume"
 icon = ExtResource("3_af0kr")
 alignment = 0
 
-[node name="Menu" type="Button" parent="Pause/Panel/LeftControl/VBoxContainer" unique_id=1001904564]
+[node name="SettingsButton" type="Button" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer" unique_id=331253495]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Settings"
+icon = ExtResource("6_hfur4")
+alignment = 0
+
+[node name="Menu" type="Button" parent="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer" unique_id=1001904564]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Menu"
 icon = ExtResource("4_q5h2w")
 alignment = 0
 
-[connection signal="button_down" from="Pause/Panel/LeftControl/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Pause/Panel/LeftControl/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[node name="Settings" parent="Pause/HBoxContainer" unique_id=20530153 instance=ExtResource("7_go287")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="button_down" from="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Pause/HBoxContainer/Panel/LeftControl/VBoxContainer/Menu" to="." method="_on_menu_pressed"]

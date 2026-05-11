@@ -11,6 +11,8 @@ func _ready() -> void:
 	highscores.initialize("user://data/highscores.cfg")
 
 class SaveFile:
+	signal data_updated(category: String, id: String, value: Variant)
+	
 	var _path: String
 	var _default_data_path: String
 	var _file := ConfigFile.new()
@@ -39,6 +41,7 @@ class SaveFile:
 	func set_data(category: String, id: String, value: Variant) -> void:
 		_file.set_value(category, id, value)
 		save_data()
+		data_updated.emit(category, id, value)
 
 	func get_data(category: String, id: String, default: Variant = null) -> Variant:
 		if _file.has_section_key(category, id):

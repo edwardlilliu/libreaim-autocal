@@ -17,10 +17,11 @@ func trigger_pause(new_pause_state: bool) -> void:
 	%CurrentGamemode.text = Global.get_current_scenario_value("title")
 	%GamemodeIcon.texture = Global.get_scenario_thumbnail(Global.get_current_scenario_value("path"))
 	if (new_pause_state):
-		$Pause/Panel/LeftControl/VBoxContainer/Resume.grab_focus()
+		%Resume.grab_focus()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		%Settings.visible = false
 
 func _on_resume_pressed() -> void:
 	trigger_pause(false)
@@ -28,3 +29,7 @@ func _on_resume_pressed() -> void:
 func _on_menu_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file(Global.MAIN_MENU_PATH)
+
+func _on_settings_pressed() -> void:
+	var settings: Control = %Settings
+	settings.visible = !settings.visible

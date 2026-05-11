@@ -227,14 +227,17 @@ size = Vector2i(300, 150)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=1940158000]
+cull_mask = 1048574
 fov = 20.0
 
 [node name="Target" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=445463680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+layers = 2
 mesh = SubResource("SphereMesh_332bo")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=671543682]
 transform = Transform3D(0.25881907, -0.6830127, 0.6830127, 0, 0.7071068, 0.7071068, -0.9659258, -0.18301274, 0.18301274, 0, 2, 0)
+layers = 2
 directional_shadow_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=994494411]
@@ -242,6 +245,7 @@ environment = SubResource("Environment_332bo")
 
 [node name="Floor" type="MeshInstance3D" parent="WorldAppareance/WorldAppearancePreview/PanelContainer/VBoxContainer/SubViewportContainer/SubViewport" unique_id=170197266]
 transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.08715574, 0, 0.08715574, 0.9961947, 0, -1, -6)
+layers = 2
 mesh = SubResource("PlaneMesh_332bo")
 script = ExtResource("9_ryila")
 

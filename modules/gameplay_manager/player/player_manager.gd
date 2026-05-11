@@ -24,6 +24,7 @@ var current_shoot_cooldown: float
 func _ready() -> void:
 	_camera.fov = SaveManager.settings.get_data("video", "fov")
 	mouse_sensitivity = _get_mouse_sensitivity()
+	SaveManager.settings.data_updated.connect(_on_settings_data_updated)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -60,6 +61,12 @@ func _physics_process(delta: float) -> void:
 		
 		velocity = applied_velocity
 		move_and_slide()
+
+func _on_settings_data_updated(category: String, id: String, value: Variant) -> void:
+	if category == "video" and id == "fov":
+		_camera.fov = value
+	if category == "controls" and (id == "sensitivity_game" or id == "sensitivity_game_value"):
+		mouse_sensitivity = _get_mouse_sensitivity()
 
 func _get_mouse_sensitivity() -> float:
 	var user_sensitivity: float = SaveManager.settings.get_data("controls", "sensitivity")
