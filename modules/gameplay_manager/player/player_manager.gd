@@ -6,67 +6,86 @@ signal shooted ## When player shoots
 signal missed ## When player mises a shot
 
 const SHOOT_COOLDOWN: float = 0.1
-const SPEED: int = 5
-const JUMP_FORCE: int = 8
 const MAX_CAMERA_ANGLE: int = 89 ## Max vertical angle of the camera
 
 @export var bullet_hole_scene: PackedScene
 
-var mouse_sensitivity: float = 0.01
+@onready var _camera: Camera3D = $Head/Camera3D
+@onready var _raycast: RayCast3D = $Head/Camera3D/RayCast3D
 
-var jumps: Array[bool] = [true, true]
-var gravity: float = 0.0
-var current_shoot_cooldown: float
-
-@onready var _camera = $Head/Camera3D
-@onready var _raycast = $Head/Camera3D/RayCast3D
+var _current_shoot_cooldown: float
+var _gravity_force: float = 20.0
+var _jump_force: float = 8
+var _current_jumps := 2
+var _max_jumps := 2
+var _mouse_sensitivity: float = 0.01
+var _speed: int = 5
+var _shoot_machinegun: bool = false
+var _movement_enabled: bool = true
 
 func _ready() -> void:
 	_camera.fov = SaveManager.settings.get_data("video", "fov")
-	mouse_sensitivity = _get_mouse_sensitivity()
+	_mouse_sensitivity = _get_mouse_sensitivity()
 	SaveManager.settings.data_updated.connect(_on_settings_data_updated)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(-event.screen_relative.x * mouse_sensitivity)
-		_camera.rotate_x(-event.screen_relative.y * mouse_sensitivity)
-		_camera.rotation.x = clamp(_camera.rotation.x, deg_to_rad(-MAX_CAMERA_ANGLE), deg_to_rad(MAX_CAMERA_ANGLE))
-	if Global.current_scenario and Global.current_scenario.shoot_machinegun == false:
+		rotate_y(-event.screen_relative.x * _mouse_sensitivity)
+		_rotate_camera(-event.screen_relative.y * _mouse_sensitivity)
+	if _shoot_machinegun == false:
 		if event.is_action_pressed("shoot"):
 			_shoot(1)
-	if event.is_action_pressed("jump") \
-		and ((Global.current_scenario and Global.current_scenario.player_movement) \
-		or Global.current_scenario.is_empty()):
+	if event.is_action_pressed("jump") and _movement_enabled:
 		_jump()
 
 func _process(delta: float) -> void:
-	if Global.current_scenario and Global.current_scenario.shoot_machinegun == true:
-		current_shoot_cooldown += delta
-		if current_shoot_cooldown > SHOOT_COOLDOWN:
+	if _shoot_machinegun == true:
+		_current_shoot_cooldown += delta
+		if _current_shoot_cooldown > SHOOT_COOLDOWN:
 			if Input.is_action_pressed("shoot"):
 				_shoot(SHOOT_COOLDOWN)
-				current_shoot_cooldown = 0
+				_current_shoot_cooldown = 0
 	
 	_handle_joypad_rotation(delta)
 
 func _physics_process(delta: float) -> void:
-	if (Global.current_scenario and Global.current_scenario.player_movement) or Global.current_scenario.is_empty():
-		_handle_gravity(delta)
-		var input := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-		var movement_velocity := Vector3(input.x, 0, input.y) * SPEED
-		movement_velocity = transform.basis * movement_velocity
-		
-		var applied_velocity := velocity.lerp(movement_velocity, delta * 10)
-		applied_velocity.y = -gravity
-		
-		velocity = applied_velocity
-		move_and_slide()
+	if !_movement_enabled:
+		return
+	
+	if !is_on_floor():
+		velocity.y -= _gravity_force * delta
+	else:
+		_current_jumps = _max_jumps
+	
+	var input := Input.get_vector(
+		"move_left",
+		"move_right",
+		"move_forward",
+		"move_back"
+	)
+	
+	var movement_velocity := Vector3(input.x, 0, input.y) * _speed
+	movement_velocity = transform.basis * movement_velocity
+	
+	velocity.x = lerp(velocity.x, movement_velocity.x, delta * 10)
+	velocity.z = lerp(velocity.z, movement_velocity.z, delta * 10)
+	
+	move_and_slide()
+
+func initialize(player_settings: Dictionary) -> void:
+	_movement_enabled = player_settings.get("movement_enabled", _movement_enabled)
+	_speed = player_settings.get("speed", _speed)
+	_jump_force = player_settings.get("jump_force", _jump_force)
+	_gravity_force = player_settings.get("gravity_force", _gravity_force)
+	_speed = player_settings.get("speed", _speed)
+	_max_jumps = player_settings.get("max_jumps", _max_jumps)
+	_shoot_machinegun = player_settings.get("shoot_machinegun", _shoot_machinegun)
 
 func _on_settings_data_updated(category: String, id: String, value: Variant) -> void:
 	if category == "video" and id == "fov":
 		_camera.fov = value
 	if category == "controls" and (id == "sensitivity_game" or id == "sensitivity_game_value"):
-		mouse_sensitivity = _get_mouse_sensitivity()
+		_mouse_sensitivity = _get_mouse_sensitivity()
 
 func _get_mouse_sensitivity() -> float:
 	var user_sensitivity: float = SaveManager.settings.get_data("controls", "sensitivity")
@@ -76,23 +95,22 @@ func _get_mouse_sensitivity() -> float:
 func _handle_joypad_rotation(delta: float) -> void:
 	var joypad_dir: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 	if joypad_dir.length() > 0:
-		rotate_y(-joypad_dir.x * mouse_sensitivity * delta * 1000)
-		_camera.rotate_x(-joypad_dir.y * mouse_sensitivity * delta * 1000)
-		_camera.rotation.x = clamp(_camera.rotation.x, deg_to_rad(-MAX_CAMERA_ANGLE), deg_to_rad(MAX_CAMERA_ANGLE))
+		const JOYPAD_LOOK_SPEED := 1000.0
+		rotate_y(-joypad_dir.x * _mouse_sensitivity * delta * JOYPAD_LOOK_SPEED)
+		_rotate_camera(-joypad_dir.y * _mouse_sensitivity * delta * JOYPAD_LOOK_SPEED)
 
-func _handle_gravity(delta: float) -> void:
-	gravity += 20 * delta
-	if gravity > 0 and is_on_floor():
-		for i in range(jumps.size()):
-			jumps[i] = true
-		gravity = 0
+func _rotate_camera(amount: float) -> void:
+	_camera.rotate_x(amount)
+	_camera.rotation.x = clamp(
+		_camera.rotation.x,
+		deg_to_rad(-MAX_CAMERA_ANGLE),
+		deg_to_rad(MAX_CAMERA_ANGLE)
+	)
 
 func _jump() -> void:
-	for i in range(jumps.size()):
-		if jumps[i]:
-			jumps[i] = false
-			gravity = -JUMP_FORCE
-			return
+	if _current_jumps > 0:
+		_current_jumps -= 1
+		velocity.y = _jump_force
 
 func _shoot(damage: float) -> void:
 	shooted.emit()
@@ -100,16 +118,7 @@ func _shoot(damage: float) -> void:
 	if _raycast.is_colliding():
 		var target = _raycast.get_collider()
 		if target != null:
-			var bullet_hole_instance = bullet_hole_scene.instantiate()
-			
-			target.add_child(bullet_hole_instance)
-			bullet_hole_instance.global_transform.origin = _raycast.get_collision_point() + _raycast.get_collision_normal() * 0.01
-			
-			if abs(_raycast.get_collision_normal().dot(Vector3.FORWARD)) != 1:
-				bullet_hole_instance.look_at(
-				bullet_hole_instance.global_position + _raycast.get_collision_normal(),
-				Vector3.FORWARD
-				)
+			_create_bullet_hole(target)
 			if target is Area3D:
 				if target.is_in_group("Target"):
 					target.hit(damage)
@@ -119,3 +128,15 @@ func _shoot(damage: float) -> void:
 			missed.emit()
 	else:
 		missed.emit()
+
+func _create_bullet_hole(target: Node3D) -> void:
+	var bullet_hole_instance = bullet_hole_scene.instantiate()
+	
+	target.add_child(bullet_hole_instance)
+	bullet_hole_instance.global_transform.origin = _raycast.get_collision_point() + _raycast.get_collision_normal() * 0.01
+	
+	if abs(_raycast.get_collision_normal().dot(Vector3.FORWARD)) != 1:
+		bullet_hole_instance.look_at(
+			bullet_hole_instance.global_position + _raycast.get_collision_normal(),
+			Vector3.FORWARD
+		)

@@ -13,7 +13,7 @@ func _add_scenario_buttons() -> void:
 	var scenario_list := $Scenarios/Scenarios/ScrollContainer/Scenarios
 	for scenario in Global.scenarios:
 		var button := Button.new()
-		button.text = Global.scenarios[scenario].title
+		button.text = Global.scenarios[scenario].get("title", "No title")
 		button.icon = Global.get_scenario_thumbnail(Global.scenarios[scenario].path)
 		button.set_expand_icon(true)
 		button.name = scenario
@@ -33,14 +33,14 @@ func _select_scenario(id: String) -> void:
 ## Sets the scenarios title
 func _set_current_scenario_title(type: String) -> void:
 	var title: Label = $CurrentScenario/VBoxContainer/Title
-	title.text = Global.scenarios[type].title
+	title.text = Global.scenarios[type].get("title", "No title")
 
 ## Sets the scenarios description
 func _set_current_scenario_description(type: String) -> void:
+	var text: String = str(Global.scenarios[type].get("description", "No description"))
 	var description: Label = $CurrentScenario/VBoxContainer/Description
 	description.text = "%s\nTime: %s s\nHigh score: %s"\
-		% [str(Global.scenarios[type].description),\
-		Global.scenarios[type].time, \
+		% [text, Global.scenarios[type].get("time", 30), \
 		HighScoreManager.get_high_score(Global.scenarios[type].id)]
 
 ## Loads the scenario

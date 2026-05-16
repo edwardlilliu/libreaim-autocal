@@ -8,13 +8,18 @@ var _hitted_shots: int = 0
 ## Number of shots missed by the player
 var _missed_shots: int = 0
 
+var _score_per_hit: int = 1
+var _accuracy_multiplier: bool = false
+
 var _scenario: Scenario
 @export var _timer: Timer
 @export var _gameplay_ui: GameplayUI
 
 func _ready() -> void:
 	if Global.current_scenario:
-		_timer.wait_time = Global.current_scenario.time
+		_timer.wait_time = Global.current_scenario.get("time", 30)
+		_score_per_hit = Global.current_scenario.get("score_per_hit", _score_per_hit)
+		_accuracy_multiplier = Global.current_scenario.get("accuracy_multiplier", _accuracy_multiplier)
 	_load_scenario()
 	_scenario.target_destroyed.connect(_on_target_destroyed)
 	_scenario.target_hitted.connect(_on_target_hitted)
@@ -59,8 +64,8 @@ func _play_destroyed_sound() -> void:
 
 func _get_score() -> int:
 	if Global.current_scenario:
-		var score = _hitted_shots * Global.current_scenario.score_per_hit
-		if Global.current_scenario.accuracy_multiplier:
+		var score = _hitted_shots * _score_per_hit
+		if _accuracy_multiplier:
 			score = score * (_get_accuracy() / 100)
 		return score
 	else:
