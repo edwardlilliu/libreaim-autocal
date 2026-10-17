@@ -2,16 +2,18 @@
 
 [ext_resource type="Theme" uid="uid://caf1fphx2xqt0" path="res://assets/themes/main_menu.tres" id="1_2h7x4"]
 [ext_resource type="Script" uid="uid://dw5gwf5bgcody" path="res://modules/main_menu/main_menu.gd" id="1_p06gh"]
-[ext_resource type="Texture2D" uid="uid://nng31j22g6fh" path="res://assets/images/icons/play.svg" id="2_n3hsc"]
 [ext_resource type="Texture2D" uid="uid://m5gaiq7pjwbv" path="res://assets/images/icons/settings.svg" id="3_8dqwy"]
 [ext_resource type="Script" uid="uid://bxkvsjo4eq44k" path="res://modules/main_menu/show_version.gd" id="3_kmn6w"]
 [ext_resource type="Texture2D" uid="uid://c4b2m50txi00g" path="res://icon.svg" id="3_kq7as"]
 [ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="3_qel0l"]
-[ext_resource type="Texture2D" uid="uid://tkfbioukscgd" path="res://assets/images/icons/git.svg" id="4_nuriq"]
 [ext_resource type="Texture2D" uid="uid://cmrheauks0nru" path="res://assets/images/icons/cross.svg" id="5_nidys"]
+[ext_resource type="Texture2D" uid="uid://cnhqynculsoou" path="res://assets/images/icons/auto_calibrate.svg" id="6_18dlr"]
 [ext_resource type="PackedScene" uid="uid://cropshnueuiqr" path="res://modules/shared/settings/settings.tscn" id="8_1n7gf"]
 [ext_resource type="Texture2D" uid="uid://crtp1xg7nyhki" path="res://assets/images/icons/folder.svg" id="8_cvdmj"]
 [ext_resource type="PackedScene" uid="uid://bx5lej1m0kvgb" path="res://modules/main_menu/select_scenario.tscn" id="9_lii3m"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i61vg"]
+load_path = "res://.godot/imported/play.svg-1d952cfe62e2c4af323625da7305909b.ctex"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pfoy0"]
 
@@ -105,7 +107,15 @@ layout_mode = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Play"
-icon = ExtResource("2_n3hsc")
+icon = SubResource("CompressedTexture2D_i61vg")
+alignment = 0
+autowrap_mode = 2
+
+[node name="Auto Calibration" type="Button" parent="LeftControl/VBoxContainer" unique_id=1460600200]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Auto Calibrate"
+icon = ExtResource("6_18dlr")
 alignment = 0
 autowrap_mode = 2
 
@@ -122,14 +132,6 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "User folder"
 icon = ExtResource("8_cvdmj")
-alignment = 0
-autowrap_mode = 2
-
-[node name="SourceCode" type="Button" parent="LeftControl/VBoxContainer" unique_id=548363565]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Source code"
-icon = ExtResource("4_nuriq")
 alignment = 0
 autowrap_mode = 2
 
@@ -155,7 +157,7 @@ visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="LeftControl/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="LeftControl/VBoxContainer/Auto Calibration" to="." method="_on_auto_calibrate_pressed"]
 [connection signal="pressed" from="LeftControl/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="LeftControl/VBoxContainer/UserFolder" to="." method="_on_user_folder_pressed"]
-[connection signal="pressed" from="LeftControl/VBoxContainer/SourceCode" to="." method="_on_source_code_pressed"]
 [connection signal="pressed" from="LeftControl/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -11,15 +11,15 @@ func _on_play_pressed() -> void:
 	_hide_options()
 	_right_panel.get_node("SelectScenario").visible = true
 
+func _on_auto_calibrate_pressed() -> void:
+	_hide_options()
+
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_settings_pressed() -> void:
 	_hide_options()
 	_right_panel.get_node("Settings").visible = true
-
-func _on_source_code_pressed() -> void:
-	OS.shell_open("https://codeberg.org/Nokorpo/LibreAim") 
 
 func _on_user_folder_pressed():
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://"))
