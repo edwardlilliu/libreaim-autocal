@@ -4,6 +4,7 @@ extends Node
 
 const TEXTURES_FOLDER := "world_textures"
 const SCENARIOS_FOLDER := "scenarios"
+const CALIBRATIONS_FOLDER := "calibrations"
 const DESTROY_SOUNDS_FOLDER := "destroy_sounds"
 const HITMARKER_FOLDER := "hitmarker"
 const MAIN_MENU_PATH := "res://modules/main_menu/main_menu.tscn"
@@ -12,10 +13,14 @@ const GAMEPLAY_MANAGER_PATH := "res://modules/gameplay_manager/gameplay_manager.
 var scenarios : Dictionary
 var current_scenario : Dictionary
 
+var calibrations : Dictionary
+var current_calibration : Dictionary
+
 func _ready() -> void:
 	Input.set_use_accumulated_input(false)
 	CustomResourceManager.copy_sample_custom_resources()
 	_load_scenarios()
+	_load_calibrations()
 
 ## Returns the value of a key of the current scenario
 func get_current_scenario_value(value: String) -> Variant:
@@ -28,6 +33,10 @@ func get_world_textures() -> PackedStringArray:
 
 func get_hitmarker_textures() -> PackedStringArray:
 	return CustomResourceManager.get_file_list(HITMARKER_FOLDER, "svg")
+
+## Returns a list of paths to all calibration modes
+func get_calibrations() -> PackedStringArray:
+	return CustomResourceManager.get_folder_list(CALIBRATIONS_FOLDER)
 
 ## Returns a list of paths to all scenarios
 func get_scenarios() -> PackedStringArray:
@@ -84,3 +93,22 @@ func _load_scenarios() -> void:
 				this_scenario[key] = config.get_value(section, key)
 		this_scenario["path"] = path
 		scenarios[id] = this_scenario
+
+
+func _load_calibrations() -> void:
+	for path: String in Global.get_calibrations():
+		if !FileAccess.file_exists(path + "calibrate.tscn"):
+			break
+		var config = ConfigFile.new()
+		config.load(path + "info.cfg")
+		if !config.has_section_key("metadata", "id"):
+			break
+		var id = config.get_value("metadata", "id")
+		var this_calibration: Dictionary = { }
+		
+		this_calibration.id = id
+		for section: String in config.get_sections():
+			for key: String in config.get_section_keys(section):
+				this_calibration[key] = config.get_value(section, key)
+		this_calibration["path"] = path
+		calibrations[id] = this_calibration

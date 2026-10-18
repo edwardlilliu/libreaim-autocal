@@ -13,6 +13,7 @@ func _on_play_pressed() -> void:
 
 func _on_auto_calibrate_pressed() -> void:
 	_hide_options()
+	_right_panel.get_node("SelectCalibration").visible = true
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

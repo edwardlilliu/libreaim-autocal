@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cropshnueuiqr" path="res://modules/shared/settings/settings.tscn" id="8_1n7gf"]
 [ext_resource type="Texture2D" uid="uid://crtp1xg7nyhki" path="res://assets/images/icons/folder.svg" id="8_cvdmj"]
 [ext_resource type="PackedScene" uid="uid://bx5lej1m0kvgb" path="res://modules/main_menu/select_scenario.tscn" id="9_lii3m"]
+[ext_resource type="PackedScene" uid="uid://coccxm20br1gt" path="res://modules/main_menu/select_calibration.tscn" id="12_i61vg"]
+[ext_resource type="Script" uid="uid://dlmpdgo6mm43b" path="res://modules/main_menu/select_calibration.gd" id="13_wy1j6"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i61vg"]
 load_path = "res://.godot/imported/play.svg-1d952cfe62e2c4af323625da7305909b.ctex"
@@ -155,6 +157,18 @@ layout_mode = 1
 [node name="Settings" parent="RightControl" unique_id=2019305631 instance=ExtResource("8_1n7gf")]
 visible = false
 layout_mode = 1
+
+[node name="SelectCalibration" parent="RightControl" unique_id=241814628 instance=ExtResource("12_i61vg")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1409.0
+offset_bottom = 750.0
+grow_horizontal = 1
+grow_vertical = 1
+script = ExtResource("13_wy1j6")
 
 [connection signal="pressed" from="LeftControl/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="LeftControl/VBoxContainer/Auto Calibration" to="." method="_on_auto_calibrate_pressed"]

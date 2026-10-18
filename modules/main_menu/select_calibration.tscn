@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://coccxm20br1gt"]
+
+[ext_resource type="Script" uid="uid://blgmmigbqfjhr" path="res://modules/main_menu/select_scenario.gd" id="1_5x832"]
+[ext_resource type="LabelSettings" uid="uid://lo2b2eogk1jn" path="res://assets/themes/title_label_settings.tres" id="2_g8kwl"]
+[ext_resource type="FontVariation" uid="uid://dqqgwyrbx48ds" path="res://assets/fonts/inter_bold.tres" id="4_7dugb"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r4hpk"]
+load_path = "res://.godot/imported/auto_calibrate.svg-60d107715983bea2081ab3e16d8aceaa.ctex"
+
+[node name="SelectCalibrations" type="HBoxContainer" unique_id=241814628]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5x832")
+
+[node name="Calibrations" type="MarginContainer" parent="." unique_id=1121340218]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 60
+
+[node name="Calibrations" type="VBoxContainer" parent="Calibrations" unique_id=464688901]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Calibrations/Calibrations" unique_id=1836844304]
+layout_mode = 2
+focus_mode = 3
+text = "Calibrations"
+label_settings = ExtResource("2_g8kwl")
+
+[node name="Margin" type="Control" parent="Calibrations/Calibrations" unique_id=1314287189]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Calibrations/Calibrations" unique_id=787378148]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Calibrations" type="VBoxContainer" parent="Calibrations/Calibrations/ScrollContainer" unique_id=1212973137]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=902806076]
+custom_minimum_size = Vector2(0, 750)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="CurrentCalibration" type="MarginContainer" parent="." unique_id=853012609]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CurrentCalibration" unique_id=1807732352]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CurrentCalibration/VBoxContainer" unique_id=1761431834]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Description")
+focus_mode = 3
+text = "Title"
+label_settings = ExtResource("2_g8kwl")
+vertical_alignment = 1
+
+[node name="Margin" type="Control" parent="CurrentCalibration/VBoxContainer" unique_id=1168810824]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Description" type="Label" parent="CurrentCalibration/VBoxContainer" unique_id=328516456]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Title")
+focus_mode = 3
+theme_override_colors/font_color = Color(0.54902, 0.54902, 0.54902, 1)
+theme_override_font_sizes/font_size = 18
+text = "Description"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Margin2" type="Control" parent="CurrentCalibration/VBoxContainer" unique_id=1958443957]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Calibrate" type="Button" parent="CurrentCalibration/VBoxContainer" unique_id=1441476764]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("4_7dugb")
+theme_override_font_sizes/font_size = 48
+text = "Calibrate"
+icon = SubResource("CompressedTexture2D_r4hpk")
+alignment = 0
+expand_icon = true
+
+[connection signal="pressed" from="CurrentCalibration/VBoxContainer/Calibrate" to="." method="_on_calibrate_pressed"]
