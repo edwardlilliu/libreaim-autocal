@@ -97,8 +97,6 @@ func _load_scenarios() -> void:
 
 func _load_calibrations() -> void:
 	for path: String in Global.get_calibrations():
-		if !FileAccess.file_exists(path + "calibrate.tscn"):
-			break
 		var config = ConfigFile.new()
 		config.load(path + "info.cfg")
 		if !config.has_section_key("metadata", "id"):
