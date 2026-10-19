@@ -1,9 +1,9 @@
 extends Control
-## Scenario selection in main menu
+## calibration selection in main menu
 
 func _ready() -> void:
 	_add_calibration_buttons()
-	_select_calibration("deadzones")
+	_select_calibration("sensitivity")
 
 func _on_calibrate_pressed() -> void:
 	_start_calibration()
@@ -18,6 +18,7 @@ func _add_calibration_buttons() -> void:
 		button.set_expand_icon(true)
 		button.name = calibration
 		button.set_text_alignment(HORIZONTAL_ALIGNMENT_LEFT)
+		button.pressed.connect(_select_calibration.bind(button.name))
 		calibration_list.add_child(button)
 
 ## Select what calibration mode to run
