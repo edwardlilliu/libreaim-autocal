@@ -9,6 +9,7 @@ const DESTROY_SOUNDS_FOLDER := "destroy_sounds"
 const HITMARKER_FOLDER := "hitmarker"
 const MAIN_MENU_PATH := "res://modules/main_menu/main_menu.tscn"
 const GAMEPLAY_MANAGER_PATH := "res://modules/gameplay_manager/gameplay_manager.tscn"
+const CALIBRATION_MANAGER_PATH :="res://modules/gameplay_manager/calibration_manager.tscn"
 
 var scenarios : Dictionary
 var current_scenario : Dictionary

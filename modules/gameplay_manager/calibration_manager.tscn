@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://caikwnxow0vy8"]
+
+[ext_resource type="Script" uid="uid://ce73djj6yq1gf" path="res://modules/gameplay_manager/calibration_manager.gd" id="1_7y0lj"]
+[ext_resource type="PackedScene" uid="uid://dcd6yn8pmwkf" path="res://modules/gameplay_manager/pause_ui/pause_ui.tscn" id="2_uhes8"]
+[ext_resource type="PackedScene" uid="uid://cpoik4f7kx6aj" path="res://modules/gameplay_manager/end_game_ui/end_game_ui.tscn" id="3_b6qfv"]
+[ext_resource type="PackedScene" uid="uid://sm4v755ype1l" path="res://modules/gameplay_manager/gameplay_ui/gameplay_ui.tscn" id="4_f1vs2"]
+[ext_resource type="AudioStream" uid="uid://c1ons03xoggga" path="res://assets/default_data/custom_resources/destroy_sounds/beep.ogg" id="5_7mrnl"]
+[ext_resource type="Script" uid="uid://d0234x8uu2y3k" path="res://modules/shared/user_setting_sound.gd" id="6_fck6g"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gakb1"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_i8euj"]
+sky_material = SubResource("ProceduralSkyMaterial_gakb1")
+
+[sub_resource type="Environment" id="Environment_pon8i"]
+background_mode = 1
+sky = SubResource("Sky_i8euj")
+
+[node name="CalibrationManager" type="Node3D" unique_id=2015162523]
+script = ExtResource("1_7y0lj")
+
+[node name="PauseUI" parent="." unique_id=13701667 instance=ExtResource("2_uhes8")]
+visible = false
+
+[node name="EndGameUI" parent="." unique_id=1015188913 instance=ExtResource("3_b6qfv")]
+visible = false
+
+[node name="GameplayUI" parent="." unique_id=65927991 instance=ExtResource("4_f1vs2")]
+
+[node name="Timer" type="Timer" parent="." unique_id=599092477]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1086223072]
+environment = SubResource("Environment_pon8i")
+
+[node name="LevelSpawner" type="Node3D" parent="." unique_id=315761970]
+unique_name_in_owner = true
+
+[node name="DestroySound" type="AudioStreamPlayer" parent="." unique_id=2026684494]
+stream = ExtResource("5_7mrnl")
+script = ExtResource("6_fck6g")
+sound_id = "destroy_sound"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

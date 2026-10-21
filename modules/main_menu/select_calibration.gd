@@ -40,4 +40,4 @@ func _set_current_calibration_description(type: String) -> void:
 
 ## Loads the calibration mode
 func _start_calibration() -> void:
-	pass
+	get_tree().change_scene_to_file(Global.CALIBRATION_MANAGER_PATH)
