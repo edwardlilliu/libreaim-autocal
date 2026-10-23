@@ -6,11 +6,15 @@ extends Node
 @onready var _score = $GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/score/label2
 @onready var _timer_label = $GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/time/label2
 @onready var _accuracy = $GameplayUI/MarginContainer/Panel/MarginContainer/VBoxContainer/accuracy/label2
+@onready var _controller_message: Label = $GameplayUI/ControllerMessage
 
 ## Feedback that tells the player to shoot to start the game
 @export var _start_feedback: Node
 
 var _timer: Timer
+
+func _ready() -> void:
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
 func initialize(new_timer: Timer, player: PlayerManager) -> void:
 	_timer = new_timer
@@ -40,3 +44,13 @@ func _set_hitmarker() -> void:
 	hitmarker.visible = SaveManager.settings.get_data("crosshair_hitmarker", "hitmarker_enable")
 	hitmarker.pivot_offset.x = hitmarker.texture.get_width() / 2.0
 	hitmarker.pivot_offset.y = hitmarker.texture.get_height() / 2.0
+
+func _on_joy_connection_changed(connected: bool) -> void:
+	if connected:
+		_controller_message.text = "Controller connected"
+	else:
+		_controller_message.text = "Controller disconnected"
+
+	_controller_message.visible = true
+	await get_tree().create_timer(3.0).timeout
+	_controller_message.visible = false

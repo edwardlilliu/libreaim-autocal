@@ -268,3 +268,13 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("3_6saeo")
+
+[node name="ControllerMessage" type="Label" parent="GameplayUI" unique_id=2045177025]
+visible = false
+layout_mode = 0
+offset_left = 730.0
+offset_top = 537.0
+offset_right = 1200.0
+offset_bottom = 589.0
+text = "message"
+horizontal_alignment = 1
