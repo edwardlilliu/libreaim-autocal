@@ -1,6 +1,10 @@
 extends Node3D
 ## Manager of the game world during gameplay
 
+## Timer length for scenarios without a time limit ("time = 0" in info.cfg).
+## Those rounds end when the scenario emits finished, and the timer counts up.
+const UNLIMITED_TIME: float = 86400.0
+
 ## Number of targets destroyed by the player
 var _targets_destroyed: int = 0
 ## Number of shots hitted by the player
@@ -10,6 +14,7 @@ var _missed_shots: int = 0
 
 var _score_per_hit: int = 1
 var _accuracy_multiplier: bool = false
+var _time_limited: bool = true
 
 var _scenario: Scenario
 @export var _timer: Timer
@@ -17,18 +22,25 @@ var _scenario: Scenario
 
 func _ready() -> void:
 	if Global.current_scenario:
-		_timer.wait_time = Global.current_scenario.get("time", 30)
+		var time: float = Global.current_scenario.get("time", 30)
+		_time_limited = time > 0
+		_timer.wait_time = time if _time_limited else UNLIMITED_TIME
 		_score_per_hit = Global.current_scenario.get("score_per_hit", _score_per_hit)
 		_accuracy_multiplier = Global.current_scenario.get("accuracy_multiplier", _accuracy_multiplier)
 	_load_scenario()
 	_scenario.target_destroyed.connect(_on_target_destroyed)
 	_scenario.target_hitted.connect(_on_target_hitted)
+	_scenario.finished.connect(_on_scenario_finished)
 	_scenario.get_player().connect("missed", Callable(self, "_on_target_missed"))
 	_gameplay_ui.initialize(_timer, _scenario.get_player())
 	$WorldEnvironment.environment.background_color = SaveManager.settings.get_data("video_world", "ambient_color")
 
 func _process(_delta: float) -> void:
-	if _timer.is_stopped():
+	if not _time_limited:
+		# No time limit: show the time spent so far
+		var elapsed := 0.0 if _timer.is_stopped() else _timer.wait_time - _timer.time_left
+		_gameplay_ui.update_timer_ui(elapsed)
+	elif _timer.is_stopped():
 		_gameplay_ui.update_timer_ui(_timer.wait_time)
 	else:
 		_gameplay_ui.update_timer_ui(_timer.time_left)
@@ -43,6 +55,10 @@ func _on_timer_timeout() -> void:
 	$EndGameUI.set_score(_get_score(), high_score, _get_accuracy())
 	_gameplay_ui.visible = false
 	$EndGameUI.visible = true
+
+## The scenario ended the round itself (e.g. all calibration stages done)
+func _on_scenario_finished() -> void:
+	_on_timer_timeout()
 
 func _on_target_destroyed() -> void:
 	_play_destroyed_sound()

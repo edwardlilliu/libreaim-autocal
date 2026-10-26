@@ -6,6 +6,7 @@ extends Node3D
 
 signal target_destroyed ## When player destroys the target
 signal target_hitted ## When player when player hits the target
+signal finished ## When the scenario ends the round itself, without the timer
 
 @export var _light: DirectionalLight3D
 ## Where targets are supposed to spawn
@@ -28,6 +29,9 @@ func initialize() -> void:
 	for target_spawner: TargetSpawner in _target_spawners:
 		target_spawner.target_destroyed.connect(_on_target_destroyed)
 		target_spawner.target_hitted.connect(_on_target_hitted)
+		# Spawners that end the round themselves, like the calibration one
+		if target_spawner.has_signal("finished"):
+			target_spawner.connect("finished", _on_target_spawner_finished)
 	if _player_spawner == null:
 		var new_spawner: PlayerSpawner = PlayerSpawner.new()
 		add_child(new_spawner)
@@ -49,3 +53,6 @@ func _on_target_destroyed() -> void:
 
 func _on_target_hitted() -> void:
 	target_hitted.emit()
+
+func _on_target_spawner_finished() -> void:
+	finished.emit()

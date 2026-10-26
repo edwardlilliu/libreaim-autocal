@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c1vhpj5mrubm6"]
+
+[ext_resource type="Script" uid="uid://eap3623705g4" path="res://modules/gameplay_manager/scenario/scenario.gd" id="1_scenario"]
+[ext_resource type="Script" uid="uid://dwyx06nsevwk4" path="res://modules/gameplay_manager/scenario/world_mesh.gd" id="2_world_mesh"]
+[ext_resource type="Script" uid="uid://b4ru47t0m5k4m" path="res://modules/gameplay_manager/calibration/calibration_target_spawner.gd" id="3_spawner"]
+[ext_resource type="Script" uid="uid://c0n8gamit3syj" path="res://modules/gameplay_manager/calibration/calibration_stage.gd" id="4_stage"]
+[ext_resource type="Script" uid="uid://cqgu0hosxt5e1" path="res://modules/gameplay_manager/scenario/player_spawner.gd" id="5_player_spawner"]
+[ext_resource type="PackedScene" path="res://modules/gameplay_manager/calibration/calibration_hud.tscn" id="6_hud"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+size = Vector2(600, 600)
+
+[sub_resource type="Resource" id="Resource_outer"]
+script = ExtResource("4_stage")
+title = "Outer viewport"
+min_distance_from_last = 0.3
+
+[sub_resource type="Resource" id="Resource_intermediate"]
+script = ExtResource("4_stage")
+title = "Intermediate viewport"
+zone = 1
+target_distance = 13.0
+target_radius = 0.38
+
+[sub_resource type="Resource" id="Resource_middle"]
+script = ExtResource("4_stage")
+title = "Middle viewport"
+zone = 2
+target_distance = 16.0
+target_radius = 0.25
+
+[node name="Scenario" type="Node3D" unique_id=1627767973 node_paths=PackedStringArray("_light", "_target_spawners", "_player_spawner")]
+script = ExtResource("1_scenario")
+_light = NodePath("DirectionalLight3D")
+_target_spawners = [NodePath("CalibrationTargetSpawner")]
+_player_spawner = NodePath("PlayerSpawner")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1156188833]
+transform = Transform3D(0.998198, 0.0464176, 0.0380308, -0.0421491, 0.0912349, 0.994937, 0.0427129, -0.994747, 0.093027, 0, 20, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=428800968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
+mesh = SubResource("PlaneMesh_floor")
+script = ExtResource("2_world_mesh")
+
+[node name="CalibrationTargetSpawner" type="Marker3D" parent="." unique_id=1550249916]
+script = ExtResource("3_spawner")
+stages = Array[ExtResource("4_stage")]([SubResource("Resource_outer"), SubResource("Resource_intermediate"), SubResource("Resource_middle")])
+center_zone_radius = 0.075
+center_zone_min_offset = 0.01
+
+[node name="PlayerSpawner" type="Marker3D" parent="." unique_id=1837927908]
+script = ExtResource("5_player_spawner")
+
+[node name="CalibrationHUD" parent="." unique_id=926037730 node_paths=PackedStringArray("spawner") instance=ExtResource("6_hud")]
+spawner = NodePath("../CalibrationTargetSpawner")
