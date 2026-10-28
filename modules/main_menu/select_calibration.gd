@@ -52,6 +52,9 @@ func _set_current_calibration_description(type: String) -> void:
 
 ## Loads the calibration mode
 func _start_calibration() -> void:
+	if Global.current_calibration.get("id", "") == "sensitivity":
+		get_tree().change_scene_to_file("res://modules/gameplay_manager/sensitivity_calibration.tscn")
+		return
 	# Calibrations that come with a scenario.tscn play exactly like the
 	# scenarios under Play, through the regular gameplay manager
 	var scenario_path: String = Global.current_calibration.get("path", "") + "scenario.tscn"

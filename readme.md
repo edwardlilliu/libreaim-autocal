@@ -2,6 +2,12 @@
 
 A free and open source FPS aim trainer, made with Godot 4.
 
+## Controller sensitivity calibration
+
+Open `project.godot` in Godot 4.7 and run the project. Choose **Auto Calibrate → Controller Sensitivity → Calibrate** to adjust controller speed manually or run the initial benchmark. Calibration compares three speeds, validates a candidate on fresh targets, and saves it only when you select **Apply recommendation**. A controller is required for the benchmark.
+
+See [the calibration guide](docs/sensitivity-calibration.md) for the selection rules, limitations, and test instructions. Deadzone calibration remains separate and unfinished.
+
 - **✏️ Customizable**: Libre Aim is open source, and offers a lot of customization settings.
 - **🕊️ Lightweight**: This is a training tool, it doesn't need fancy graphics, but it needs to run on low-end machines, give a high ammount of fps, and have minimal input lag.
 

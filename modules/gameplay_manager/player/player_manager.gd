@@ -22,6 +22,10 @@ var _mouse_sensitivity: float = 0.01
 var _speed: int = 5
 var _shoot_machinegun: bool = false
 var _movement_enabled: bool = true
+## Calibration uses one controller and a temporary speed, in degrees/second.
+var controller_only: bool = false
+var controller_device: int = -1
+var controller_sensitivity_override: float = -1.0
 
 func _ready() -> void:
 	_camera.fov = SaveManager.settings.get_data("video", "fov")
@@ -29,6 +33,8 @@ func _ready() -> void:
 	SaveManager.settings.data_updated.connect(_on_settings_data_updated)
 
 func _input(event: InputEvent) -> void:
+	if controller_only and (not (event is InputEventJoypadButton or event is InputEventJoypadMotion) or event.device != controller_device):
+		return
 	if event is InputEventMouseMotion:
 		rotate_y(-event.screen_relative.x * _mouse_sensitivity)
 		_rotate_camera(-event.screen_relative.y * _mouse_sensitivity)
@@ -84,7 +90,7 @@ func initialize(player_settings: Dictionary) -> void:
 func _on_settings_data_updated(category: String, id: String, value: Variant) -> void:
 	if category == "video" and id == "fov":
 		_camera.fov = value
-	if category == "controls" and (id == "sensitivity_game" or id == "sensitivity_game_value"):
+	if category == "controls" and id in ["sensitivity", "sensitivity_game", "sensitivity_game_value"]:
 		_mouse_sensitivity = _get_mouse_sensitivity()
 
 func _get_mouse_sensitivity() -> float:
@@ -94,10 +100,18 @@ func _get_mouse_sensitivity() -> float:
 
 func _handle_joypad_rotation(delta: float) -> void:
 	var joypad_dir: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	if controller_only:
+		var raw := Vector2(Input.get_joy_axis(controller_device, JOY_AXIS_RIGHT_X), Input.get_joy_axis(controller_device, JOY_AXIS_RIGHT_Y))
+		var deadzone := InputMap.action_get_deadzone("look_left")
+		joypad_dir = Vector2.ZERO if raw.length() <= deadzone else raw.normalized() * clampf((raw.length() - deadzone) / (1.0 - deadzone), 0.0, 1.0)
 	if joypad_dir.length() > 0:
-		const JOYPAD_LOOK_SPEED := 1000.0
-		rotate_y(-joypad_dir.x * _mouse_sensitivity * delta * JOYPAD_LOOK_SPEED)
-		_rotate_camera(-joypad_dir.y * _mouse_sensitivity * delta * JOYPAD_LOOK_SPEED)
+		var speed := controller_sensitivity_override if controller_sensitivity_override > 0 else get_controller_sensitivity()
+		rotate_y(-joypad_dir.x * deg_to_rad(speed) * delta)
+		_rotate_camera(-joypad_dir.y * deg_to_rad(speed) * delta)
+
+## Preserve the old controller speed until the user saves an independent one.
+func get_controller_sensitivity() -> float:
+	return float(SaveManager.settings.get_data("controls", "controller_sensitivity", rad_to_deg(_get_mouse_sensitivity() * 1000.0)))
 
 func _rotate_camera(amount: float) -> void:
 	_camera.rotate_x(amount)
@@ -114,7 +128,7 @@ func _jump() -> void:
 
 func _shoot(damage: float) -> void:
 	shooted.emit()
-	
+	_raycast.force_raycast_update()
 	if _raycast.is_colliding():
 		var target = _raycast.get_collider()
 		if target != null:
@@ -122,12 +136,8 @@ func _shoot(damage: float) -> void:
 			if target is Area3D:
 				if target.is_in_group("Target"):
 					target.hit(damage)
-				else:
-					missed.emit()
-		else:
-			missed.emit()
-	else:
-		missed.emit()
+					return
+	missed.emit()
 
 func _create_bullet_hole(target: Node3D) -> void:
 	var bullet_hole_instance = bullet_hole_scene.instantiate()
