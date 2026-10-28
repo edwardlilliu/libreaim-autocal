@@ -45,7 +45,7 @@ func _set_hitmarker() -> void:
 	hitmarker.pivot_offset.x = hitmarker.texture.get_width() / 2.0
 	hitmarker.pivot_offset.y = hitmarker.texture.get_height() / 2.0
 
-func _on_joy_connection_changed(connected: bool) -> void:
+func _on_joy_connection_changed(_device: int, connected: bool) -> void:
 	if connected:
 		_controller_message.text = "Controller connected"
 	else:
