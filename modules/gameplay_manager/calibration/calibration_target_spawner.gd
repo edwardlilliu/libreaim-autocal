@@ -22,6 +22,8 @@ const UI_PADDING: float = 12.0
 
 ## Stages, in the order they are played
 @export var stages: Array[Stage] = []
+## Nonzero seeds allow matched benchmark target sequences.
+@export var sequence_seed: int = 0
 ## Seconds with no target on screen between two stages (shots fired in between
 ## count as misses)
 @export_range(0.0, 10.0, 0.1, "suffix:s") var stage_break: float = 0.0
@@ -65,6 +67,8 @@ var _break_timer: Timer
 func _ready() -> void:
 	# Unlike TargetSpawner, nothing spawns until start() is called
 	_rng.randomize()
+	if sequence_seed != 0:
+		_rng.seed = sequence_seed
 	if behavior == null:
 		behavior = TargetMovementBehaviorStatic.new()
 	_break_timer = Timer.new()
