@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://itbonp6jetet"]
+
+[ext_resource type="Script" uid="uid://iq274nw31n86" path="res://modules/gameplay_manager/calibration/sensitivity_calibration.gd" id="1_1yvu7"]
+
+[node name="SensitivityCalibration" type="Node3D" unique_id=1501807350]
+script = ExtResource("1_1yvu7")

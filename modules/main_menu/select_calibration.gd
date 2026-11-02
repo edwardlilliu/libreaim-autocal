@@ -53,8 +53,12 @@ func _set_current_calibration_description(type: String) -> void:
 ## Loads the calibration mode
 func _start_calibration() -> void:
 	if Global.current_calibration.get("id", "") == "sensitivity":
-		get_tree().change_scene_to_file("res://modules/gameplay_manager/sensitivity_calibration.tscn")
+		get_tree().change_scene_to_file("res://modules/gameplay_manager/calibration/sensitivity_calibration.tscn")
 		return
+	if Global.current_calibration.get("id", "") == "deadzone":
+		get_tree().change_scene_to_file("res://modules/gameplay_manager/calibration/deadzone_calibration.tscn")
+		return
+		
 	# Calibrations that come with a scenario.tscn play exactly like the
 	# scenarios under Play, through the regular gameplay manager
 	var scenario_path: String = Global.current_calibration.get("path", "") + "scenario.tscn"
@@ -63,4 +67,3 @@ func _start_calibration() -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_tree().change_scene_to_file(Global.GAMEPLAY_MANAGER_PATH)
 		return
-	get_tree().change_scene_to_file(Global.CALIBRATION_MANAGER_PATH)

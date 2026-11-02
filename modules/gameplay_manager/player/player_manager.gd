@@ -2,6 +2,8 @@ class_name PlayerManager
 extends CharacterBody3D
 ## First person character controller
 
+const DeadzoneBenchmark = preload("res://modules/gameplay_manager/calibration/deadzone_benchmark.gd")
+
 signal shooted ## When player shoots
 signal missed ## When player mises a shot
 
@@ -26,6 +28,7 @@ var _movement_enabled: bool = true
 var controller_only: bool = false
 var controller_device: int = -1
 var controller_sensitivity_override: float = -1.0
+var controller_deadzone_profile: Dictionary = {}
 
 func _ready() -> void:
 	_camera.fov = SaveManager.settings.get_data("video", "fov")
@@ -102,8 +105,11 @@ func _handle_joypad_rotation(delta: float) -> void:
 	var joypad_dir: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 	if controller_only:
 		var raw := Vector2(Input.get_joy_axis(controller_device, JOY_AXIS_RIGHT_X), Input.get_joy_axis(controller_device, JOY_AXIS_RIGHT_Y))
-		var deadzone := InputMap.action_get_deadzone("look_left")
-		joypad_dir = Vector2.ZERO if raw.length() <= deadzone else raw.normalized() * clampf((raw.length() - deadzone) / (1.0 - deadzone), 0.0, 1.0)
+		if controller_deadzone_profile.is_empty():
+			var deadzone := InputMap.action_get_deadzone("look_left")
+			joypad_dir = Vector2.ZERO if raw.length() <= deadzone else raw.normalized() * clampf((raw.length() - deadzone) / (1.0 - deadzone), 0.0, 1.0)
+		else:
+			joypad_dir = DeadzoneBenchmark.apply(raw, controller_deadzone_profile)
 	if joypad_dir.length() > 0:
 		var speed := controller_sensitivity_override if controller_sensitivity_override > 0 else get_controller_sensitivity()
 		rotate_y(-joypad_dir.x * deg_to_rad(speed) * delta)

@@ -25,7 +25,7 @@ func measurement(speed: float, seconds: float, shots: int = 9, hits: int = 9) ->
 	return Benchmark.result(speed, seconds, shots, hits, times)
 
 func run() -> void:
-	Flow = load("res://modules/gameplay_manager/sensitivity_calibration.gd")
+	Flow = load("res://modules/gameplay_manager/calibration/sensitivity_calibration.gd")
 	var original := measurement(100, 20)
 	var faster := measurement(120, 17)
 	check(Benchmark.improves(faster, original), "faster accurate candidate wins")
