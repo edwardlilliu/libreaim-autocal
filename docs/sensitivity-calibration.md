@@ -15,7 +15,7 @@ Up to 60 targets are required: 3 search blocks and 2 validation blocks, each wit
 
 ## Input, measurement, and interruption rules
 
-- Only the selected controller supplies aim and shots during calibration. Mouse/keyboard aiming is ignored. The right stick uses the existing look deadzone; deadzone calibration is out of scope.
+- Only the selected controller supplies aim and shots during calibration. Mouse/keyboard aiming is ignored. These trials keep the existing look deadzone. [Deadzone calibration](deadzone-calibration.md) is a separate flow whose saved curve is used in normal Play.
 - The shoot action uses the project's mapping (right shoulder by default). Esc or controller Back/Select pauses. Losing window focus also pauses.
 - Each measured timer starts when Begin is pressed, including acquisition of the first target. Paused time is excluded. Hits, shots, accuracy, total elapsed time, and acquisition intervals are recorded.
 - Every block has a 75-second limit. A timeout or selected-controller disconnect invalidates the current run. Restart through setup rather than resuming partial measurements after reconnection.

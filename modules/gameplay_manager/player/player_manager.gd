@@ -102,18 +102,68 @@ func _get_mouse_sensitivity() -> float:
 	return user_sensitivity * conversion_sensitivity
 
 func _handle_joypad_rotation(delta: float) -> void:
-	var joypad_dir: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
-	if controller_only:
-		var raw := Vector2(Input.get_joy_axis(controller_device, JOY_AXIS_RIGHT_X), Input.get_joy_axis(controller_device, JOY_AXIS_RIGHT_Y))
-		if controller_deadzone_profile.is_empty():
-			var deadzone := InputMap.action_get_deadzone("look_left")
-			joypad_dir = Vector2.ZERO if raw.length() <= deadzone else raw.normalized() * clampf((raw.length() - deadzone) / (1.0 - deadzone), 0.0, 1.0)
-		else:
-			joypad_dir = DeadzoneBenchmark.apply(raw, controller_deadzone_profile)
+	var joypad_dir := _get_controller_look()
 	if joypad_dir.length() > 0:
 		var speed := controller_sensitivity_override if controller_sensitivity_override > 0 else get_controller_sensitivity()
 		rotate_y(-joypad_dir.x * deg_to_rad(speed) * delta)
 		_rotate_camera(-joypad_dir.y * deg_to_rad(speed) * delta)
+
+func _get_controller_look() -> Vector2:
+	if controller_only:
+		var raw := _read_controller_stick(controller_device)
+		# Calibration owns its temporary profile; never substitute the saved one.
+		return _apply_default_look_deadzone(raw) if controller_deadzone_profile.is_empty() \
+			else DeadzoneBenchmark.apply(raw, controller_deadzone_profile)
+	var saved: Variant = SaveManager.settings.get_data("controls", "controller_deadzone_profile", {})
+	var devices := _get_controller_devices()
+	var has_matching_controller := false
+	for device in devices:
+		if DeadzoneBenchmark.is_compatible(saved, _get_controller_guid(device)):
+			has_matching_controller = true
+			break
+	# Preserve existing input mappings when there is no applicable calibration.
+	if not has_matching_controller or not _uses_default_look_bindings():
+		return Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	var strongest := Vector2.ZERO
+	for device in devices:
+		var raw := _read_controller_stick(device)
+		var direction := DeadzoneBenchmark.apply(raw, saved) \
+			if DeadzoneBenchmark.is_compatible(saved, _get_controller_guid(device)) \
+			else _apply_default_look_deadzone(raw)
+		# Keep controllers independent instead of mixing axes from different pads.
+		if direction.length_squared() > strongest.length_squared():
+			strongest = direction
+	return strongest
+
+func _get_controller_devices() -> Array[int]:
+	return Input.get_connected_joypads()
+
+func _get_controller_guid(device: int) -> String:
+	return Input.get_joy_guid(device)
+
+func _read_controller_stick(device: int) -> Vector2:
+	return DeadzoneBenchmark.read_stick(device)
+
+func _uses_default_look_bindings() -> bool:
+	var actions := ["look_left", "look_right", "look_up", "look_down"]
+	for i in actions.size():
+		var events := InputMap.action_get_events(actions[i])
+		if events.size() != 1 or not events[0] is InputEventJoypadMotion:
+			return false
+		var event: InputEventJoypadMotion = events[0]
+		var axis := JOY_AXIS_RIGHT_X if i < 2 else JOY_AXIS_RIGHT_Y
+		var direction := -1.0 if i % 2 == 0 else 1.0
+		if event.device != -1 or event.axis != axis or event.axis_value != direction:
+			return false
+	return true
+
+func _apply_default_look_deadzone(raw: Vector2) -> Vector2:
+	var deadzone := 0.0
+	for action in ["look_left", "look_right", "look_up", "look_down"]:
+		deadzone += InputMap.action_get_deadzone(action) / 4.0
+	if not raw.is_finite() or raw.length() <= deadzone:
+		return Vector2.ZERO
+	return raw.normalized() * clampf((raw.length() - deadzone) / maxf(1.0 - deadzone, 0.001), 0.0, 1.0)
 
 ## Preserve the old controller speed until the user saves an independent one.
 func get_controller_sensitivity() -> float:

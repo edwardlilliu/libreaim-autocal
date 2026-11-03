@@ -93,7 +93,9 @@ static func build_profile(rest: Dictionary, rng: Dictionary, device_name: String
 
 ## Response curve used by the player. 
 static func apply(raw: Vector2, profile: Dictionary) -> Vector2:
-	var p := profile if not profile.is_empty() else DEFAULT_PROFILE
+	if not raw.is_finite():
+		return Vector2.ZERO
+	var p := profile if has_valid_curve(profile) else DEFAULT_PROFILE
 	var v := raw - Vector2(p.get("offset", Vector2.ZERO))
 	var inner := float(p.inner)
 	var outer := float(p.outer)
@@ -102,9 +104,23 @@ static func apply(raw: Vector2, profile: Dictionary) -> Vector2:
 		return Vector2.ZERO
 	return v.normalized() * clampf((m - inner) / maxf(outer - inner, 0.001), 0.0, 1.0)
 
-static func is_compatible(profile: Dictionary, device_guid: String) -> bool:
-	return not profile.is_empty() and int(profile.get("version", 0)) == VERSION \
-		and str(profile.get("controller_guid", "")) == device_guid
+static func has_valid_curve(profile: Variant) -> bool:
+	if not profile is Dictionary:
+		return false
+	var inner: Variant = profile.get("inner")
+	var outer: Variant = profile.get("outer")
+	var offset: Variant = profile.get("offset")
+	if not (inner is float or inner is int) or not (outer is float or outer is int) or not offset is Vector2:
+		return false
+	return is_finite(inner) and is_finite(outer) and offset.is_finite() \
+		and inner >= MIN_INNER and inner <= MAX_INNER \
+		and outer >= MIN_OUTER and outer <= MAX_OUTER \
+		and outer - inner >= MIN_GAP and offset.length() <= REST_MAX_OFFSET
+
+static func is_compatible(profile: Variant, device_guid: String) -> bool:
+	return has_valid_curve(profile) and not device_guid.is_empty() \
+		and profile.get("version") is int and profile.version == VERSION \
+		and profile.get("controller_guid") is String and profile.controller_guid == device_guid
 
 ## Verification is "no worse than default".
 static func verified(with_profile: Dictionary, with_default: Dictionary) -> bool:
