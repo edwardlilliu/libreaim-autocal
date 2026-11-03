@@ -182,20 +182,23 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" type="ColorRect" parent="CanvasLayer/Screen" unique_id=526285287]
-layout_mode = 0
-offset_right = 1921.0
-offset_bottom = 1083.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1880.0
+offset_bottom = 1040.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.06666667, 0.10980392, 0.16078432, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Screen" unique_id=953576107]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 47.354004
-anchor_bottom = 26.6
-offset_left = 205.0
-offset_top = 164.0
-offset_right = -176.16016
-offset_bottom = -157.0
+offset_left = 460.0
+offset_top = 370.0
+offset_right = -460.0
+offset_bottom = -350.0
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Screen/CenterContainer" unique_id=1683153635]
 layout_mode = 2
