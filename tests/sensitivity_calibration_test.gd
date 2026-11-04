@@ -38,7 +38,8 @@ func run() -> void:
 	var results: Array[Dictionary] = [measurement(80, 24), faster, original]
 	check(Benchmark.choose(results, 100).speed == 120, "choose independent of trial order")
 	check(Benchmark.choose(results, 90).is_empty(), "missing baseline rejects recommendation")
-	check(Benchmark.candidates(1).size() == 2 and Benchmark.candidates(720).size() == 2, "boundary candidates deduplicated")
+	check(Benchmark.candidates(1) == [1.0, 144.0, 216.0], "very low baseline includes usable alternatives")
+	check(Benchmark.candidates(720).size() == 2, "upper boundary candidates deduplicated")
 	check(not Benchmark.improves(measurement(120, 21), original), "failed holdout does not validate")
 	var saves = root.get_node("SaveManager")
 	saves.settings.set_data("controls", "controller_sensitivity", 100.0)

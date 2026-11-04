@@ -3,6 +3,7 @@ extends CharacterBody3D
 ## First person character controller
 
 const DeadzoneBenchmark = preload("res://modules/gameplay_manager/calibration/deadzone_benchmark.gd")
+const ControllerSensitivity = preload("res://modules/gameplay_manager/calibration/sensitivity_benchmark.gd")
 
 signal shooted ## When player shoots
 signal missed ## When player mises a shot
@@ -165,9 +166,9 @@ func _apply_default_look_deadzone(raw: Vector2) -> Vector2:
 		return Vector2.ZERO
 	return raw.normalized() * clampf((raw.length() - deadzone) / maxf(1.0 - deadzone, 0.001), 0.0, 1.0)
 
-## Preserve the old controller speed until the user saves an independent one.
+## Controller turn speed is independent of the mouse's per-pixel sensitivity.
 func get_controller_sensitivity() -> float:
-	return float(SaveManager.settings.get_data("controls", "controller_sensitivity", rad_to_deg(_get_mouse_sensitivity() * 1000.0)))
+	return ControllerSensitivity.resolve_speed(SaveManager.settings.get_data("controls", "controller_sensitivity", ControllerSensitivity.DEFAULT_SPEED))
 
 func _rotate_camera(amount: float) -> void:
 	_camera.rotate_x(amount)

@@ -291,9 +291,7 @@ func _finish_round() -> void:
 		_show_results()
 
 func _reference_speed() -> float:
-	var legacy: float = float(SaveManager.settings.get_data("controls", "sensitivity")) \
-		* float(SaveManager.settings.get_data("controls", "sensitivity_game_value")) * 1000.0
-	return clampf(float(SaveManager.settings.get_data("controls", "controller_sensitivity", rad_to_deg(legacy))), SensBenchmark.MIN_SPEED, SensBenchmark.MAX_SPEED)
+	return SensBenchmark.resolve_speed(SaveManager.settings.get_data("controls", "controller_sensitivity", SensBenchmark.DEFAULT_SPEED))
 
 func _show_results() -> void:
 	_phase = Phase.RESULTS
