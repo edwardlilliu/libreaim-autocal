@@ -121,10 +121,3 @@ static func is_compatible(profile: Variant, device_guid: String) -> bool:
 	return has_valid_curve(profile) and not device_guid.is_empty() \
 		and profile.get("version") is int and profile.version == VERSION \
 		and profile.get("controller_guid") is String and profile.controller_guid == device_guid
-
-## Verification is "no worse than default".
-static func verified(with_profile: Dictionary, with_default: Dictionary) -> bool:
-	if not with_profile.get("valid", false) or not with_default.get("valid", false):
-		return false
-	return float(with_profile.accuracy) >= float(with_default.accuracy) - 0.02 \
-		and float(with_profile.seconds) <= float(with_default.seconds) * 1.05
