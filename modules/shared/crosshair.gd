@@ -83,13 +83,9 @@ func _load_crosshair() -> void:
 
 func _draw_part(points: PackedVector2Array) -> void:
 	draw_polygon(points, [_color])
-	var polygon := Polygon2D.new()
-	polygon.set_polygon(points)
 	if _outline_enable:
-		_draw_outline(polygon)
+		_draw_outline(points)
 
-func _draw_outline(polygon: Polygon2D) -> void:
-	var poly = polygon.get_polygon()
-	for i in range(1 , poly.size()):
-		draw_line(poly[i-1] , poly[i], _outline_color , _outline_width)
-	draw_line(poly[poly.size() - 1] , poly[0], _outline_color , _outline_width)
+func _draw_outline(points: PackedVector2Array) -> void:
+	for i in range(points.size()):
+		draw_line(points[i], points[(i + 1) % points.size()], _outline_color, _outline_width)

@@ -3,6 +3,7 @@ extends Node3D
 ## The existing aim-test scenario supplies its targets; ordinary Play is unchanged.
 
 const Benchmark = preload("res://modules/gameplay_manager/calibration/sensitivity_benchmark.gd")
+const Crosshair = preload("res://modules/shared/crosshair.gd")
 const AIM_SCENE = preload("res://assets/default_data/custom_resources/calibrations/aim_test/scenario.tscn")
 const ACCENT := Color("a8e6cf")
 
@@ -57,9 +58,7 @@ func _exit_tree() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _saved_speed() -> float:
-	var legacy: float = float(SaveManager.settings.get_data("controls", "sensitivity")) \
-		* float(SaveManager.settings.get_data("controls", "sensitivity_game_value")) * 1000.0
-	return clampf(float(SaveManager.settings.get_data("controls", "controller_sensitivity", rad_to_deg(legacy))), Benchmark.MIN_SPEED, Benchmark.MAX_SPEED)
+	return Benchmark.resolve_speed(SaveManager.settings.get_data("controls", "controller_sensitivity", Benchmark.DEFAULT_SPEED))
 
 func _build_ui() -> void:
 	_canvas = CanvasLayer.new()
@@ -96,16 +95,12 @@ func _build_ui() -> void:
 	_hud_text = Label.new()
 	_hud_text.add_theme_font_size_override("font_size", 24)
 	_hud_panel.add_child(_hud_text)
-	var crosshair := Label.new()
-	crosshair.text = "+"
-	crosshair.add_theme_font_size_override("font_size", 30)
-	crosshair.add_theme_color_override("font_color", ACCENT)
-	crosshair.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	crosshair.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	var crosshair := Control.new()
+	crosshair.name = "Crosshair"
+	crosshair.set_script(Crosshair)
+	crosshair.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_hud.add_child(crosshair)
 	crosshair.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	crosshair.position -= Vector2(20, 20)
-	crosshair.size = Vector2(40, 40)
 	_hud.hide()
 
 func _panel_style() -> StyleBoxFlat:
@@ -178,6 +173,7 @@ func _show_setup(message: String = "") -> void:
 	_manual_speed.custom_minimum_size = Vector2(240, 48)
 	manual_row.add_child(_manual_speed)
 	_button(manual_row, "Save manual setting", _save_manual)
+	_button(manual_row, "Use default (180°/s)", _reset_speed)
 	_label("Use the right stick to aim and your mapped shoot button (default: right shoulder). Each measured round has 9 targets, after 3 practice targets. Only the selected controller counts.", 20)
 	_status = _label(message, 20, ACCENT)
 	var actions := _buttons()
@@ -208,6 +204,10 @@ func _save_manual() -> void:
 	_manual_speed.apply()
 	SaveManager.settings.set_data("controls", "controller_sensitivity", float(_manual_speed.value))
 	_show_setup("Manual sensitivity saved. Calibration will start from this value.")
+
+func _reset_speed() -> void:
+	SaveManager.settings.set_data("controls", "controller_sensitivity", Benchmark.DEFAULT_SPEED)
+	_show_setup("Default controller speed saved. Calibration will start from 180°/s.")
 
 func _begin_session() -> void:
 	if Input.get_connected_joypads().is_empty():
@@ -262,6 +262,8 @@ func _start_round() -> void:
 	for i in range(_spawner.stages.size()):
 		_spawner.stages[i] = _spawner.stages[i].duplicate()
 		_spawner.stages[i].hits_required = 1 if _practice else Benchmark.HITS_PER_STAGE
+		_spawner.stages[i].target_radius = maxf(_spawner.stages[i].target_radius,
+			_spawner.stages[i].target_distance * Benchmark.TARGET_RADIUS_RATIO)
 	_spawner.stage_started.connect(_on_stage_started)
 	_spawner.finished.connect(_on_finished)
 	_spawner.ui_areas_provider = _covered_areas

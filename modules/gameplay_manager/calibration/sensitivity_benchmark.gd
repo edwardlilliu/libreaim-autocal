@@ -5,17 +5,30 @@ extends RefCounted
 
 const MIN_SPEED: float = 1.0
 const MAX_SPEED: float = 720.0
+## Independent controller default: a half turn in one second at full stick.
+const DEFAULT_SPEED: float = 180.0
+## Keep sensitivity trials readable without changing the original precision test.
+const TARGET_RADIUS_RATIO: float = 0.035
 const MIN_IMPROVEMENT: float = 0.05
 const ACCURACY_TOLERANCE: float = 0.02
 const HITS_PER_STAGE: int = 3
 const TARGET_COUNT: int = HITS_PER_STAGE * 3
 const ROUND_TIMEOUT: float = 75.0
-const VERSION: int = 1
+const VERSION: int = 2
+
+static func resolve_speed(value: Variant) -> float:
+	if not (value is float or value is int) or not is_finite(float(value)) or float(value) <= 0.0:
+		return DEFAULT_SPEED
+	return clampf(float(value), MIN_SPEED, MAX_SPEED)
 
 static func candidates(baseline: float) -> Array[float]:
 	var values: Array[float] = []
-	for factor in [1.0, 0.8, 1.2]:
-		var speed := clampf(baseline * factor, MIN_SPEED, MAX_SPEED)
+	baseline = resolve_speed(baseline)
+	# A legacy mouse-derived speed can be only 22 degrees/second. A narrow
+	# search around that value never reaches usable controller speeds.
+	var search_center := DEFAULT_SPEED if baseline < DEFAULT_SPEED * 0.5 else baseline
+	for candidate in [baseline, search_center * 0.8, search_center * 1.2]:
+		var speed := clampf(candidate, MIN_SPEED, MAX_SPEED)
 		if not values.has(speed):
 			values.append(speed)
 	return values

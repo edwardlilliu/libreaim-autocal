@@ -1,17 +1,17 @@
 # Sensitivity calibration: initial benchmark
 
-Open **Auto Calibrate → Controller Sensitivity → Calibrate**. Connect a controller, then start calibration. Manual controller sensitivity can also be saved on this screen. Speeds are degrees per second at full right-stick deflection.
+Open **Auto Calibrate → Controller Sensitivity → Calibrate**. Connect a controller, then start calibration. Manual controller sensitivity can also be saved on this screen. **Use default (180°/s)** restores a starting speed that turns halfway around in one second at full right-stick deflection. Controller speed is independent of mouse sensitivity.
 
 ## Flow
 
-1. Snapshot the current controller speed. Until an independent controller setting is saved, use the legacy mouse-derived speed to preserve existing behavior.
-2. Test the current speed, 80% of it, and 120% of it, in shuffled order. Clamp values to 1–720°/s and remove duplicates.
-3. Before each measurement, run 3 unscored practice targets. Each measured round then requires 9 hits: 3 outer, 3 intermediate, 3 central targets. Reuse the existing aim-test scene and stage definitions.
+1. Snapshot the current controller speed. Use 180°/s when there is no valid saved controller setting. Explicit saved speeds are preserved until the user saves a change.
+2. Test the current speed, 80% of it, and 120% of it, in shuffled order. For a baseline below 90°/s, compare it with 144°/s and 216°/s instead, so an old slow setting does not trap the search. Clamp values to 1–720°/s and remove duplicates.
+3. Before each measurement, run 3 unscored practice targets. Each measured round then requires 9 hits: 3 outer, 3 intermediate, 3 central targets. Reuse the existing aim-test scene, with a minimum target radius of 3.5% of its distance for this sensitivity flow. The same target sizes apply to every candidate and validation round; the original precision test is unchanged. The crosshair uses the same centered renderer as normal Play and deadzone verification.
 4. Select a faster candidate only if it completes the equal-target benchmark at least 5% faster and its accuracy is no more than 2 percentage points lower than the baseline. Invalid/incomplete measurements cannot win. If no candidate qualifies, keep the baseline without further rounds.
 5. Compare the selected candidate and baseline again, in shuffled order, using a fresh seed and another practice block before each measurement. Apply the same acceptance rule to these independent validation results.
 6. Present the measured comparison. Only **Apply recommendation** saves a winning sensitivity and its evidence. **Keep current**, cancellation, timeout, or disconnect does not save trial settings.
 
-Up to 60 targets are required: 3 search blocks and 2 validation blocks, each with 3 practice and 9 measured targets. The 5% speed threshold, 2-point accuracy tolerance, 20% search interval, and target count are transparent prototype defaults in `sensitivity_benchmark.gd`, not scientifically established calibration parameters.
+Up to 60 targets are required: 3 search blocks and 2 validation blocks, each with 3 practice and 9 measured targets. The speed default, target sizes, 5% improvement threshold, 2-point accuracy tolerance, search interval and target count are prototype defaults in `sensitivity_benchmark.gd`, not scientifically established calibration parameters.
 
 ## Input, measurement, and interruption rules
 
@@ -36,9 +36,10 @@ On Windows, from the repository directory:
 
 ```powershell
 .\tests\run-sensitivity-tests.ps1 -Godot 'C:\path\to\Godot_console.exe'
+.\tests\run-controller-aim-tests.ps1 -Godot 'C:\path\to\Godot_console.exe'
 ```
 
-The runner imports the project and uses a disposable save directory under `.godot`, never the player's normal save data. Tests cover candidate selection, incomplete/invalid measurements, full stage progression, temporary overrides, validation, saving/reloading, manual entry, pause, cancellation, disconnect, timeout, controller-only input, menu routing, and existing gameplay sensitivity updates. Hits are synthetic; this is not a physical-controller usability test.
+The runners import the project and use disposable save directories under `.godot`, never the player's normal save data. The sensitivity suite covers candidate selection, incomplete/invalid measurements, full stage progression, temporary overrides, validation, saving/reloading, manual entry, pause, cancellation, disconnect, timeout, controller-only input, menu routing, and existing gameplay sensitivity updates. The aiming suite additionally checks shared speed defaults, crosshair alignment at different window sizes and real physics ray hits and misses against visible targets. These checks do not replace a physical-controller usability test.
 
 Manual acceptance check:
 
