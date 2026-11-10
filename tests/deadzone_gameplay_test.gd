@@ -2,9 +2,13 @@ extends SceneTree
 ## Run only through the runner, which isolates the player's saved settings.
 const Benchmark = preload("res://modules/gameplay_manager/calibration/deadzone_benchmark.gd")
 const PROFILE := {
-	"version": 1, "controller_guid": "test-controller", "controller_name": "Test pad",
-	"inner": 0.1, "outer": 0.8, "offset": Vector2(0.02, -0.01),
+	"version": 2, "controller_guid": "test-controller", "controller_name": "Test pad",
+	"left_stick": {"inner": 0.1, "outer": 0.9, "offset": Vector2(-0.03, 0.01)},
+	"right_stick": {"inner": 0.1, "outer": 0.8, "offset": Vector2(0.02, -0.01)},
+	"left_trigger": {"detected": true, "digital": false, "inner": 0.05, "outer": 0.95},
+	"right_trigger": {"detected": false},
 }
+const RIGHT: Dictionary = PROFILE.right_stick
 var failures := 0
 var checks := 0
 
@@ -37,16 +41,23 @@ func run() -> void:
 		finish("DEADZONE RELOAD TESTS")
 		return
 
-	check(Benchmark.apply(Vector2(0.02, -0.01), PROFILE).is_zero_approx(), "resting offset produces no drift")
-	check(Benchmark.apply(Vector2(0.12, -0.01), PROFILE).is_zero_approx(), "inner boundary produces no movement")
-	check(Benchmark.apply(Vector2(0.47, -0.01), PROFILE).is_equal_approx(Vector2(0.5, 0)), "midpoint scales to half speed")
-	check(Benchmark.apply(Vector2(0.82, -0.01), PROFILE).is_equal_approx(Vector2.RIGHT), "outer boundary reaches full speed")
-	check(is_equal_approx(Benchmark.apply(Vector2.ONE, PROFILE).length(), 1.0), "diagonal input is capped at full speed")
-	check(Benchmark.apply(Vector2(NAN, 0), PROFILE).is_zero_approx(), "non-finite stick input cannot move the camera")
+	check(Benchmark.apply(Vector2(0.02, -0.01), RIGHT).is_zero_approx(), "resting offset produces no drift")
+	check(Benchmark.apply(Vector2(0.12, -0.01), RIGHT).is_zero_approx(), "inner boundary produces no movement")
+	check(Benchmark.apply(Vector2(0.47, -0.01), RIGHT).is_equal_approx(Vector2(0.5, 0)), "midpoint scales to half speed")
+	check(Benchmark.apply(Vector2(0.82, -0.01), RIGHT).is_equal_approx(Vector2.RIGHT), "outer boundary reaches full speed")
+	check(is_equal_approx(Benchmark.apply(Vector2.ONE, RIGHT).length(), 1.0), "diagonal input is capped at full speed")
+	check(Benchmark.apply(Vector2(NAN, 0), RIGHT).is_zero_approx(), "non-finite stick input cannot move the camera")
 	check(Benchmark.apply(Vector2(0.6, 0), {"inner": "bad"}).is_equal_approx(Vector2(0.5, 0)), "bad temporary curve falls back to default")
+	check(Benchmark.apply_trigger(0.05, PROFILE.left_trigger) == 0.0 and Benchmark.apply_trigger(0.95, PROFILE.left_trigger) == 1.0, "trigger curve spans its calibrated range")
+	check(is_equal_approx(Benchmark.apply_trigger(0.5, PROFILE.left_trigger), 0.5), "trigger midpoint is half")
+	check(is_equal_approx(Benchmark.apply_trigger(0.5, PROFILE.right_trigger), Benchmark.apply_trigger(0.5, Benchmark.DEFAULT_TRIGGER)), "uncalibrated trigger uses the default curve")
+	check(Benchmark.apply_trigger(NAN, PROFILE.left_trigger) == 0.0, "non-finite trigger input reads as released")
 	check(Benchmark.is_compatible(PROFILE, "test-controller"), "matching controller accepts profile")
 	check(not Benchmark.is_compatible(PROFILE, "other-controller"), "different controller rejects profile")
 	check(not Benchmark.is_compatible(PROFILE, ""), "unknown controller rejects profile")
+	var right_only := RIGHT.duplicate()
+	right_only.merge({"version": 1, "controller_guid": "test-controller"})
+	check(not Benchmark.is_compatible(right_only, "test-controller"), "old right-stick-only profile is not used")
 
 	# Exercise the actual calibration save path, then ordinary player input.
 	var global = root.get_node("Global")
@@ -54,10 +65,9 @@ func run() -> void:
 	var flow = load("res://modules/gameplay_manager/calibration/deadzone_calibration.tscn").instantiate()
 	root.add_child(flow)
 	flow._profile = PROFILE.duplicate(true)
-	flow._save_profile(false)
+	flow._save_profile()
 	var saved: Dictionary = saves.settings.get_data("controls", "controller_deadzone_profile")
 	check(Benchmark.is_compatible(saved, "test-controller"), "calibration saves a compatible profile")
-	check(not saved.verified, "saving without verification does not claim it was verified")
 	saves.settings.set_data("controls", "controller_sensitivity", 100.0)
 	var player = make_player()
 	check(not player.controller_only, "test uses ordinary gameplay mode")
@@ -70,8 +80,21 @@ func run() -> void:
 	player._input(mouse)
 	check(not is_equal_approx(player.rotation.y, before_mouse), "mouse aiming still works")
 
+	# Left stick moves the player through its own curve
+	check(player._get_movement_input().is_equal_approx(Benchmark.apply(player.left_sticks[17], PROFILE.left_stick)), "ordinary Play applies the saved left-stick curve to movement")
+	player.left_sticks[17] = PROFILE.left_stick.offset + Vector2(0.05, 0.05)
+	check(player._get_movement_input().is_zero_approx(), "a drifting left stick at rest doesn't walk the player")
+	var forward := InputEventKey.new()
+	forward.physical_keycode = KEY_W
+	forward.pressed = true
+	Input.parse_input_event(forward)
+	check(player._get_movement_input().is_equal_approx(Vector2.UP), "keys still move the player alongside a calibrated stick")
+	forward.pressed = false
+	Input.parse_input_event(forward)
+	player.left_sticks[17] = Vector2(0.5, 0.0)
+
 	var changed := PROFILE.duplicate(true)
-	changed.inner = 0.2
+	changed.right_stick.inner = 0.2
 	saves.settings.set_data("controls", "controller_deadzone_profile", changed)
 	check(player._get_controller_look().is_equal_approx(Vector2(5.0 / 12.0, 0)), "newly saved profile takes effect without recreating player")
 	saves.settings.set_data("controls", "controller_deadzone_profile", saved)
@@ -100,7 +123,7 @@ func run() -> void:
 	check(player._get_controller_look().is_equal_approx(Vector2(0.5, 0)), "reconnected controller can use a different device ID")
 	player.devices.assign([17, 23])
 	player.guids[23] = "other-controller"
-	player.sticks[17] = PROFILE.offset
+	player.sticks[17] = RIGHT.offset
 	player.sticks[23] = Vector2(0, 0.6)
 	check(player._get_controller_look().is_equal_approx(Vector2(0, 0.5)), "unmatched second controller uses default deadzone")
 	player.sticks[17] = Vector2(0.82, -0.01)
@@ -122,13 +145,17 @@ func run() -> void:
 	InputMap.action_add_event("look_right", original_binding)
 	Input.action_press("look_right", 0.4)
 
-	var invalid: Array = [null, "broken", [], {}, {"version": 1, "controller_guid": "test-controller"}]
+	var invalid: Array = [null, "broken", [], {}, {"version": 2, "controller_guid": "test-controller"}, right_only]
 	for entry in [
 		["inner", "bad"], ["inner", NAN], ["outer", INF], ["inner", -0.2],
 		["outer", 0.1], ["outer", 2.0], ["offset", [0.0, 0.0]],
 		["offset", Vector2(INF, 0)], ["offset", Vector2(0.5, 0)],
-		["version", "1"], ["version", 99], ["controller_guid", ""],
 	]:
+		for stick in ["left_stick", "right_stick"]:
+			var bad := PROFILE.duplicate(true)
+			bad[stick][entry[0]] = entry[1]
+			invalid.append(bad)
+	for entry in [["version", "2"], ["version", 1], ["version", 99], ["controller_guid", ""], ["right_stick", null]]:
 		var bad := PROFILE.duplicate(true)
 		bad[entry[0]] = entry[1]
 		invalid.append(bad)
@@ -139,12 +166,20 @@ func run() -> void:
 	saves.settings.set_data("controls", "controller_deadzone_profile", saved)
 	player.controller_only = true
 	player.controller_device = 17
-	player.controller_deadzone_profile = Benchmark.DEFAULT_PROFILE.duplicate(true)
-	check(player._get_controller_look().is_equal_approx(Benchmark.apply(player.sticks[17], Benchmark.DEFAULT_PROFILE)), "verification uses its temporary default instead of saved profile")
+	player.controller_deadzone_profile = {"right_stick": Benchmark.DEFAULT_STICK.duplicate(true)}
+	check(player._get_controller_look().is_equal_approx(Benchmark.apply(player.sticks[17], Benchmark.DEFAULT_STICK)), "a temporary profile replaces the saved one")
 	player.controller_deadzone_profile = PROFILE.duplicate(true)
-	check(player._get_controller_look().is_equal_approx(Vector2(0.5, 0)), "verification uses its temporary candidate")
+	check(player._get_controller_look().is_equal_approx(Vector2(0.5, 0)), "a temporary candidate profile is used")
 	player.controller_deadzone_profile = {}
-	check(player._get_controller_look().is_equal_approx(player._apply_default_look_deadzone(player.sticks[17])), "sensitivity trials retain their original deadzone")
+	player.sticks[17] = RIGHT.offset + Vector2(0.06, 0.04)
+	check(player._get_controller_look().is_zero_approx(), "sensitivity trials use the saved drift calibration")
+	player.sticks[17] = Vector2(0.47, -0.01)
+	check(player._get_controller_look().is_equal_approx(Vector2(0.5, 0)), "sensitivity trials use the saved curve")
+	player.devices.assign([23])
+	player.controller_device = 23
+	player.sticks[23] = Vector2(0, 0.6)
+	check(player._get_controller_look().is_equal_approx(player._apply_default_look_deadzone(player.sticks[23])), "uncalibrated controller in trials keeps the default deadzone")
+	player.devices.assign([17])
 	check(saves.settings.get_data("controls", "controller_deadzone_profile") == saved, "temporary trials never alter the saved profile")
 	flow.free()
 	player.free()

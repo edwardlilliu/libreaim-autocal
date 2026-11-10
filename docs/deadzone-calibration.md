@@ -1,12 +1,9 @@
 # Deadzone calibration
 
-Open **Auto Calibrate → Controller Deadzones → Calibrate**. Choose the controller, let the right stick rest, then roll it around its full range. Review the profile and optionally compare it with the default on the aim test. **Save now** or **Save profile** makes it available in normal Play. Cancelling or discarding leaves the saved profile alone.
 
-Normal training loads the saved curve automatically, including after restarting LibreAim. It applies only to controllers with the matching Godot GUID. Device numbers may change after reconnecting; the GUID match still works. GUIDs generally identify a controller model, so this is one saved profile rather than a library for individually identified controllers.
+It applies only to controllers with the matching Godot GUID. Device numbers may change after reconnecting; the GUID match still works. GUIDs generally identify a controller model, so this is one saved profile rather than a library for individually identified controllers. If the saved data is missing, invalid, from an older version, or for another controller, normal input behavior is retained. Custom look or move bindings also keep their existing behavior; the profile calibrates the default stick axes.
 
-The curve compensates for the measured resting offset and scales stick movement between the inner and outer deadzones. If the saved data is missing, invalid, from an unsupported version, or for another controller, normal input behavior is retained. Custom look bindings also keep their existing behavior; this profile calibrates the default right-stick axes.
-
-With multiple controllers connected, the strongest processed stick controls aim. Each controller uses its own applicable curve or the default deadzone; axes are not combined across controllers. Mouse aiming and movement are unchanged. Calibration's A/B trials use their temporary curves, while sensitivity trials retain their original deadzone.
+With multiple controllers connected, the strongest processed stick wins. Each controller uses its own applicable curve or the default deadzone; axes are not combined across controllers. Mouse aiming is unchanged.
 
 ## Tests
 
@@ -15,14 +12,16 @@ Run from the repository directory:
 ```powershell
 .\tests\run-deadzone-tests.ps1 -Godot 'C:\path\to\Godot_console.exe'
 .\tests\run-sensitivity-tests.ps1 -Godot 'C:\path\to\Godot_console.exe'
+.\tests\run-controller-aim-tests.ps1 -Godot 'C:\path\to\Godot_console.exe'
 ```
 
-The deadzone runner uses disposable saves under `.godot`. It checks the actual calibration save path and player rotation, invalid profiles, controller matching and reconnects, multiple controllers, custom look bindings, cancellation, and temporary calibration curves. A second Godot process verifies that the saved profile loads and affects aiming after restart. Controller input is simulated, so a physical-controller check is still required.
+The deadzone runner uses disposable saves under `.godot`. `deadzone_gameplay_test.gd` checks the curves, the save path and player rotation and movement, invalid and old profiles, controller matching and reconnects, multiple controllers, custom bindings, cancellation and temporary profiles; a second Godot process verifies the saved profile loads and affects aiming after restart. `deadzone_flow_test.gd` plays the whole calibration with `simulated_controller.gd`, a worn controller whose sticks settle in a different spot after every release, and checks that 500 later releases never produce drift, both sticks reach full tilt, triggers read 0 at rest and 1 at full pull, on/off triggers are recognised, and a release with a thumb left on the stick is asked again.
 
-For SCRUM-36, record the controller model, operating system and app version, then:
+Controller input is simulated, so a physical-controller check is still required. Record the controller model, operating system and app version, then:
 
-1. Calibrate and save. Open normal Play and confirm the resting stick does not drift and aiming responds to the new curve.
-2. Restart the app and repeat the check.
-3. Start another calibration and cancel or discard it. Confirm the previous profile is still used.
-4. Disconnect and reconnect the controller. Confirm input stops while disconnected and works after reconnecting.
-5. Try a different controller and confirm the original calibration is not incorrectly applied.
+1. Calibrate and save. Open normal Play, let go of the sticks after aiming in several directions, and confirm the view never creeps.
+2. Run the sensitivity calibration and confirm aim doesn't creep there either.
+3. Restart the app and repeat the check.
+4. Start another calibration and cancel it. Confirm the previous profile is still used.
+5. Disconnect and reconnect the controller. Confirm input stops while disconnected and works after reconnecting.
+6. Try a different controller and confirm the original calibration is not incorrectly applied.

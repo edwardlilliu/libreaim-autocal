@@ -75,7 +75,6 @@ func run() -> void:
 	flow._start_round()
 	await settle()
 	flow._player._movement_enabled = false
-	var deadzone = load("res://modules/gameplay_manager/calibration/deadzone_calibration.gd").new()
 	for value in [null, 22.0, 240.0, "bad", NAN]:
 		if value == null:
 			if saves.settings.get_file().has_section_key("controls", "controller_sensitivity"):
@@ -85,8 +84,6 @@ func run() -> void:
 		var expected := Benchmark.resolve_speed(value)
 		check(is_equal_approx(flow._saved_speed(), expected), "sensitivity setup resolves %s consistently" % str(value))
 		check(is_equal_approx(flow._player.get_controller_sensitivity(), expected), "normal player resolves %s consistently" % str(value))
-		check(is_equal_approx(deadzone._reference_speed(), expected), "deadzone verification resolves %s consistently" % str(value))
-	deadzone.free()
 	saves.settings.set_data("controls", "controller_sensitivity", 180.0)
 	flow._player.controller_only = false
 	flow._player.controller_sensitivity_override = -1.0

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dw7cmht2fc0ab"]
 
 [ext_resource type="Script" uid="uid://deil3iadt7cwb" path="res://modules/gameplay_manager/calibration/deadzone_calibration.gd" id="1_vlinm"]
+[ext_resource type="Script" path="res://modules/gameplay_manager/calibration/controller_view.gd" id="2_view"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxwci"]
 bg_color = Color(0.105882354, 0.16470589, 0.22745098, 1)
@@ -215,8 +216,14 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 42
 
+[node name="ControllerView" type="Control" parent="CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1388420517]
+custom_minimum_size = Vector2(900, 400)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_view")
+
 [node name="Body" type="Label" parent="CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=816107190]
-custom_minimum_size = Vector2(900, 0)
+custom_minimum_size = Vector2(900, 102)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72156864, 0.78039217, 0.8392157, 1)
 theme_override_constants/line_spacing = 6

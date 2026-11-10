@@ -9,14 +9,19 @@ try {
     $env:APPDATA = $testDataRoot
     & $Godot --headless --path $repoRoot --import
     if ($LASTEXITCODE -ne 0) { throw 'Godot import failed.' }
-    foreach ($phase in @('gameplay', 'reload')) {
+    foreach ($phase in @('gameplay', 'reload', 'flow')) {
         $testLog = Join-Path $testDataRoot "deadzone-$phase.log"
-        $engineArgs = @('--headless', '--path', $repoRoot, '--script', 'res://tests/deadzone_gameplay_test.gd', '--quit-after', '1000', '--log-file', $testLog)
+        $testScript = if ($phase -eq 'flow') { 'res://tests/deadzone_flow_test.gd' } else { 'res://tests/deadzone_gameplay_test.gd' }
+        $engineArgs = @('--headless', '--path', $repoRoot, '--script', $testScript, '--quit-after', '100000', '--log-file', $testLog)
         if ($phase -eq 'reload') { $engineArgs += @('--', '--verify-reload') }
         & $Godot @engineArgs
         $engineExitCode = $LASTEXITCODE
         $logText = Get-Content -LiteralPath $testLog -Raw
-        $resultPattern = if ($phase -eq 'reload') { 'DEADZONE RELOAD TESTS: \d+ checks, 0 failures' } else { 'DEADZONE TESTS: \d+ checks, 0 failures' }
+        $resultPattern = switch ($phase) {
+            'reload' { 'DEADZONE RELOAD TESTS: \d+ checks, 0 failures' }
+            'flow' { 'DEADZONE FLOW TESTS: \d+ checks, 0 failures' }
+            default { 'DEADZONE TESTS: \d+ checks, 0 failures' }
+        }
         if ($engineExitCode -ne 0 -or $logText -notmatch $resultPattern -or $logText -match 'SCRIPT ERROR|FAIL:') {
             throw "Deadzone $phase tests did not pass. Read $testLog"
         }
