@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dw7cmht2fc0ab"]
 
 [ext_resource type="Script" uid="uid://deil3iadt7cwb" path="res://modules/gameplay_manager/calibration/deadzone_calibration.gd" id="1_vlinm"]
-[ext_resource type="Script" path="res://modules/gameplay_manager/calibration/controller_view.gd" id="2_view"]
+[ext_resource type="Script" uid="uid://ckgxwm2c7ovvf" path="res://modules/gameplay_manager/calibration/controller_view.gd" id="2_view"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxwci"]
 bg_color = Color(0.105882354, 0.16470589, 0.22745098, 1)
@@ -281,6 +281,21 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_abpjp")
 theme_override_styles/focus = SubResource("StyleBoxFlat_xqshu")
 
 [node name="Button3" type="Button" parent="CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1969384891]
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9647059, 0.9764706, 0.9882353, 1)
+theme_override_colors/font_focus_color = Color(0.9647059, 0.9764706, 0.9882353, 1)
+theme_override_colors/font_pressed_color = Color(0.9647059, 0.9764706, 0.9882353, 1)
+theme_override_colors/font_hover_color = Color(0.9647059, 0.9764706, 0.9882353, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 0.84313726)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_72fp0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vh01r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cp5rw")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_abpjp")
+theme_override_styles/focus = SubResource("StyleBoxFlat_xqshu")
+
+[node name="Button4" type="Button" parent="CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1757764523]
 custom_minimum_size = Vector2(200, 56)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9647059, 0.9764706, 0.9882353, 1)

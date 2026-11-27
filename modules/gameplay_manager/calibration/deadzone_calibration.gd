@@ -9,6 +9,7 @@ extends Node3D
 
 const Benchmark = preload("res://modules/gameplay_manager/calibration/deadzone_benchmark.gd")
 const ControllerView = preload("res://modules/gameplay_manager/calibration/controller_view.gd")
+const DeadzoneExport = preload("res://modules/gameplay_manager/calibration/deadzone_export.gd")
 
 @onready var _screen: Control = $CanvasLayer/Screen
 @onready var _title: Label = $CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Title
@@ -20,6 +21,7 @@ const ControllerView = preload("res://modules/gameplay_manager/calibration/contr
 	$CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button1,
 	$CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button2,
 	$CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button3,
+	$CanvasLayer/Screen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button4
 ]
 const SETUP_INTRO := "Calibrates both sticks (drift and range) and both triggers, in about a minute.\nMove the sticks and squeeze the triggers to check the right controller is selected."
 const STEPS := 4
@@ -52,6 +54,7 @@ var _pull_tracker: Benchmark.PullTracker
 var _trigger_results: Dictionary = {}
 
 var _profile: Dictionary = {}
+var _summary_text := ""
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -391,7 +394,8 @@ func _build_summary() -> void:
 	if not warnings.is_empty():
 		text += "\n\n" + "\n".join(warnings)
 	text += "\n\nTry it: let go of the sticks and the green rings stay centered, even where the white dots (the raw stick) sit off center. Squeeze the triggers to see them go from 0 to 100%."
-	_show_page("Profile ready", text, [["Save profile", _save_profile], ["Redo", _begin_session], ["Cancel", _cancel]])
+	_summary_text = text;
+	_show_page("Profile ready", text, [["Save profile", _save_profile], ["Redo", _begin_session], ["Export CSV", _export_csv], ["Cancel", _cancel]])
 
 func _update_preview() -> void:
 	_view.outputs = {
@@ -428,3 +432,16 @@ func _cancel() -> void:
 
 func _back() -> void:
 	get_tree().change_scene_to_file(Global.MAIN_MENU_PATH)
+	
+func _export_csv() -> void:
+	if _profile.is_empty():
+		return
+	var path := "user://deadzone_values.csv"
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		_body.text = _summary_text + "\n\nCould not write the file (error %d)." % FileAccess.get_open_error()
+		return
+	f.store_string(DeadzoneExport.build_csv(_profile))
+	f.close()
+	_body.text = _summary_text + "\n\nSaved to " + ProjectSettings.globalize_path(path)
+	OS.shell_open(ProjectSettings.globalize_path("user://"))
